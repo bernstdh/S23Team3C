@@ -1,5 +1,7 @@
 package utilities;
 
+import java.util.List;
+
 /**
  * A utility class that performs checks of various kinds.
  * 
@@ -26,4 +28,16 @@ public class Check
     }
     return false;
   }
+  
+  public static boolean forContains(final List<String> haystack, final String needle)
+  {
+    if (haystack == null) return false;
+
+    for (int i=0; i<haystack.size(); i++)
+    {
+      if (haystack.get(i).equals(needle)) return true;
+    }
+    return false;
+  }
+  
 }
