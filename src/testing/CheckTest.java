@@ -18,6 +18,8 @@ class CheckTest
     assertTrue(Check.forContains(haystack, "Dog"));
     assertTrue(Check.forContains(haystack, "Cat"));
     
+    assertFalse(Check.forContains(haystack, "CAT"));
+
     assertFalse(Check.forContains(haystack, "Aardvark"));
   }
 
