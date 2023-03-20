@@ -14,7 +14,7 @@ public class Check
    * 
    * @param haystack  The array of String objects to search through
    * @param needle The String object to search for
-   * @return true if haystack contains needle; false otherwise
+   * @return true if haystack contains needle; false otherwis
    */
   public static boolean forContains(final String[] haystack, final String needle)
   {
