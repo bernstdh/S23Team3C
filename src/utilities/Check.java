@@ -26,4 +26,14 @@ public class Check
     }
     return false;
   }
+  
+  public static boolean forContainsIgnoreCase(final String[] haystack, final String needle) {
+	  if (haystack == null) return false;
+
+	    for (int i=0; i<haystack.length; i++)
+	    {
+	      if (haystack[i].equalsIgnoreCase(needle)) return true;
+	    }
+	    return false;
+  }
 }
