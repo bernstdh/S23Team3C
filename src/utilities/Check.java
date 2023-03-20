@@ -35,7 +35,8 @@ public class Check
    * @param needle The String object to search for
    * @return true if haystack contains needle; false otherwise
    */
-  public static boolean forContainsIgnoreCase(final String[] haystack, final String needle) {
+  public static boolean forContainsIgnoreCase(final String[] haystack, final String needle) 
+  {
     if (haystack == null) return false;
 
     for (int i=0; i<haystack.length; i++)
