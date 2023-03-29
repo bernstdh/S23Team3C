@@ -18,11 +18,15 @@ public class ShoppingListViewer extends JFrame
 
 	/**
 	 * Constructor.
+	 * @param strings Array List String
+	 * @param num Int
+	 * @param title Title
 	 */
 
-	public ShoppingListViewer() 
+	public ShoppingListViewer(final ArrayList<String> strings, 
+			final int num, final String title) 
 	{
-		super("KiLowBites Shopping List Viewer\t Recipe name");
+		super("KiLowBites Shopping List Viewer\t" + title);
 
 		numPeopleLabel = new JLabel("Number of People:");
 		numPeopleBox = new JTextField(10);
@@ -40,7 +44,7 @@ public class ShoppingListViewer extends JFrame
 		{
 			public void actionPerformed(final ActionEvent e)
 			{
-				generateShoppingList();
+				generateShoppingList(strings, num);
 			}
 		});
 
@@ -49,15 +53,6 @@ public class ShoppingListViewer extends JFrame
 		setSize(500, 400);
 		setVisible(true);
 
-	}
-	/**
-	 * temp main method.
-	 * @param args arg
-	 */
-
-	public static void main(final String[] args) 
-	{
-		new ShoppingListViewer();
 	}
 
 	/**
@@ -90,10 +85,14 @@ public class ShoppingListViewer extends JFrame
 
 	/**
 	 * generateList.
+	 * @param strings String
+	 * @param num number of items
 	 */
-	private void generateShoppingList() 
+	private void generateShoppingList(final ArrayList<String> strings, final int num) 
 	{
 		double numPeople = 0;
+		ArrayList<String> list = sortList(strings);
+		String display = "";
 		try 
 		{
 			numPeople = Double.parseDouble(numPeopleBox.getText());
@@ -102,12 +101,12 @@ public class ShoppingListViewer extends JFrame
 			shoppingListBox.setText("Please enter a valid amount of people.");
 			return;
 		}
+		
+		for(String ss: list) 
+		{
+			display += ss + "\n";
+		}
 
-		String[] shoppingList = new String[3];
-		shoppingList[0] = (1*numPeople) + " banana";
-		shoppingList[1] = (2*numPeople) + " apples sliced";
-		shoppingList[2] = (1*numPeople) + " gallons of pickle juice";
-
-		shoppingListBox.setText(String.join("\n", shoppingList));
+		shoppingListBox.setText(display);
 	}
 }

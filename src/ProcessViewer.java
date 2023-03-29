@@ -51,15 +51,7 @@ public class ProcessViewer extends JFrame
 		setSize(800, 600);
 		setVisible(true);
 	}
-	/**
-	 * temp main.
-	 * @param args arg
-	 */
-	
-	public static void main(final String[] args) 
-	{
-		new ProcessViewer();
-	}
+
 	
 	/**
 	 * setter.
