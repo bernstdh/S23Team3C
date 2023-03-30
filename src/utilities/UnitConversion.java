@@ -32,7 +32,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double dramsConversions(final String unitType, final double amount)
+  public static double dramsConversions(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -116,7 +116,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double gramsConversions(final String unitType, final double amount)
+  public static double gramsConversions(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -145,7 +145,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double lbsConversions(final String unitType, final double amount)
+  public static double lbsConversions(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -226,7 +226,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double ozConversions(final String unitType, final double amount)
+  public static double ozConversions(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -307,7 +307,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double pinchesConversion(final String unitType, final double amount)
+  public static double pinchesConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -330,7 +330,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double tspConversion(final String unitType, final double amount)
+  public static double tspConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -354,7 +354,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double tbsConversion(final String unitType, final double amount)
+  public static double tbsConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -378,7 +378,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double flozConversion(final String unitType, final double amount)
+  public static double flozConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -402,7 +402,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double cupConversion(final String unitType, final double amount)
+  public static double cupConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -426,7 +426,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double ptConversion(final String unitType, final double amount)
+  public static double ptConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -450,7 +450,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double qtConversion(final String unitType, final double amount)
+  public static double qtConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -474,7 +474,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double galConversion(final String unitType, final double amount)
+  public static double galConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
@@ -524,7 +524,7 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double mlConversion(final String unitType, final double amount)
+  public static double mlConversion(final String unitType, final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
