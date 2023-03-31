@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import utilities.*;
+import java.util.*;
+//import utilities.*;
 /**
  * The window for the unit converter.
  * @author Trace Jones
@@ -17,6 +18,8 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   private JComboBox<String> toUnitsBox;
   private JComboBox<String> ingredientsBox;
   private JComboBox<Double> amountBox;
+  private JButton calc;
+  private JButton reset;
   private JLabel amountLabel;
   
   private String dr = "dr";
@@ -32,6 +35,12 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   private String qt = "qt";
   private String gal = "gal";
   private String ml = "ml";
+  String[] units = {dr, g, oz, lbs, p, tsp, tbs, floz, cup,
+      pt, qt, gal, ml};
+  ArrayList<String> weight = new ArrayList<String>(
+      Arrays.asList(dr, g, oz, lbs));
+  ArrayList<String> volume = new ArrayList<String>(
+      Arrays.asList(ml, p, tsp, tbs, floz, cup, pt, qt, gal));
   
   public UnitConverterWindow()
   {
@@ -45,21 +54,26 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     }
     ingredientsBox.addItemListener(this);
     
-    String[] units = {dr, g, oz, lbs, p, tsp, tbs, floz, cup,
-        pt, qt, gal, ml};
+    
     fromUnitsBox = new JComboBox<>(units);
     fromUnitsBox.addItemListener(this);
     
     toUnitsBox = new JComboBox<>(units);
     toUnitsBox.addItemListener(this);
     
-    Double[] amounts = {0.25, 0.5, 1.0, 1.5, 2.0};
+    Double[] amounts = {0.25, 0.5, 1.0, 1.5, 2.0, 10.0};
     amountBox = new JComboBox<>(amounts);
     amountBox.addItemListener(this);
     
     amountLabel = new JLabel("To Amount:");
     
-    JPanel panel = new JPanel(new FlowLayout());
+    calc = new JButton(new ImageIcon("calculate.png"));
+    reset = new JButton(new ImageIcon("reset.png"));
+    reset.addItemListener(this);
+    
+    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//    panel.add(calc);
+//    panel.add(reset);
     panel.add(new JLabel("From Units:"));
     panel.add(fromUnitsBox);
     panel.add(new JLabel("To Units:"));
@@ -76,7 +90,7 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
     setResizable(false);
-    setSize(600, 150);
+    setSize(600, 200);
   }
   
   /**
@@ -85,14 +99,36 @@ public class UnitConverterWindow extends JFrame implements ItemListener
    */
   public void itemStateChanged(final ItemEvent e)
   {
+    String ingredient = "";
     String fromUnit = (String) fromUnitsBox.getSelectedItem();
     String toUnit = (String) toUnitsBox.getSelectedItem();
-    String ingredient = (String) ingredientsBox.getSelectedItem();
+    boolean weight1 = false;
+    boolean weight2 = false;
+    boolean vol1 = false;
+    boolean vol2 = false;
+    
+    if (weight.contains(fromUnit)) weight1 = true;
+    if (weight.contains(toUnit)) weight2 = true;
+    if (volume.contains(fromUnit)) vol1 = true;
+    if (volume.contains(toUnit)) vol2 = true;
+    
+    if (weight1 && weight2) ingredientsBox.setEnabled(false);
+    else if (vol1 && vol2) ingredientsBox.setEnabled(false);
+    if (weight1 && vol2) ingredientsBox.setEnabled(true);
+    if (vol1 && weight2) ingredientsBox.setEnabled(true);
+    ingredient = (String) ingredientsBox.getSelectedItem();
+    
     double amount = (double) amountBox.getSelectedItem();
     
+//    calc.addActionListener(new ActionListener()
+//    {
+//      public void actionPerformed(final ActionEvent e)
+//      {
+//        converter(ingredient, fromUnit, toUnit, amount);
+//      }
+//    });
     double newAmount = converter(ingredient, fromUnit, toUnit, amount);
-    
-    amountLabel.setText("To Amount: " + newAmount);
+    amountLabel.setText(String.format("To Amount: %f", newAmount));
   }
   
   /**
@@ -108,32 +144,40 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   {
     double newAmount = -1.0;
     if (fromUnit.equals(dr)) newAmount = 
-        UnitConversion.dramsConversions(toUnit, amount);
+        UnitConversion.dramsConversions(ingredient, toUnit, amount);
     else if (fromUnit.equals(g)) newAmount = 
-        UnitConversion.gramsConversions(toUnit, amount);
+        UnitConversion.gramsConversions(ingredient, toUnit, amount);
     else if (fromUnit.equals(oz)) newAmount = 
-        UnitConversion.ozConversions(toUnit, amount);
+        UnitConversion.ozConversions(ingredient, toUnit, amount);
     else if (fromUnit.equals(lbs)) newAmount = 
-        UnitConversion.lbsConversions(toUnit, amount);
+        UnitConversion.lbsConversions(ingredient, toUnit, amount);
     else if (fromUnit.equals(p)) newAmount = 
-        UnitConversion.pinchesConversion(toUnit, amount);
+        UnitConversion.pinchesConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(tsp)) newAmount = 
-        UnitConversion.tspConversion(toUnit, amount);
+        UnitConversion.tspConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(tbs)) newAmount = 
-        UnitConversion.tbsConversion(toUnit, amount);
+        UnitConversion.tbsConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(floz)) newAmount = 
-        UnitConversion.flozConversion(toUnit, amount);
+        UnitConversion.flozConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(cup)) newAmount = 
-        UnitConversion.cupConversion(toUnit, amount);
+        UnitConversion.cupConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(pt)) newAmount = 
-        UnitConversion.ptConversion(toUnit, amount);
+        UnitConversion.ptConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(qt)) newAmount = 
-        UnitConversion.qtConversion(toUnit, amount);
+        UnitConversion.qtConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(gal)) newAmount = 
-        UnitConversion.galConversion(toUnit, amount);
+        UnitConversion.galConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(ml)) newAmount = 
-        UnitConversion.mlConversion(toUnit, amount);
+        UnitConversion.mlConversion(ingredient, toUnit, amount);
     return newAmount;
+  }
+  
+  /**
+   * temp Main
+   */
+  public static void main(String args[])
+  {
+    new UnitConverterWindow();
   }
 
 }
