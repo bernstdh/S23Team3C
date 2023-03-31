@@ -103,15 +103,15 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == shoppingList)
     {
-      System.out.println("open shopping list viewer");
+      new ShoppingListSelector();
     }
     else if (e.getSource() == process)
     {
-      System.out.println("process window");
+      new ProcessViewer();
     }
     else if (e.getSource() == calorieCalculator)
     {
-      System.out.println("open calorie calculator");
+      new CalorieCalculator();
     }
     else if (e.getSource() == unitsConverter)
     {
@@ -127,7 +127,7 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == about)
     {
-      System.out.println("open about window");
+      new AboutDialog();
     }
   }
 }
