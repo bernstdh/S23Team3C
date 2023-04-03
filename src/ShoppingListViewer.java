@@ -23,8 +23,8 @@ public class ShoppingListViewer extends JFrame
 	 * @param title Title
 	 */
 
-	public ShoppingListViewer(final ArrayList<String> strings, 
-			final int num, final String title) 
+	public ShoppingListViewer(final ArrayList<String> strings,
+			 final String title) 
 	{
 		super("KiLowBites Shopping List Viewer\t" + title);
 
@@ -44,7 +44,7 @@ public class ShoppingListViewer extends JFrame
 		{
 			public void actionPerformed(final ActionEvent e)
 			{
-				generateShoppingList(strings, num);
+				generateShoppingList(strings);
 			}
 		});
 
@@ -88,7 +88,7 @@ public class ShoppingListViewer extends JFrame
 	 * @param strings String
 	 * @param num number of items
 	 */
-	private void generateShoppingList(final ArrayList<String> strings, final int num) 
+	private void generateShoppingList(final ArrayList<String> strings) 
 	{
 		double numPeople = 0;
 		ArrayList<String> list = sortList(strings);

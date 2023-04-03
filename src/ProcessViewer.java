@@ -57,7 +57,7 @@ public class ProcessViewer extends JFrame
 	 * setter.
 	 * @param s string
 	 */
-	private void setUtensils(final String s) 
+	public void setUtensils(final String s) 
 	{
 		utensilBox.setText(s);
 	}
@@ -66,7 +66,7 @@ public class ProcessViewer extends JFrame
 	 * setter.
 	 * @param s string
 	 */
-	private void setSteps(final String s) 
+	public void setSteps(final String s) 
 	{
 		stepsBox.setText(s);
 	}
