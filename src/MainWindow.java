@@ -18,7 +18,7 @@ public class MainWindow extends JFrame implements ActionListener
   JMenuBar menuBar;
   JMenu file, edit, view, tools, configure, help;
   JMenuItem exit, recipe, meal, shoppingList, process, calorieCalculator, unitsConverter,
-      preferences, nutrition, about;
+      preferences, about;
 
   /**
    * Creates a new MainWindow object and adds the all menus.
@@ -72,11 +72,8 @@ public class MainWindow extends JFrame implements ActionListener
 
     configure = new JMenu("Configure");
     preferences = new JMenuItem("Preferences");
-    nutrition = new JMenuItem("Nutrition");
     configure.add(preferences);
-    configure.add(nutrition);
     preferences.addActionListener(this);
-    nutrition.addActionListener(this);
     mb.add(configure);
 
     help = new JMenu("Help");
@@ -95,7 +92,7 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == recipe)
     {
-      System.out.println("open recipe editor");
+      new RecipeEditor(); 
     }
     else if (e.getSource() == meal)
     {
@@ -107,7 +104,7 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == process)
     {
-      new ProcessViewer();
+      new ProcessSelector();
     }
     else if (e.getSource() == calorieCalculator)
     {
@@ -115,19 +112,15 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == unitsConverter)
     {
-      System.out.println("open units converter");
+      new UnitConverterWindow();
     }
     else if (e.getSource() == preferences)
     {
       System.out.println("open preferences");
     }
-    else if (e.getSource() == nutrition)
-    {
-      System.out.println("open nutrition");
-    }
     else if (e.getSource() == about)
     {
-      new AboutDialog();
+      System.out.println("about");
     }
   }
 }
