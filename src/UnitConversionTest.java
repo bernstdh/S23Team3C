@@ -9,7 +9,7 @@ class UnitConversionTest
 
   private String dr = "dr";
   private String oz = "oz";
-  private String lbs = "lbs";
+  private String lb = "lb";
   private String g = "g";
 //  private String ind = "individual";
   private String p = "p";
@@ -31,7 +31,7 @@ class UnitConversionTest
     assertEquals(30.91869874, UnitConversion.dramsConversions("Alcohol", g, drams));
     
     drams = 578.564;
-    assertEquals(2.260015625, UnitConversion.dramsConversions("Alcohol", lbs, drams));
+    assertEquals(2.260015625, UnitConversion.dramsConversions("Alcohol", lb, drams));
     
     drams = 3746.0;
     assertEquals(234.125, UnitConversion.dramsConversions("Alcohol", oz, drams), 0.01);
@@ -56,7 +56,7 @@ class UnitConversionTest
     assertEquals(32.28272989085051, UnitConversion.gramsConversions("Alcohol", dr, grams));
     
     grams = 2600.89836288;
-    assertEquals(5.734, UnitConversion.gramsConversions("Alcohol", lbs, grams), 0.01);
+    assertEquals(5.734, UnitConversion.gramsConversions("Alcohol", lb, grams), 0.01);
     
     grams = 12;
     assertEquals(.42328759, UnitConversion.gramsConversions("Alcohol", oz, grams), 0.01);
@@ -69,28 +69,28 @@ class UnitConversionTest
   }
   
   @Test
-  void lbsTest()
+  void lbTest()
   {
     double pound = 21.2;
-    assertEquals(21.2, UnitConversion.lbsConversions("Alcohol", lbs, pound));
+    assertEquals(21.2, UnitConversion.lbConversions("Alcohol", lb, pound));
     
     pound = 0.2;
-    assertEquals(3.2, UnitConversion.lbsConversions("Alcohol", oz, pound));
+    assertEquals(3.2, UnitConversion.lbConversions("Alcohol", oz, pound));
     
     pound = 0.0;
-    assertEquals(0.0, UnitConversion.lbsConversions("Alcohol", g, pound));
+    assertEquals(0.0, UnitConversion.lbConversions("Alcohol", g, pound));
     
     pound = -10;
-    assertEquals(-1, UnitConversion.lbsConversions("Alcohol", p, pound));
+    assertEquals(-1, UnitConversion.lbConversions("Alcohol", p, pound));
     
     pound = 93.27;
-    assertEquals(-1.0, UnitConversion.lbsConversions("Alcohol", "GEE", pound));
+    assertEquals(-1.0, UnitConversion.lbConversions("Alcohol", "GEE", pound));
     
     pound = 34.2;
-    assertEquals(8755.2, UnitConversion.lbsConversions("Alcohol", dr, pound));
+    assertEquals(8755.2, UnitConversion.lbConversions("Alcohol", dr, pound));
     
     pound = 3827.4;
-    assertEquals(1736079.25, UnitConversion.lbsConversions("Alcohol", g, pound), .01);
+    assertEquals(1736079.25, UnitConversion.lbConversions("Alcohol", g, pound), .01);
     
   }
   
@@ -106,7 +106,7 @@ class UnitConversionTest
     ounce = 84.2;
     assertEquals(-1.0, UnitConversion.ozConversions("Alcohol", "JMU", ounce));
     
-    assertEquals(5.2625, UnitConversion.ozConversions("Alcohol", lbs, ounce));
+    assertEquals(5.2625, UnitConversion.ozConversions("Alcohol", lb, ounce));
     
     ounce = 46572.495;
     assertEquals(745159.92, UnitConversion.ozConversions("Alcohol", dr, ounce));

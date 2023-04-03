@@ -14,7 +14,7 @@ public class UnitConversion
   private static String floz = "floz";
   private static String g = "g";
   private static String gal = "gal";
-  private static String lbs = "lbs";
+  private static String lb = "lb";
   private static String ml = "ml";
   private static String oz = "oz";
   private static String p = "p";
@@ -58,7 +58,7 @@ public class UnitConversion
     
     else if (unitType.equals(oz)) value = amount / 16;
     
-    else if (unitType.equals(lbs)) value = amount / 256;
+    else if (unitType.equals(lb)) value = amount / 256;
     
     else if (unitType.equals(g)) value = amount * 1.7718452;
     
@@ -160,7 +160,7 @@ public class UnitConversion
     double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(g)) value = amount;
     else if (unitType.equals(oz)) value = amount / 28.34952;
-    else if (unitType.equals(lbs)) value = ((amount / 28.34952) / 16);
+    else if (unitType.equals(lb)) value = ((amount / 28.34952) / 16);
     else if (unitType.equals(dr)) value = (amount / 1.7718452);
 
     else if (unitType.equals(ml)) value = amount / volume;
@@ -198,11 +198,11 @@ public class UnitConversion
     double value = -1.0;
     double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(gal)) value = amount;
-    else if (unitType.equals(lbs))
+    else if (unitType.equals(lb))
     {
       double milli = amount * 3785.4117888;
       double grams = milli * volume;
-      value = gramsConversions(ingredient, lbs, grams);
+      value = gramsConversions(ingredient, lb, grams);
     }
     else if (unitType.equals(oz))
     {
@@ -237,19 +237,19 @@ public class UnitConversion
   }
   
   /**
-   * Conversions for lbs.
+   * Conversions for lb.
    * @param ingredient - the ingredient being used.
    * @param unitType - the type of unit it is switching to
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double lbsConversions(final String ingredient, final String unitType,
+  public static double lbConversions(final String ingredient, final String unitType,
       final Double amount)
   {
     if (amount < 0) return -1.0;
     double value = -1.0;
     double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
-    if (unitType.equals(lbs)) value = amount;
+    if (unitType.equals(lb)) value = amount;
     else if (unitType.equals(oz)) value = amount * 16;
     else if (unitType.equals(g)) value = (amount * 16) * 28.34952;
     else if (unitType.equals(dr)) value = (amount * 16) * 16;
@@ -351,7 +351,7 @@ public class UnitConversion
     double value = -1.0;
     double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(oz)) value = amount;
-    else if (unitType.equals(lbs)) value = amount / 16;
+    else if (unitType.equals(lb)) value = amount / 16;
     else if (unitType.equals(g)) value = amount *  28.34952;
     else if (unitType.equals(dr)) value = amount * 16;
 

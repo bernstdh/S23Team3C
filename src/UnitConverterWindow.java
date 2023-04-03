@@ -17,14 +17,14 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   private JComboBox<String> fromUnitsBox;
   private JComboBox<String> toUnitsBox;
   private JComboBox<String> ingredientsBox;
-  private JComboBox<Double> amountBox;
+  private JTextField amountBox;
   private JButton calc;
   private JButton reset;
   private JLabel amountLabel;
   
   private String dr = "dr";
   private String oz = "oz";
-  private String lbs = "lbs";
+  private String lb = "lb";
   private String g = "g";
   private String p = "p";
   private String tsp = "tsp";
@@ -35,10 +35,10 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   private String qt = "qt";
   private String gal = "gal";
   private String ml = "ml";
-  String[] units = {dr, g, oz, lbs, p, tsp, tbs, floz, cup,
+  String[] units = {dr, g, oz, lb, p, tsp, tbs, floz, cup,
       pt, qt, gal, ml};
   ArrayList<String> weight = new ArrayList<String>(
-      Arrays.asList(dr, g, oz, lbs));
+      Arrays.asList(dr, g, oz, lb));
   ArrayList<String> volume = new ArrayList<String>(
       Arrays.asList(ml, p, tsp, tbs, floz, cup, pt, qt, gal));
   
@@ -61,19 +61,19 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     toUnitsBox = new JComboBox<>(units);
     toUnitsBox.addItemListener(this);
     
-    Double[] amounts = {0.25, 0.5, 1.0, 1.5, 2.0, 10.0};
-    amountBox = new JComboBox<>(amounts);
-    amountBox.addItemListener(this);
+//    Double[] amounts = {0.25, 0.5, 1.0, 1.5, 2.0, 10.0};
+    amountBox = new JTextField(10);
+    
     
     amountLabel = new JLabel("To Amount:");
     
     calc = new JButton(new ImageIcon("calculate.png"));
     reset = new JButton(new ImageIcon("reset.png"));
-    reset.addItemListener(this);
+//    reset.addItemListener(this);
     
     JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-//    panel.add(calc);
-//    panel.add(reset);
+    panel.add(calc);
+    panel.add(reset);
     panel.add(new JLabel("From Units:"));
     panel.add(fromUnitsBox);
     panel.add(new JLabel("To Units:"));
@@ -118,15 +118,17 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     if (vol1 && weight2) ingredientsBox.setEnabled(true);
     ingredient = (String) ingredientsBox.getSelectedItem();
     
-    double amount = (double) amountBox.getSelectedItem();
+    double amount = Double.parseDouble(amountBox.getText());
     
-//    calc.addActionListener(new ActionListener()
-//    {
-//      public void actionPerformed(final ActionEvent e)
-//      {
-//        converter(ingredient, fromUnit, toUnit, amount);
-//      }
-//    });
+    final String finalIng = ingredient;
+    
+    calc.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(final ActionEvent e)
+      {
+        converter(finalIng, fromUnit, toUnit, amount);
+      }
+    });
     double newAmount = converter(ingredient, fromUnit, toUnit, amount);
     amountLabel.setText(String.format("To Amount: %f", newAmount));
   }
@@ -149,8 +151,8 @@ public class UnitConverterWindow extends JFrame implements ItemListener
         UnitConversion.gramsConversions(ingredient, toUnit, amount);
     else if (fromUnit.equals(oz)) newAmount = 
         UnitConversion.ozConversions(ingredient, toUnit, amount);
-    else if (fromUnit.equals(lbs)) newAmount = 
-        UnitConversion.lbsConversions(ingredient, toUnit, amount);
+    else if (fromUnit.equals(lb)) newAmount = 
+        UnitConversion.lbConversions(ingredient, toUnit, amount);
     else if (fromUnit.equals(p)) newAmount = 
         UnitConversion.pinchesConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(tsp)) newAmount = 
