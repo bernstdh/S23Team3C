@@ -119,7 +119,7 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == preferences)
     {
-      System.out.println("open preferences");
+      new Preferences();
     }
     else if (e.getSource() == nutrition)
     {

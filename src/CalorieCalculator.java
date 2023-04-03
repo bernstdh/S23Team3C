@@ -53,7 +53,7 @@ public class CalorieCalculator extends JFrame implements ItemListener
 
 		setSize(400, 100);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setResizable(false);
 		setSize(500, 100);

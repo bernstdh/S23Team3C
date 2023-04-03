@@ -47,7 +47,7 @@ public class ProcessViewer extends JFrame
 		add(bottomPanel, BorderLayout.SOUTH);
 
 		setResizable(false); 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(800, 600);
 		setVisible(true);
 	}
@@ -57,7 +57,7 @@ public class ProcessViewer extends JFrame
 	 * setter.
 	 * @param s string
 	 */
-	private void setUtensils(final String s) 
+	public void setUtensils(final String s) 
 	{
 		utensilBox.setText(s);
 	}
@@ -66,7 +66,7 @@ public class ProcessViewer extends JFrame
 	 * setter.
 	 * @param s string
 	 */
-	private void setSteps(final String s) 
+	public void setSteps(final String s) 
 	{
 		stepsBox.setText(s);
 	}
