@@ -71,18 +71,22 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     reset = new JButton(new ImageIcon("reset.png"));
 //    reset.addItemListener(this);
     
-    JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    panel.add(calc);
-    panel.add(reset);
-    panel.add(new JLabel("From Units:"));
-    panel.add(fromUnitsBox);
-    panel.add(new JLabel("To Units:"));
-    panel.add(toUnitsBox);
-    panel.add(new JLabel("Ingredient:"));
-    panel.add(ingredientsBox);
-    panel.add(new JLabel("From Amount: "));
-    panel.add(amountBox);
-    panel.add(amountLabel);
+    JPanel panel = new JPanel(new GridLayout(2, 1));
+    JPanel upperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    upperPanel.add(calc);
+    upperPanel.add(reset);
+    lowerPanel.add(new JLabel("From Units:"));
+    lowerPanel.add(fromUnitsBox);
+    lowerPanel.add(new JLabel("To Units:"));
+    lowerPanel.add(toUnitsBox);
+    lowerPanel.add(new JLabel("Ingredient:"));
+    lowerPanel.add(ingredientsBox);
+    lowerPanel.add(new JLabel("From Amount: "));
+    lowerPanel.add(amountBox);
+    lowerPanel.add(amountLabel);
+    panel.add(upperPanel, 0);
+    panel.add(lowerPanel, 1);
     add(panel);
     
     setSize(400, 100);
@@ -102,6 +106,7 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     String ingredient = "";
     String fromUnit = (String) fromUnitsBox.getSelectedItem();
     String toUnit = (String) toUnitsBox.getSelectedItem();
+    double amount = 0.0;
     boolean weight1 = false;
     boolean weight2 = false;
     boolean vol1 = false;
@@ -118,7 +123,8 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     if (vol1 && weight2) ingredientsBox.setEnabled(true);
     ingredient = (String) ingredientsBox.getSelectedItem();
     
-    double amount = Double.parseDouble(amountBox.getText());
+    if (amountBox.getText().equals("")) amount = 0.0;
+    else amount = Double.parseDouble(amountBox.getText());
     
     final String finalIng = ingredient;
     
