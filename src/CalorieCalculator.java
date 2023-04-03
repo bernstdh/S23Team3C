@@ -14,7 +14,7 @@ public class CalorieCalculator extends JFrame implements ItemListener
 	String orange = "Orange";
 	
 	private JComboBox<String> ingredientBox;
-	private JComboBox<Double> amountBox;
+	private JTextField amountBox;
 	private JComboBox<String> unitBox;
 	private JLabel calorieLabel;
 	
@@ -24,16 +24,18 @@ public class CalorieCalculator extends JFrame implements ItemListener
 	public CalorieCalculator() 
 	{
 		super("Calorie Calculator");
+		Ingredients[] ingredient = Ingredients.values();
 		
-		String[] ingredients = {apple, banana, orange};
-		ingredientBox = new JComboBox<>(ingredients);
-		ingredientBox.addItemListener(this);
+		ingredientBox = new JComboBox<>();
+    for (int i = 0; i < ingredient.length; i++)
+    {
+      ingredientBox.addItem(ingredient[i].getIngredientName());
+    }
+    ingredientBox.addItemListener(this);
+		amountBox = new JTextField(10);
 
-		Double[] amounts = {0.25, 0.5, 1.0, 1.5, 2.0};
-		amountBox = new JComboBox<>(amounts);
-		amountBox.addItemListener(this);
-
-		String[] units = {"cup", "oz", "g", "kg"};
+		String[] units = {"g", "dr", "oz", "lb", "p", "tsp", "tbs", "floz",
+		    "cup", "pt", "qt", "gal", "ml"};
 		unitBox = new JComboBox<>(units);
 		unitBox.addItemListener(this);
 
@@ -73,8 +75,10 @@ public class CalorieCalculator extends JFrame implements ItemListener
 	 */
 	public void itemStateChanged(final ItemEvent e)
 	{
+	  double amount = -1.0;
 		String ingredient = (String) ingredientBox.getSelectedItem();
-		double amount = (double) amountBox.getSelectedItem();
+		if (amountBox.getText().equals("")) amount = 0.0;
+		else amount = Double.parseDouble(amountBox.getText());
 		String unit = (String) unitBox.getSelectedItem();
 
 		double calories = calculateCalories(ingredient, amount, unit);
@@ -92,19 +96,14 @@ public class CalorieCalculator extends JFrame implements ItemListener
 	private double calculateCalories(final String ingredient, 
 			final double amount, final String unit) 
 	{
-		if (ingredient.equals(apple))
-		{
-			return amount * 2.0;
-		} else if (ingredient.equals(banana)) 
-		{
-			return amount * 9.0;
-		} else if (ingredient.equals(orange)) 
-		{
-			return amount * 7.0;
-		} else 
-		{
-			return 0.0;
-		}
+	  if (amount < 0.0)return 0.0;
+	  Ingredients ing = Ingredients.fromCode(ingredient);
+	  double calories = amount * ing.getCaloriesPerGram();
+	  double result = 0.0;
+	  result = UnitConversion.gramsConversions(ingredient, unit, amount);
+	  calories = result * ing.getCaloriesPerGram();
+	  return calories;
+	  
 	}
 
 }
