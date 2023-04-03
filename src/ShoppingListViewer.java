@@ -49,7 +49,7 @@ public class ShoppingListViewer extends JFrame
 		});
 
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(500, 400);
 		setVisible(true);
 
