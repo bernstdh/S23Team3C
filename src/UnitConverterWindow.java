@@ -10,7 +10,7 @@ import java.util.*;
  * 
  * This work complies with the JMU Honor Code.
  */
-public class UnitConverterWindow extends JFrame implements ItemListener
+public class UnitConverterWindow extends JFrame implements ActionListener
 {
   private static final long serialVersionUID = 1L;
   
@@ -35,6 +35,7 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   private String qt = "qt";
   private String gal = "gal";
   private String ml = "ml";
+  private String toAmount = "To Amount:";
   String[] units = {dr, g, oz, lb, p, tsp, tbs, floz, cup,
       pt, qt, gal, ml};
   ArrayList<String> weight = new ArrayList<String>(
@@ -55,25 +56,25 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     {
       ingredientsBox.addItem(ingredient[i].getIngredientName());
     }
-    ingredientsBox.addItemListener(this);
+    ingredientsBox.addActionListener(this);
     
     
     fromUnitsBox = new JComboBox<>(units);
-    fromUnitsBox.addItemListener(this);
+    fromUnitsBox.addActionListener(this);
     
     toUnitsBox = new JComboBox<>(units);
-    toUnitsBox.addItemListener(this);
-    
-//    Double[] amounts = {0.25, 0.5, 1.0, 1.5, 2.0, 10.0};
+    toUnitsBox.addActionListener(this);
+
     amountBox = new JTextField(10);
     
     
-    amountLabel = new JLabel("To Amount:");
+    amountLabel = new JLabel(toAmount);
     
     calc = new JButton(new ImageIcon("calculate.png"));
+    calc.addActionListener(this);
     reset = new JButton(new ImageIcon("reset.png"));
-//    reset.addItemListener(this);
-    
+    reset.addActionListener(this);
+
     JPanel panel = new JPanel(new GridLayout(2, 1));
     JPanel upperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -102,9 +103,9 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   
   /**
    * Overridden method.
-   * @param e ItemEvent
+   * @param e ActionEvent
    */
-  public void itemStateChanged(final ItemEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
     String ingredient = "";
     String fromUnit = (String) fromUnitsBox.getSelectedItem();
@@ -114,33 +115,35 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     boolean weight2 = false;
     boolean vol1 = false;
     boolean vol2 = false;
-    
+  
     if (weight.contains(fromUnit)) weight1 = true;
     if (weight.contains(toUnit)) weight2 = true;
     if (volume.contains(fromUnit)) vol1 = true;
     if (volume.contains(toUnit)) vol2 = true;
-    
+  
     if (weight1 && weight2) ingredientsBox.setEnabled(false);
     else if (vol1 && vol2) ingredientsBox.setEnabled(false);
     if (weight1 && vol2) ingredientsBox.setEnabled(true);
     if (vol1 && weight2) ingredientsBox.setEnabled(true);
     ingredient = (String) ingredientsBox.getSelectedItem();
-    
+  
     if (amountBox.getText().equals("")) amount = 0.0;
     else amount = Double.parseDouble(amountBox.getText());
-    
-    final String finalIng = ingredient;
-    final double finalAmount = amount;
-    
-    calc.addActionListener(new ActionListener()
+    if (e.getSource() == calc)
     {
-      public void actionPerformed(final ActionEvent e)
-      {
-        converter(finalIng, fromUnit, toUnit, finalAmount);
-      }
-    });
-    double newAmount = converter(ingredient, fromUnit, toUnit, amount);
-    amountLabel.setText(String.format("To Amount: %f", newAmount));
+      double newAmount = converter(ingredient, fromUnit, toUnit, amount);
+      amountLabel.setText(String.format("To Amount: %f", newAmount));
+    }
+    
+    if (e.getSource() == reset)
+    {
+      amountBox.setText("");
+      amountLabel.setText(toAmount);
+      ingredientsBox.setEnabled(true);
+      ingredientsBox.setSelectedItem("Alcohol");
+      fromUnitsBox.setSelectedItem(dr);
+      toUnitsBox.setSelectedItem(dr);
+    }
   }
   
   /**
@@ -184,7 +187,11 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     return newAmount;
   }
   
-  public static void main(String[] args)
+  /**
+   * Temp main.
+   * @param args - a
+   */
+  public static void main(final String[] args)
   {
     new UnitConverterWindow();
   }

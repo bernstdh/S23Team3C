@@ -6,7 +6,7 @@ import java.awt.event.*;
  * @author Shaury Gautam
  *
  */
-public class CalorieCalculatorWindow extends JFrame implements ItemListener 
+public class CalorieCalculatorWindow extends JFrame implements ActionListener 
 {
 	private static final long serialVersionUID = 1L;
 	private String g = "g";
@@ -22,6 +22,7 @@ public class CalorieCalculatorWindow extends JFrame implements ItemListener
 	private String qt = "qt";
 	private String gal = "gal";
 	private String ml = "ml";
+	private String calor = "Calories:";
 	
 	private String[] units = {g, dr, oz, lb, p, tsp, tbs, floz, cup, pt, qt, gal, ml};
 	
@@ -45,15 +46,17 @@ public class CalorieCalculatorWindow extends JFrame implements ItemListener
     {
       ingredientBox.addItem(ingredient[i].getIngredientName());
     }
-    ingredientBox.addItemListener(this);
+    ingredientBox.addActionListener(this);
 		amountBox = new JTextField(10);
 
 		unitBox = new JComboBox<>(units);
-		unitBox.addItemListener(this);
+		unitBox.addActionListener(this);
 
-		calorieLabel = new JLabel("");
+		calorieLabel = new JLabel(calor);
 		calc = new JButton(new ImageIcon("calculate.png"));
+		calc.addActionListener(this);
     reset = new JButton(new ImageIcon("reset.png"));
+    reset.addActionListener(this);
 
 		JPanel panel = new JPanel(new GridLayout(2,1));
 		JPanel upperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -93,17 +96,28 @@ public class CalorieCalculatorWindow extends JFrame implements ItemListener
 	 * Overridden method.
 	 * @param e ItemEvent
 	 */
-	public void itemStateChanged(final ItemEvent e)
+	public void actionPerformed(final ActionEvent e)
 	{
-	  double amount = -1.0;
-		String ingredient = (String) ingredientBox.getSelectedItem();
-		if (amountBox.getText().equals("")) amount = 0.0;
-		else amount = Double.parseDouble(amountBox.getText());
-		String unit = (String) unitBox.getSelectedItem();
+	  if (e.getSource() == calc)
+	  {
+	    double amount = -1.0;
+	    String ingredient = (String) ingredientBox.getSelectedItem();
+	    if (amountBox.getText().equals("")) amount = 0.0;
+	    else amount = Double.parseDouble(amountBox.getText());
+	    String unit = (String) unitBox.getSelectedItem();
 
-		double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
+	    double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
 
-		calorieLabel.setText(String.format("Calories: %.2f", calories));
+	    calorieLabel.setText(String.format("Calories: %.2f", calories));
+	  }
+	  if (e.getSource() == reset)
+	  {
+	    ingredientBox.setSelectedItem("Alcohol");
+	    unitBox.setSelectedItem(g);
+	    calorieLabel.setText(calor);
+	    amountBox.setText("");
+	  }
+	  
 	}
 
 }
