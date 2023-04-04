@@ -3,6 +3,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  * Creates and reads both .rcp and .mel objects.
@@ -13,6 +14,30 @@ public class Serializer
 {
   private static final String RECIPE = ".rcp";
   private static final String MEAL = ".mel";
+//  *EXAMPLE DRIVER*
+//  public static void main(String[] args) {
+//    Recipes r = new Recipes("example", 99990, new ArrayList<Ingredient>(), new ArrayList<Utensils>());
+//    Recipes r2 = null;
+//    System.out.println(r.getName());
+//    System.out.println(r.numPpl());
+//    try {
+//      serializeRecipe(r);
+//    } catch (IOException ioe) {
+//      
+//    }
+//    try
+//    {
+//      r2 = deserializeRecipe("example.rcp");
+//    }
+//    catch (ClassNotFoundException | IOException e)
+//    {
+//      // TODO Auto-generated catch block
+//      e.printStackTrace();
+//    }
+//    System.out.println("Now printing deserialized Recipes object");
+//    System.out.println(r2.getName());
+//    System.out.println(r2.numPpl());
+//  }
   /**
    * Creates a new .rcp file.
    * @param r The object to make the file from
@@ -29,7 +54,7 @@ public class Serializer
   /**
    * Creates a new .mel file.
    * @param m The object to make the file from
-   * @throws IOException  If ther is Input/Output trouble
+   * @throws IOException  If there is Input/Output trouble
    */
   public static void serializeMeal(final Meals m) throws IOException
   {
