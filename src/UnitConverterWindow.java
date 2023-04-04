@@ -42,6 +42,9 @@ public class UnitConverterWindow extends JFrame implements ItemListener
   ArrayList<String> volume = new ArrayList<String>(
       Arrays.asList(ml, p, tsp, tbs, floz, cup, pt, qt, gal));
   
+  /**
+   * The constructor for the UnitConverterWindow.
+   */
   public UnitConverterWindow()
   {
     super("Unit Converter");
@@ -127,12 +130,13 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     else amount = Double.parseDouble(amountBox.getText());
     
     final String finalIng = ingredient;
+    final double finalAmount = amount;
     
     calc.addActionListener(new ActionListener()
     {
       public void actionPerformed(final ActionEvent e)
       {
-        converter(finalIng, fromUnit, toUnit, amount);
+        converter(finalIng, fromUnit, toUnit, finalAmount);
       }
     });
     double newAmount = converter(ingredient, fromUnit, toUnit, amount);
@@ -180,10 +184,7 @@ public class UnitConverterWindow extends JFrame implements ItemListener
     return newAmount;
   }
   
-  /**
-   * temp Main
-   */
-  public static void main(String args[])
+  public static void main(String[] args)
   {
     new UnitConverterWindow();
   }

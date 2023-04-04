@@ -19,7 +19,6 @@ public class ShoppingListViewer extends JFrame
 	/**
 	 * Constructor.
 	 * @param strings Array List String
-	 * @param num Int
 	 * @param title Title
 	 */
 
@@ -86,7 +85,6 @@ public class ShoppingListViewer extends JFrame
 	/**
 	 * generateList.
 	 * @param strings String
-	 * @param num number of items
 	 */
 	private void generateShoppingList(final ArrayList<String> strings) 
 	{
