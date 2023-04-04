@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -5,7 +6,7 @@ import java.util.List;
  * @author Julian Barrett
  *
  */
-public class Meals {
+public class Meals implements Serializable {
 
 	private List<Recipes> recipes;
 	private String name;
