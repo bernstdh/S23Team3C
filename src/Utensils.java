@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Utensils {
+public class Utensils implements Serializable {
 	
 	private String name;
 	private String details;

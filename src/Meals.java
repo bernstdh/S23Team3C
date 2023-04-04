@@ -20,6 +20,10 @@ public class Meals implements Serializable {
 		this.recipes = recipes;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	/**
 	 * returns name;
 	 * @return name.
@@ -45,5 +49,16 @@ public class Meals implements Serializable {
 	public void addRecipe(Recipes recipe) 
 	{
 		this.recipes.add(recipe);
+	}
+	
+	public String toString() {
+		String mealString = null;
+		mealString += this.name;
+		
+		for (int i = 0; i < this.recipes.size(); i++ ) {
+			mealString += this.recipes.get(i);
+			mealString += "\n";
+		}
+		return mealString;
 	}
 }

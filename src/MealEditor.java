@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,16 +37,15 @@ public class MealEditor extends JFrame implements ActionListener {
 	private JButton addRecipeButton;
 	private JButton deleteRecipeButton;
 	
-	// private 
-
-
 	private JButton newButton;
 	private JButton openButton;
 	private JButton saveButton;
 	private JButton saveAsButton;
 	private JButton closeButton;
 
-
+	private Meals meal;
+	// 
+	private JFileChooser fileChooser;
 	
 	public MealEditor() {
 		
@@ -60,14 +60,19 @@ public class MealEditor extends JFrame implements ActionListener {
 		
 		newButton = new JButton(new ImageIcon("newButton.png"));
 		newButton.setPreferredSize(buttonSize);
+		newButton.addActionListener(this);
 		openButton = new JButton(new ImageIcon("openButton.png"));
 		openButton.setPreferredSize(buttonSize);
+		openButton.addActionListener(this);
 		saveButton = new JButton(new ImageIcon("saveButton.png"));
 		saveButton.setPreferredSize(buttonSize);
+		saveButton.addActionListener(this);
 		saveAsButton = new JButton(new ImageIcon("saveAsButton.png"));
 		saveAsButton.setPreferredSize(buttonSize);
+		saveAsButton.addActionListener(this);
 		closeButton = new JButton(new ImageIcon("closeButton.png"));
 		closeButton.setPreferredSize(buttonSize);
+		closeButton.addActionListener(this);
 
 		
 		this.setLayout(new BorderLayout());
@@ -89,6 +94,7 @@ public class MealEditor extends JFrame implements ActionListener {
 		nameFrame.add(nameLabel);
 		nameFrame.add(nameBox);
 		nameBox.setEditable(true);
+		nameBox.addActionListener(this);
 		
 		// buttons panel and name panels, inside a borderPnl
 		JPanel borderPnl = new JPanel(new BorderLayout());
@@ -119,6 +125,9 @@ public class MealEditor extends JFrame implements ActionListener {
 		recipeBigPanel.add(addRecipeFlow, BorderLayout.CENTER);
 		recipeBigPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
+		
+		this.fileChooser = new JFileChooser();
+		
 		this.add(recipeBigPanel); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
@@ -129,17 +138,43 @@ public class MealEditor extends JFrame implements ActionListener {
 	  @Override
 	  public void actionPerformed(final ActionEvent e)
 	  {
+		
 	    if (e.getSource() == addRecipeButton)
 	    {
-	      // new ;
+	    	int returnVal = fileChooser.showOpenDialog(MealEditor.this);
+	        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File file = fileChooser.getSelectedFile();
+		        String tempFileName = file.getName();
+		        String fileName = tempFileName.substring(0, tempFileName.length() - 4);
+		        try {
+		        	this.meal.addRecipe(Serializer.deserializeRecipe(fileName));
+		        } catch (IOException | ClassNotFoundException ia) {
+		        	
+		        }
+	        }
 	    } else if (e.getSource() == deleteRecipeButton) {
+	    	this.recipeTextBox.setText("");
 	    	
+	    } else if (e.getSource() == openButton) {
+	    	
+	    } else if (e.getSource() == newButton) {
+	        
+	        
+	    } else if (e.getSource() == saveButton) {
+	    	
+	    } else if (e.getSource() == saveAsButton) {
+	    	
+	    } else if (e.getSource() == closeButton) {
+	    	
+	    } else if (e.getSource() == nameBox) {
+	    	// this.recipeTextBox.setText(nameBox.getText());
+	    	this.meal.setName(nameBox.getText());
 	    }
 	  }
 	
 	   public void write(String filename) throws IOException
 	   {
-	     ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename + ".mel"));
+	     ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename + ".txt"));
 	     out.writeObject(this);
 	     out.flush();
 	     out.close();
@@ -165,8 +200,41 @@ public class MealEditor extends JFrame implements ActionListener {
 	     return file;
 	   }
 	
+	  
+	  public void enableWrite(boolean enable) {
+		  this.addRecipeButton.setEnabled(enable);
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  public void loadFile(String fileName) {
+		  JFileChooser chooser = new JFileChooser();
+		  int returnVal = chooser.showOpenDialog(this.recipeTextBox); //replace null with your swing container
+		  File file;
+		  if(returnVal == JFileChooser.APPROVE_OPTION) {   
+		    file = chooser.getSelectedFile();    
+		  }
+
+		  JTextArea text = new JTextArea();
+		  BufferedReader in = new BufferedReader(new FileReader(file));
+		  String line = in.readLine();
+	  }
+	    
+	    
+	    
+	    
 	public static void main(String[] args) {
 		new MealEditor();
+		
+		
 		
 	}
 }

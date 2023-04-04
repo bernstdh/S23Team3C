@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -6,7 +7,7 @@ import java.util.List;
  * @author Julian Barrett
  *
  */
-public class Recipes {
+public class Recipes implements Serializable {
 
 	private List<Ingredient> ingredients;
 	private List<Utensils> utensils;
@@ -20,6 +21,11 @@ public class Recipes {
 	 */
 	public Recipes(String name, int numPpl, List<Ingredient> ingredients, List<Utensils> utensils) 
 	{
+		this.ingredients = new ArrayList<Ingredient>();
+		for (Ingredient i : ingredients) {
+			this.ingredients.add(i);
+		}
+		
 		this.name = name;
 		this.numPpl = numPpl;
 		this.ingredients = ingredients;
