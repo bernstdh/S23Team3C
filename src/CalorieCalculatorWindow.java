@@ -81,17 +81,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 		setResizable(false);
 		setSize(600, 200);
 	}
-	
-	/**
-	 * Temporary main.
-	 * @param args argument
-	 */
-	public static void main(final String[] args) 
-	{
-		new CalorieCalculatorWindow();
-	}
 
-	
 	/**
 	 * Overridden method.
 	 * @param e ItemEvent

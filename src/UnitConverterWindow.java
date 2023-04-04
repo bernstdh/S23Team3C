@@ -186,14 +186,5 @@ public class UnitConverterWindow extends JFrame implements ActionListener
         UnitConversion.mlConversion(ingredient, toUnit, amount);
     return newAmount;
   }
-  
-  /**
-   * Temp main.
-   * @param args - a
-   */
-  public static void main(final String[] args)
-  {
-    new UnitConverterWindow();
-  }
 
 }
