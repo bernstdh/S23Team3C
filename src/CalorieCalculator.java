@@ -9,14 +9,26 @@ import java.awt.event.*;
 public class CalorieCalculator extends JFrame implements ItemListener 
 {
 	private static final long serialVersionUID = 1L;
-	String apple = "Apple";
-	String banana = "Banana";
-	String orange = "Orange";
+	private String g = "g";
+	private String dr = "dr";
+	private String oz = "oz";
+	private String lb = "lb";
+	private String p = "p";
+	private String tsp = "tsp";
+	private String tbs = "tbs";
+	private String floz = "floz";
+	private String cup = "cup";
+	private String pt = "pt";
+	private String qt = "qt";
+	private String gal = "gal";
+	private String ml = "ml";
 	
 	private JComboBox<String> ingredientBox;
 	private JTextField amountBox;
 	private JComboBox<String> unitBox;
 	private JLabel calorieLabel;
+	private JButton calc;
+	private JButton reset;
 	
 	/**
 	 * Constructor. 
@@ -40,15 +52,23 @@ public class CalorieCalculator extends JFrame implements ItemListener
 		unitBox.addItemListener(this);
 
 		calorieLabel = new JLabel("");
+		calc = new JButton(new ImageIcon("calculate.png"));
+    reset = new JButton(new ImageIcon("reset.png"));
 
-		JPanel panel = new JPanel(new FlowLayout());
-		panel.add(new JLabel("Ingredient:"));
-		panel.add(ingredientBox);
-		panel.add(new JLabel("Amount:"));
-		panel.add(amountBox);
-		panel.add(new JLabel("Unit:"));
-		panel.add(unitBox);
-		panel.add(calorieLabel);
+		JPanel panel = new JPanel(new GridLayout(2,1));
+		JPanel upperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		upperPanel.add(calc);
+		upperPanel.add(reset);
+		lowerPanel.add(new JLabel("Ingredient:"));
+		lowerPanel.add(ingredientBox);
+		lowerPanel.add(new JLabel("Amount:"));
+		lowerPanel.add(amountBox);
+		lowerPanel.add(new JLabel("Unit:"));
+		lowerPanel.add(unitBox);
+		lowerPanel.add(calorieLabel);
+		panel.add(upperPanel, 0);
+		panel.add(lowerPanel, 1);
 		add(panel);
 
 		setSize(400, 100);
@@ -56,7 +76,7 @@ public class CalorieCalculator extends JFrame implements ItemListener
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setResizable(false);
-		setSize(500, 100);
+		setSize(600, 200);
 	}
 	
 	/**
@@ -96,12 +116,35 @@ public class CalorieCalculator extends JFrame implements ItemListener
 	private double calculateCalories(final String ingredient, 
 			final double amount, final String unit) 
 	{
-	  if (amount < 0.0)return 0.0;
+	  if (amount < 0.0) return 0.0;
+	  double calories = 0.0;
 	  Ingredients ing = Ingredients.fromCode(ingredient);
-	  double calories = amount * ing.getCaloriesPerGram();
-	  double result = 0.0;
-	  result = UnitConversion.gramsConversions(ingredient, unit, amount);
-	  calories = result * ing.getCaloriesPerGram();
+//	  double calories = amount * ing.getCaloriesPerGram();
+	  if (unit.equals(g)) calories = amount * ing.getCaloriesPerGram();
+	  else if (unit.equals(dr)) calories = UnitConversion.dramsConversions(ingredient,
+	      g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(oz)) calories = UnitConversion.ozConversions(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(lb)) calories = UnitConversion.lbConversions(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(p)) calories = UnitConversion.pinchesConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(tsp)) calories = UnitConversion.tspConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(tbs)) calories = UnitConversion.tbsConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(floz)) calories = UnitConversion.flozConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(cup)) calories = UnitConversion.cupConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(pt)) calories = UnitConversion.ptConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(qt)) calories = UnitConversion.qtConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(gal)) calories = UnitConversion.galConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
+	  else if (unit.equals(ml)) calories = UnitConversion.mlConversion(ingredient,
+        g, amount) * ing.getCaloriesPerGram();
 	  return calories;
 	  
 	}
