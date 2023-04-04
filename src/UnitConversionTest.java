@@ -42,7 +42,33 @@ class UnitConversionTest
     drams = 0.0;
     assertEquals(-1.0, UnitConversion.dramsConversions("Alcohol", "Trace", drams));
     
-    //Test for p, ml, tsp, tbs, floz, cup, pt, qt, gal
+    drams = 54.3;
+    assertEquals(743.6085728309065, UnitConversion.dramsConversions("Bread", p, drams));
+    
+    drams = 163.2;
+    assertEquals(222.43472049230766, UnitConversion.dramsConversions("Lamb", ml, drams));
+    
+    drams = 21.1;
+    assertEquals(5.056675239738716, UnitConversion.dramsConversions("Honey", tsp, drams));
+    
+    drams = 99.2;
+    assertEquals(15.437378709364207, UnitConversion.dramsConversions("Lemon", tbs, drams), 0.01);
+    
+    drams = 276.94;
+    assertEquals(21.00299419421141, UnitConversion.dramsConversions("Kidney bean", floz, drams));
+    
+    drams = 963.78;
+    assertEquals(5.509843238481082, UnitConversion.dramsConversions("Pasta", cup, drams));
+    
+    drams = 5945.352;
+    assertEquals(185.52351309446, UnitConversion.dramsConversions("Cornflake", pt, drams));
+    
+    drams = 16382.956;
+    assertEquals(90.21650225524553, UnitConversion.dramsConversions("Cheddar cheese", qt, drams));
+    
+    drams = 5648362.54;
+    assertEquals(7145.514192262774, UnitConversion.dramsConversions("Broccoli", gal, drams));
+    
     
   }
   
@@ -66,6 +92,33 @@ class UnitConversionTest
     
     grams = 564382.1;
     assertEquals(-1.0, UnitConversion.gramsConversions("Alcohol", "MAX", grams));
+    
+    grams = 475.3;
+    assertEquals(2410.7707454709766, UnitConversion.gramsConversions("Carrot", p, grams));
+    
+    grams = 27.29;
+    assertEquals(26.240384615384613, UnitConversion.gramsConversions("Apple juice", ml, grams));
+    
+    grams = 2014.3;
+    assertEquals(609.9545000772097, UnitConversion.gramsConversions("Cucumber", tsp, grams));
+    
+    grams = 83.67;
+    assertEquals(4.041741822679544, UnitConversion.gramsConversions("Ham", tbs, grams), 0.01);
+    
+    grams = 9563.2;
+    assertEquals(718.6005810938292, UnitConversion.gramsConversions("Flour", floz, grams));
+    
+    grams = 3709.1;
+    assertEquals(26.129081550910534, UnitConversion.gramsConversions("Egg", cup, grams));
+    
+    grams = 57694.325;
+    assertEquals(154.34155164903044, UnitConversion.gramsConversions("Rum", pt, grams));
+    
+    grams = 94723.346;
+    assertEquals(101.10408358513483, UnitConversion.gramsConversions("Wine", qt, grams));
+    
+    grams = 76849.21;
+    assertEquals(23.069788070522304, UnitConversion.gramsConversions("Oil", gal, grams));
   }
   
   @Test
@@ -91,6 +144,33 @@ class UnitConversionTest
     
     pound = 3827.4;
     assertEquals(1736079.25, UnitConversion.lbConversions("Alcohol", g, pound), .01);
+
+    pound = 7.3;
+    assertEquals(17620.84740209538, UnitConversion.lbConversions("Pear", p, pound));
+    
+    pound = 19.673;
+    assertEquals(16836.833417660375, UnitConversion.lbConversions("Peanut", ml, pound));
+    
+    pound = 90.368;
+    assertEquals(14338.392332898247, UnitConversion.lbConversions("Salmon", tsp, pound));
+    
+    pound = 67.215;
+    assertEquals(2786.294456761473, UnitConversion.lbConversions("Onion", tbs, pound), 0.01);
+    
+    pound = 957.35;
+    assertEquals(11208.873761330091, UnitConversion.lbConversions("Macaroni", floz, pound));
+    
+    pound = 2743.52;
+    assertEquals(9563.52474814627, UnitConversion.lbConversions("Ice cream", cup, pound));
+    
+    pound = 96754.34;
+    assertEquals(89182.50459164254, UnitConversion.lbConversions("Milk", pt, pound));
+    
+    pound = 30563.45;
+    assertEquals(25257.300769891284, UnitConversion.lbConversions("Haddock", qt, pound));
+    
+    pound = 1.2;
+    assertEquals(0.2357240930288872, UnitConversion.lbConversions("Crab", gal, pound));
     
   }
   
@@ -113,6 +193,33 @@ class UnitConversionTest
     
     ounce = 215.2;
     assertEquals(6100.8167, UnitConversion.ozConversions("Alcohol", g, ounce), 0.01);
+    
+    ounce = .56;
+    assertEquals(88.85335192128872, UnitConversion.ozConversions("Cod", p, ounce));
+    
+    ounce = 25.67;
+    assertEquals(1617.1826186666665, UnitConversion.ozConversions("Cinnamon", ml, ounce));
+    
+    ounce = 43.692;
+    assertEquals(188.94877636983654, UnitConversion.ozConversions("Chocolate", tsp, ounce));
+    
+    ounce = 253.47;
+    assertEquals(1518.6200572758144, UnitConversion.ozConversions("Garlic", tbs, ounce), 0.01);
+    
+    ounce = 724.36;
+    assertEquals(2104.1808779011494, UnitConversion.ozConversions("Grapefruit", floz, ounce));
+    
+    ounce = 904.8345;
+    assertEquals(1807.051222649798, UnitConversion.ozConversions("Lettuce", cup, ounce));
+    
+    ounce = 756.436;
+    assertEquals(74.29591251433307, UnitConversion.ozConversions("Celery", pt, ounce));
+    
+    ounce = 70485.43;
+    assertEquals(4223.0081565357, UnitConversion.ozConversions("Cashew", qt, ounce));
+    
+    ounce = 385563.5736;
+    assertEquals(3173.125025871127, UnitConversion.ozConversions("Butter", gal, ounce));
     
   }
   
@@ -150,6 +257,18 @@ class UnitConversionTest
     
     pinch = 5039.23;
     assertEquals(1552.373099648, UnitConversion.pinchesConversion("Alcohol", ml, pinch), 0.01);
+    
+    pinch = 12.43;
+    assertEquals(5.743733952, UnitConversion.pinchesConversion("Brown sugar", g, pinch));
+    
+    pinch = 7543.58;
+    assertEquals(695.119579075102, UnitConversion.pinchesConversion("Blackberry", dr, pinch));
+    
+    pinch = 3547.23;
+    assertEquals(29.68016366926001, UnitConversion.pinchesConversion("Bean", oz, pinch));
+    
+    pinch = 59473.45;
+    assertEquals(42.41101499305808, UnitConversion.pinchesConversion("Beef", lb, pinch));
   }
   
   @Test
@@ -187,6 +306,18 @@ class UnitConversionTest
     tea = 467.32;
     assertEquals(2303.383642112, UnitConversion.tspConversion("Alcohol", ml, tea), 0.01);
     
+    tea = 5743.32;
+    assertEquals(15003.438221967363, UnitConversion.tspConversion("Green bean", g, tea));
+    
+    tea = 47353.49;
+    assertEquals(60594.88394377604, UnitConversion.tspConversion("Almond", dr, tea));
+    
+    tea = 570.436;
+    assertEquals(103.14459273703064, UnitConversion.tspConversion("Chicken", oz, tea));
+    
+    tea = 95740.33;
+    assertEquals(1061.1610711104868, UnitConversion.tspConversion("Cherry", lb, tea));
+    
   }
   
   @Test
@@ -223,6 +354,18 @@ class UnitConversionTest
     
     table = 4635.1;
     assertEquals(68538.13352448, UnitConversion.tbsConversion("Alcohol", ml, table), 0.01);
+    
+    table = 56436.32;
+    assertEquals(851200.8018178866, UnitConversion.tbsConversion("Cherry", g, table));
+    
+    table = 38201.245;
+    assertEquals(306052.6460702599, UnitConversion.tbsConversion("Cottage cheese", dr, table));
+    
+    table = 90.3027;
+    assertEquals(26.376442352278904, UnitConversion.tbsConversion("Apple", oz, table));
+    
+    table = 56436.32;
+    assertEquals(846.2993187540445, UnitConversion.tbsConversion("Thyme", lb, table));
   }
   
   @Test
@@ -259,6 +402,18 @@ class UnitConversionTest
     
     fluid = 6.1;
     assertEquals(180.39853056, UnitConversion.flozConversion("Alcohol", ml, fluid), 0.01);
+    
+    fluid = 27.34;
+    assertEquals(371.92853766144003, UnitConversion.flozConversion("Thyme", g, fluid));
+    
+    fluid = 382.493;
+    assertEquals(4468.882292936742, UnitConversion.flozConversion("Pork", dr, fluid));
+    
+    fluid = 5853.568;
+    assertEquals(4091.2208236372467, UnitConversion.flozConversion("Tomato", oz, fluid));
+    
+    fluid = 39673.4836;
+    assertEquals(1500.2574693421495, UnitConversion.flozConversion("Plum", lb, fluid));
   }
   
   @Test
@@ -295,6 +450,18 @@ class UnitConversionTest
     
     cp = 6857.3;
     assertEquals(1622356.51620864, UnitConversion.cupConversion("Alcohol", ml, cp), 0.01);
+    
+    cp = 17.54638;
+    assertEquals(3030.4249876886324, UnitConversion.cupConversion("Peas", g, cp));
+    
+    cp = 9483.5362;
+    assertEquals(683803.6857965725, UnitConversion.cupConversion("Pineapple", dr, cp));
+    
+    cp = 28402.3451;
+    assertEquals(327100.1354699439, UnitConversion.cupConversion("Syrup", oz, cp));
+    
+    cp = 4839.42;
+    assertEquals(2145.5552161783903, UnitConversion.cupConversion("Lentil", lb, cp));
   }
   
   @Test
@@ -331,6 +498,18 @@ class UnitConversionTest
     
     pint = 89.2;
     assertEquals(42207.34144512, UnitConversion.ptConversion("Alcohol", ml, pint), 0.01);
+    
+    pint = 203.284;
+    assertEquals(7695.136500744193, UnitConversion.ptConversion("Spinach", g, pint));
+    
+    pint = 3857.36101;
+    assertEquals(442951.43077340606, UnitConversion.ptConversion("Saltine crackers", dr, pint));
+    
+    pint = 49032.40146;
+    assertEquals(1072091.5997035154, UnitConversion.ptConversion("Spaghetti", oz, pint));
+    
+    pint = 13.28;
+    assertEquals(8.034956302295065, UnitConversion.ptConversion("Strawberries", lb, pint));
   }
   
   @Test
@@ -367,6 +546,19 @@ class UnitConversionTest
     
     quart = 15.7;
     assertEquals(14857.74127104, UnitConversion.qtConversion("Alcohol", ml, quart), 0.01);
+    
+    quart = 7.23;
+    assertEquals(4447.3856753664, UnitConversion.qtConversion("Sweet potato", g, quart));
+    
+    quart = 732.36;
+    assertEquals(254252.56047616625, UnitConversion.qtConversion("Olive", dr, quart));
+    
+    quart = 4638.2901;
+    assertEquals(181155.36425806122, UnitConversion.qtConversion("Mushroom", oz, quart));
+    
+    quart = 8323.1039;
+    System.out.println(UnitConversion.qtConversion("Peach", lb, quart));
+    assertEquals(10592.600603172155, UnitConversion.qtConversion("Peach", lb, quart));
   }
   
   @Test
@@ -403,6 +595,22 @@ class UnitConversionTest
     
     gallon = 2.9;
     assertEquals(10977.69418752, UnitConversion.galConversion("Alcohol", ml, gallon), 0.01);
+    
+    gallon = 8323.1039;
+    System.out.println(UnitConversion.galConversion("Peach", g, gallon));
+    assertEquals(10592.600603172155, UnitConversion.galConversion("Peach", g, gallon));
+    
+    gallon = 8323.1039;
+    System.out.println(UnitConversion.galConversion("Peach", dr, gallon));
+    assertEquals(10592.600603172155, UnitConversion.galConversion("Peach", dr, gallon));
+    
+    gallon = 8323.1039;
+    System.out.println(UnitConversion.galConversion("Peach", oz, gallon));
+    assertEquals(10592.600603172155, UnitConversion.galConversion("Peach", oz, gallon));
+    
+    gallon = 8323.1039;
+    System.out.println(UnitConversion.galConversion("Peach", lb, gallon));
+    assertEquals(10592.600603172155, UnitConversion.galConversion("Peach", lb, gallon));
   }
   
   @Test
