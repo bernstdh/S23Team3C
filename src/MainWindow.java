@@ -96,7 +96,7 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == meal)
     {
-      System.out.println("open meal editor");
+      new MealEditor();
     }
     else if (e.getSource() == shoppingList)
     {
@@ -120,7 +120,7 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == about)
     {
-      System.out.println("about");
+      new AboutDialog();
     }
   }
 }
