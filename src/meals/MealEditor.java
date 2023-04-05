@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -22,6 +21,7 @@ import app.Serializer;
 
 import java.awt.Color;
 import java.awt.Dimension;
+
 
 
 
@@ -122,7 +122,6 @@ public class MealEditor extends JFrame implements ActionListener {
 		deleteRecipeButton.addActionListener(this);
 		deletePanel.add(deleteRecipeButton, BorderLayout.SOUTH);
 		addRecipeFlow.add(deletePanel);
-
 		recipeBigPanel.add(addRecipeFlow, BorderLayout.CENTER);
 		recipeBigPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -178,8 +177,8 @@ public class MealEditor extends JFrame implements ActionListener {
 		        }
 	        }
 	    } else if (e.getSource() == newButton) {
-	        this.meal = new Meals("", new ArrayList<Recipes>());	
-	        
+	        this.meal = new Meals("", new ArrayList<Recipes>());
+    		this.recipeListModel.removeAllElements();   
 	    } else if (e.getSource() == saveButton) {
 				try {
 					Serializer.serializeMeal(this.meal);
