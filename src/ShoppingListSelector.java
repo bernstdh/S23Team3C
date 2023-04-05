@@ -14,6 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Ingredient;
+import Meals;
+import Recipes;
+import Serializer;
+import ShoppingListViewer;
+
 /**
  * A mid-point between the main menu and the ShoppingListViewer so the user can select what menu or
  * recipe they want to use.

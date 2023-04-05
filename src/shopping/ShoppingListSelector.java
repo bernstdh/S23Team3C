@@ -3,13 +3,23 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import Ingredient;
+import Meals;
+import Recipes;
+import Serializer;
+import ShoppingListViewer;
 
 /**
  * A mid-point between the main menu and the ShoppingListViewer so the user can select what menu or
@@ -20,17 +30,25 @@ import javax.swing.JPanel;
 public class ShoppingListSelector extends JFrame implements ActionListener
 {
   private static final long serialVersionUID = 1L;
-  JButton confirmType;
-  JButton confirmItem;
+  private JButton confirmType;
+  private JButton confirmItem;
   
-  JComboBox<String> typeBox;
-  JComboBox<String> itemBox;
+  private JComboBox<String> typeBox;
   
-  JPanel type;
-  JPanel item;
+  private JPanel type;
+  private JPanel file;
   
-  GridLayout gl;
-  FlowLayout fl;
+  private GridLayout gl;
+  private FlowLayout fl;
+  
+  private JFileChooser fileChooser;
+  private JButton chooseFile;
+  private JLabel fileName;
+  
+  private int fileSelection;
+  
+  private final String recipe = "Recipe";
+  private final String meal = "Meal";
   
   /**
    * Creates a new ShoppingListSelector that includes a dropdown for selecting whether the shopping
@@ -48,8 +66,8 @@ public class ShoppingListSelector extends JFrame implements ActionListener
     //Create the Type selector
     type = new JPanel();
     typeBox = new JComboBox<String>();
-    typeBox.addItem("Recipe");
-    typeBox.addItem("Menu");
+    typeBox.addItem(recipe);
+    typeBox.addItem(meal);
     typeBox.setSelectedItem(null);
     setLayout(gl);
     
@@ -64,8 +82,16 @@ public class ShoppingListSelector extends JFrame implements ActionListener
     type.add(confirmType);
     add(type);
     
+    file = new JPanel();
+    file.setLayout(new FlowLayout());
+    chooseFile = new JButton("Choose File");
+    chooseFile.addActionListener(this);
     confirmItem = new JButton("Confirm Item");
     confirmItem.addActionListener(this);
+    fileName = new JLabel("");
+    file.add(chooseFile);
+    file.add(confirmItem);
+    file.add(fileName);
     
     setVisible(true);
     
@@ -78,43 +104,68 @@ public class ShoppingListSelector extends JFrame implements ActionListener
     {
       //Reload the GridLayout
       gl = new GridLayout(2, 1);
-      setSize(200, 400);
+      add(file);
+      setSize(200, 250);
       setLayout(gl);
-      
-      //Create the item section
-      itemBox = new JComboBox<String>();
-      itemBox.addItem("recipe");
-      itemBox.setSelectedItem(null);
-      item = new JPanel();
-      item.setLayout(fl);
-      item.add(itemBox);
-      item.add(confirmItem);
-      add(item);
-    } else if(e.getSource().equals(confirmItem) && itemBox.getSelectedItem() != null)
+    } else if(e.getSource().equals(confirmItem) && fileSelection == JFileChooser.APPROVE_OPTION)
     {
-      // This is an incomplete method. As of now there's no list of recipes for the user to select
-      // from so I generated a list of 10 random items so ShoppingListViewer can be tested/observed.
-      ArrayList<String> al = new ArrayList<String>();
-      fakeList(al);
-      new ShoppingListViewer(al, (String)itemBox.getSelectedItem());
       
-      /* PSEUDO CODE:
-       * if(type = recipe)
-       *  Recipe r = find recipe
-       *  new ShoppingListViewer(<stuff in the recipe>, recipeName)
-       * if(type = meal)
-       *  Meal m = find meal
-       *  new ShoppingListViewer(<stuff in the meal>, mealName)
-       */
+      ArrayList<String> ingredients = new ArrayList<String>();
+      String name;
+      if(typeBox.getSelectedItem().equals(recipe))
+      {
+        try
+        {
+          Recipes r = Serializer.deserializeRecipe(fileChooser.getSelectedFile().toString());
+          name = r.getName();
+          loadIngredientsList(ingredients, r);
+          new ShoppingListViewer(ingredients, name);
+        }
+        catch (ClassNotFoundException | IOException e1)
+        {
+          System.out.println("Couldn't load recipe shopping list: " + e1.toString());
+        }
+      } else if(typeBox.getSelectedItem().equals(meal))
+      {
+        try
+        {
+          Meals m = Serializer.deserializeMeal(fileChooser.getSelectedFile().toString());
+          name = m.getName();
+          for(Recipes r : m.getRecipes())
+          {
+            loadIngredientsList(ingredients, r);
+            new ShoppingListViewer(ingredients, name);
+          }
+        }
+        catch (ClassNotFoundException | IOException e1)
+        {
+          System.out.println("Couldn't load meal shopping list: " + e1.toString());
+        }
+      }
+    } else if(e.getSource().equals(chooseFile))
+    {
+   // Create the file selection based on the type of item
+      fileChooser = new JFileChooser();
+      fileChooser.addActionListener(this);
+      FileNameExtensionFilter filter = null;
+      if(typeBox.getSelectedItem().equals(recipe))
+      {
+        filter = new FileNameExtensionFilter("Recipes", "rcp");
+      } else if (typeBox.getSelectedItem().equals(meal))
+      {
+        filter = new FileNameExtensionFilter("Meals", "mel");
+      }
+      fileChooser.setFileFilter(filter);
+      fileSelection = fileChooser.showOpenDialog(this);
+      fileName.setText(fileChooser.getSelectedFile().getName());
     }
   }
   
-  private void fakeList(final List<String> list)
+  private void loadIngredientsList(final List<String> list,final Recipes r)
   {
-    for(int i = 0; i < 10; i++)
+    for(Ingredient i : r.getIngredients())
     {
-      list.add("Item " + i + ": " + Math.random() * 50);
+      list.add(i.getName());
     }
-    list.add("out of order test");
   }
 }

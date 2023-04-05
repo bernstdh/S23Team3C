@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import about.AboutDialog;
+import process.ProcessSelector;
 import process.ProcessViewer;
 import shopping.ShoppingListSelector;
 

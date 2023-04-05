@@ -1,3 +1,4 @@
+package process;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import process.ProcessViewer;
+import Formatter;
+import Recipes;
+import Serializer;
+import Steps;
+import Utensils;
 
 /**
  * The middle-ground between the main menu and the ProcessViewer.
