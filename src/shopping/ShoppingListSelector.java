@@ -1,3 +1,4 @@
+package shopping;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -95,7 +96,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
       // from so I generated a list of 10 random items so ShoppingListViewer can be tested/observed.
       ArrayList<String> al = new ArrayList<String>();
       fakeList(al);
-      new ShoppingListViewer(al, 1, (String)itemBox.getSelectedItem());
+      new ShoppingListViewer(al, (String)itemBox.getSelectedItem());
       
       /* PSEUDO CODE:
        * if(type = recipe)

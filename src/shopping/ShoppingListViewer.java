@@ -1,3 +1,4 @@
+package shopping;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -62,11 +63,7 @@ public class ShoppingListViewer extends JFrame
 	 */
 	public ArrayList<String> sortList(final ArrayList<String> list)
 	{
-		ArrayList<String> sortedList = new ArrayList<>();
-		for (String s : list) 
-		{
-			sortedList.add(s);
-		}
+		ArrayList<String> sortedList = new ArrayList<>(list);
 		for (int i = 0; i < sortedList.size() - 1; i++)
 		{
 			for (int j = i + 1; j < sortedList.size(); j++) 

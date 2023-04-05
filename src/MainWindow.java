@@ -6,6 +6,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import about.AboutDialog;
+import process.ProcessViewer;
+import shopping.ShoppingListSelector;
+
 /**
  * Main window for the KILowBites application. Contains a JMenuBar with all menus.
  * 
@@ -107,7 +111,9 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == process)
     {
-      new ProcessViewer();
+      ProcessViewer a = new ProcessViewer();
+      a.setUtensils("forks\nspoon");
+      a.setSteps("eat fork\nmelt spoon\ndrink spoon");
     }
     else if (e.getSource() == calorieCalculator)
     {

@@ -1,3 +1,4 @@
+package about;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -28,7 +29,7 @@ public class AboutDialog {
     private String about = " This is the new cutting edge\n revolutionary kitchen software\n"
         + " which will completely change the way you cook!\n Your meals, recipes, ingredients, and\n"
         + " everything else that you could need is all in one\n neat and elegant application. Our application\n"
-        + " is completely intuitive and built for all chefs,\n from the minute noodle kings to the Michelin Star\n"
+        + " is completely intuitive and built for all chefs,\n from the minute noodle kings and queens to the Michelin Star\n"
         + " winning kitchens.";
 
     /**

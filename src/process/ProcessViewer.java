@@ -1,3 +1,4 @@
+package process;
 import javax.swing.*;
 import java.awt.*;
 /**
@@ -50,6 +51,7 @@ public class ProcessViewer extends JFrame
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(800, 600);
 		setVisible(true);
+		
 	}
 
 	
