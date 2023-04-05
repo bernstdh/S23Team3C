@@ -6,10 +6,9 @@ import ingredients.Ingredients;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
-//import utilities.*;
 /**
  * The window for the unit converter.
- * @author Trace Jones
+ * @author Trace Jones, James Madison University
  * @version 1.0
  * 
  * This work complies with the JMU Honor Code.
@@ -39,9 +38,11 @@ public class UnitConverterWindow extends JFrame implements ActionListener
   private String qt = "qt";
   private String gal = "gal";
   private String ml = "ml";
+  private String ind = "indivdual";
   private String toAmount = "To Amount:";
+  private String invalid = "To Amount: Please Enter a Valid Number.";
   String[] units = {dr, g, oz, lb, p, tsp, tbs, floz, cup,
-      pt, qt, gal, ml};
+      pt, qt, gal, ml, ind};
   ArrayList<String> weight = new ArrayList<String>(
       Arrays.asList(dr, g, oz, lb));
   ArrayList<String> volume = new ArrayList<String>(
@@ -109,12 +110,15 @@ public class UnitConverterWindow extends JFrame implements ActionListener
    * Overridden method.
    * @param e ActionEvent
    */
-  public void actionPerformed(final ActionEvent e)
+  public void actionPerformed(final ActionEvent e) throws NumberFormatException
   {
     String ingredient = "";
     String fromUnit = (String) fromUnitsBox.getSelectedItem();
+    if (fromUnit.equals(ind)) toUnitsBox.setEnabled(false);
+    else toUnitsBox.setEnabled(true);
     String toUnit = (String) toUnitsBox.getSelectedItem();
     double amount = 0.0;
+    double newAmount = 0.0;
     boolean weight1 = false;
     boolean weight2 = false;
     boolean vol1 = false;
@@ -132,11 +136,35 @@ public class UnitConverterWindow extends JFrame implements ActionListener
     ingredient = (String) ingredientsBox.getSelectedItem();
   
     if (amountBox.getText().equals("")) amount = 0.0;
-    else amount = Double.parseDouble(amountBox.getText());
+    
     if (e.getSource() == calc)
     {
-      double newAmount = converter(ingredient, fromUnit, toUnit, amount);
-      amountLabel.setText(String.format("To Amount: %f", newAmount));
+      if (fromUnit.equals(ind))
+      {
+        try
+        {
+          amount = Double.parseDouble(amountBox.getText());
+          amountLabel.setText(String.format("%s %f", toAmount, amount));
+        }
+        catch (NumberFormatException nfe)
+        {
+          amountLabel.setText(invalid);
+        }
+        
+      }
+      else
+      {
+        try
+        {
+          amount = Double.parseDouble(amountBox.getText());
+          newAmount = converter(ingredient, fromUnit, toUnit, amount);
+          amountLabel.setText(String.format("To Amount: %f", newAmount));
+        }
+        catch (NumberFormatException nfe)
+        {
+          amountLabel.setText(invalid);
+        }  
+      } 
     }
     
     if (e.getSource() == reset)
