@@ -15,8 +15,8 @@ public class Ingredient implements Serializable {
 	 * @param unit amount in units.
 	 * @param caloriesPerg for calories per gram.
 	 */
-	public Ingredient(Ingredient ingredients, String details, double amount, String unit) {
-		this.ingredient = ingredient;
+	public Ingredient(Ingredients ingredients, String details, double amount, String unit) {
+		this.ingredient = ingredients;
 		this.name = ingredient.getIngredientName();
 		this.details = details;
 		this.amount = amount;
