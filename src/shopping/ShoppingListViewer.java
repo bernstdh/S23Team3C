@@ -88,7 +88,6 @@ public class ShoppingListViewer extends JFrame
 	private void generateShoppingList(final ArrayList<String> strings) 
 	{
 		double numPeople = 0;
-		ArrayList<String> list = sortList(strings);
 		String display = "";
 		try 
 		{
@@ -99,10 +98,15 @@ public class ShoppingListViewer extends JFrame
 			return;
 		}
 		
-		for(String ss: list) 
-		{
-			display += ss + "\n";
-		}
+	    for (String str : strings) {
+	        double multiplier = 1.0;
+	        if (Character.isDigit(str.charAt(0))) {
+	            multiplier = Double.parseDouble(String.valueOf(str.charAt(0)));
+	        }
+	        double result = numPeople * multiplier;
+	        display += result + str.substring(1) + "\n";
+	    }
+		
 
 		shoppingListBox.setText(display);
 	}

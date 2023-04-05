@@ -1,3 +1,5 @@
+package meals;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import app.Serializer;
+import recipe.Recipes;
 
 import java.awt.Color;
 import java.awt.Dimension;
