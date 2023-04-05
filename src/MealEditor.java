@@ -69,13 +69,15 @@ public class MealEditor extends JFrame implements ActionListener {
 		ArrayList<Recipes> recipeTestList = new ArrayList<Recipes>();
 		// recipeTestList.add(newRecipe);
 		recipeTestList.add(newRecipe2);
+		recipeTestList.add(newRecipe3);
 
-		Meals testMeal = new Meals("julian3", recipeTestList);
+		Meals testMeal = new Meals("testMeal", recipeTestList);
 		this.meal = new Meals("julian3", recipeTestList);
 		
 		try {
 			Serializer.serializeRecipe("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", newRecipe3);
 			Serializer.serializeRecipe("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", newRecipe2);
+			Serializer.serializeMeal("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", testMeal);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -143,16 +145,13 @@ public class MealEditor extends JFrame implements ActionListener {
 		
 		recipeListModel = new DefaultListModel<>();
 		jlistModel = new JList<>(recipeListModel);
-		jlistModel.setPreferredSize(new Dimension(400, 150));
+		jlistModel.setPreferredSize(new Dimension(400, 250));
 		recipeScrollPane = new JScrollPane(jlistModel);
 	    recipeScrollPane.setViewportView(jlistModel);
 		recipeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		recipeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		recipeScrollPane.setPreferredSize(new Dimension(250, 200));
         addRecipeFlow.add(recipeScrollPane, BorderLayout.CENTER);
-        /// testing the list
-        recipeListModel.add(0, this.meal.getRecipes().get(0).getName());
-        // jfiodsnf
         
         JPanel deletePanel = new JPanel(new BorderLayout());
 		deleteRecipeButton = new JButton("Delete");
@@ -169,6 +168,7 @@ public class MealEditor extends JFrame implements ActionListener {
 		this.add(recipeBigPanel); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 400);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 
 	}
@@ -183,15 +183,14 @@ public class MealEditor extends JFrame implements ActionListener {
 	        if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fileChooser.getSelectedFile();
 		        String tempFileName = file.toString();
-		        // String fileName = tempFileName.substring(0, tempFileName.length() - 4);
-		        System.out.println(tempFileName);
-		        System.out.println(this.meal.getName());
+		        // System.out.println(tempFileName);
+		        // System.out.println(this.meal.getName());
 		        // System.out.println(this.meal.getRecipes().get(0).getName());
 		        try {
-		        	meal.addRecipe(Serializer.deserializeRecipe(tempFileName));
-	        		recipeListModel.addElement(meal.getRecipes().get(meal.getRecipes().size() - 1).getName());
-	        		// System.out.println(meal.getRecipes().size());
-	        		//
+		        	if (tempFileName.contains(".rcp")) {
+		        		meal.addRecipe(Serializer.deserializeRecipe(tempFileName));
+		        		recipeListModel.addElement(meal.getRecipes().get(meal.getRecipes().size() - 1).getName());
+		        	}
 		        } catch (IOException | ClassNotFoundException ia) {
 		        	ia.printStackTrace();
 		        }
@@ -205,11 +204,14 @@ public class MealEditor extends JFrame implements ActionListener {
 	        if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fileChooser.getSelectedFile();
 		        String tempFileName = file.getName();
-		        String fileName = tempFileName.substring(0, tempFileName.length() - 4);
+		        // String fileName = tempFileName.substring(0, tempFileName.length() - 4);
 		        try {
-		        	this.meal = Serializer.deserializeMeal(fileName);
-		        	this.recipeListModel.removeAllElements();
-		        	for (int i = 0; i < meal.getRecipes().size() - 1; i++) {
+		        	if (tempFileName.contains(".mel")) {
+		        		this.meal = Serializer.deserializeMeal(tempFileName);
+		        		this.recipeListModel.removeAllElements();
+		        	}
+		        	System.out.println(meal.getRecipes().size());
+		        	for (int i = 0; i < meal.getRecipes().size(); i++) {
 		        		this.recipeListModel.addElement(meal.getRecipes().get(i).getName());
 		        	}
 		        } catch (IOException | ClassNotFoundException ia) {
@@ -217,7 +219,8 @@ public class MealEditor extends JFrame implements ActionListener {
 		        }
 	        }
 	    } else if (e.getSource() == newButton) {
-	        this.meal = new Meals(null, null);	        
+	        this.meal = new Meals("", new ArrayList<Recipes>());	
+	        
 	    } else if (e.getSource() == saveButton) {
 				try {
 					Serializer.serializeMeal(this.meal);
