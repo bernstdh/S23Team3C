@@ -1,16 +1,23 @@
 package recipe;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.*;
 
-import ingredients.IngredientPanel;
-import steps.StepPanel;
-import utensil.UtensilPanel;
+import java.util.ArrayList;
+import java.util.List;
 
+import app.*;
+import steps.*;
+import ingredients.*;
+import utensil.*;
 /**
  * GUI used to open, save, and edit recipes.
  * @author Mike Buckingham (gui components)
  */
-public class RecipeEditor extends JFrame
+public class RecipeEditor extends JFrame implements ActionListener
 {
   private static final long serialVersionUID = 1L;
  
@@ -20,8 +27,9 @@ public class RecipeEditor extends JFrame
   private JPanel buttonPanel, recipeAttributesPanel, recipePanel, topPanel;
   private JTextField numberServedBox, recipeNameBox;
   private IngredientPanel ingredientsPanel;
-
+  
   private StepPanel stepsPanel;
+  private String numberServed, recipeName;
   private UtensilPanel utensilsPanel;
  
  
@@ -53,6 +61,9 @@ public class RecipeEditor extends JFrame
     stepsPanel = new StepPanel();
     utensilsPanel = new UtensilPanel();
     
+    ingredientsPanel.setStepsPanel(stepsPanel);
+    utensilsPanel.setStepsPanel(stepsPanel);
+    
     recipePanel.add(utensilsPanel);
     recipePanel.add(ingredientsPanel);
     recipePanel.add(stepsPanel);
@@ -61,6 +72,63 @@ public class RecipeEditor extends JFrame
     this.setVisible(true);
   }
   
+  /**
+   * Processes top row button inputs.
+   * @param ae ActionEvent
+   */
+  public void actionPerformed(final ActionEvent ae) 
+  {
+    if(ae.getSource() == closeButton)
+    {
+      this.dispose();
+    }
+    else if(ae.getSource() == openButton)
+    {
+      
+    }
+    else if(ae.getSource() == newButton)
+    {
+      
+    }
+    else if(ae.getSource() == saveAsButton)
+    {
+      
+    }
+    else if(ae.getSource() == saveButton)
+    {
+      List<Utensils> utensilList;
+      List<Ingredient> ingredientList;
+      List<Steps> stepsList;
+      recipeName = recipeNameBox.getText();
+      numberServed = numberServedBox.getText();
+      int serves;
+      try
+      {
+        serves = Integer.parseInt(numberServed);
+      }
+      catch(NumberFormatException nfe)
+      {
+        serves = 0;
+      }
+      
+      utensilList = utensilsPanel.getUtensilList();
+      ingredientList = ingredientsPanel.getIngredientList();
+      stepsList = new ArrayList<>();
+      
+      Recipes r = new Recipes(recipeName, serves, ingredientList, utensilList, stepsList);
+      try
+      {
+        Serializer.serializeRecipe(r);
+      }
+      catch (IOException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      
+      
+    }
+  }
   // GUI  helper methods
   private void buildButtonPanel()
   {
@@ -71,14 +139,19 @@ public class RecipeEditor extends JFrame
     
     newButton = new JButton(new ImageIcon("newButton.png"));
     newButton.setPreferredSize(buttonSize);
+    newButton.addActionListener(this);
     openButton = new JButton(new ImageIcon("openButton.png"));
     openButton.setPreferredSize(buttonSize);
+    openButton.addActionListener(this);
     saveButton = new JButton(new ImageIcon("saveButton.png"));
     saveButton.setPreferredSize(buttonSize);
+    saveButton.addActionListener(this);
     saveAsButton = new JButton(new ImageIcon("saveAsButton.png"));
     saveAsButton.setPreferredSize(buttonSize);
+    saveAsButton.addActionListener(this);
     closeButton = new JButton(new ImageIcon("closeButton.png"));
     closeButton.setPreferredSize(buttonSize);
+    closeButton.addActionListener(this);
     
     buttonPanel.add(newButton);
     buttonPanel.add(openButton);

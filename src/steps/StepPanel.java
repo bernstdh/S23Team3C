@@ -2,17 +2,25 @@ package steps;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import ingredients.*;
 
 /**
  * A JPanel used to construct and store steps of a recipe.
  * @author Mike Buckingham
  *
  */
-public class StepPanel extends JPanel
+public class StepPanel extends JPanel implements ActionListener
 {
   private static final long serialVersionUID = 1L;
+  private static final String ADD = "Add";
+  private static final String DELETE = "Delete";
+  
   private DefaultListModel<String> stepsListModel;
   private JButton stepsAddButton, stepsDeleteButton;
   private JComboBox<String> stepsActionBox, stepsOnBox, stepsUtensilBox;
@@ -20,7 +28,9 @@ public class StepPanel extends JPanel
   private JScrollPane stepsScrollPane;
   private JTextField stepsDetailsBox;
   private List<Steps> stepsObjectList;
+  private List<Ingredient> ingredientObjectList;
   private StepsPanelListener stepsListener;
+
   
   /**
    * Constructor for a StepPanel object.
@@ -30,10 +40,65 @@ public class StepPanel extends JPanel
     super();
     buildPanel();
     stepsObjectList = new ArrayList<>();
-    stepsListener = new StepsPanelListener(stepsListModel, stepsActionBox, stepsOnBox, 
-        stepsUtensilBox, stepsJList, stepsDetailsBox, stepsObjectList);
-    stepsAddButton.addActionListener(stepsListener);
-    stepsDeleteButton.addActionListener(stepsListener);
+    stepsAddButton.addActionListener(this);
+    stepsDeleteButton.addActionListener(this);
+  }
+  
+  /**
+   * Processes inputs for the add and delete buttons.
+   * @param ae ActionEvent object.
+   */
+  public void actionPerformed(final ActionEvent ae)
+  {
+    String command;
+    command = ae.getActionCommand();
+    if(command.equals(ADD))
+    {
+      String action, destinationUtensil, details, formattedStep, sourceUtensil;
+      action = (String)stepsActionBox.getSelectedItem();
+      details = stepsDetailsBox.getText();
+      sourceUtensil = (String)stepsOnBox.getSelectedItem();
+      destinationUtensil = (String)stepsUtensilBox.getSelectedItem();
+      
+      System.out.println(sourceUtensil);
+      if(destinationUtensil.equals(sourceUtensil)) 
+      {
+        formattedStep = String.format(Formatter.STEP_SINGLE, action, destinationUtensil, details);
+      } 
+      else if(" " + Ingredients.fromCode(sourceUtensil) != null) 
+      {
+        formattedStep = String.format(
+            Formatter.STEP_INGREDIENT, action, sourceUtensil, destinationUtensil, details);
+      } 
+      else 
+      {
+        formattedStep = String.format(
+            Formatter.STEP_MUL, action, sourceUtensil, destinationUtensil, details);
+      }
+      stepsListModel.addElement(formattedStep);
+    }
+    else if(command.equals(DELETE))
+    {
+      int[] indices = stepsJList.getSelectedIndices();
+      for(int i = 0; i < indices.length; i++)
+      {
+        for(int j = 0; j < stepsListModel.size(); j++) 
+        {
+          if(j == indices[i]) 
+          { 
+            stepsListModel.remove(j);
+//            stepsObjectList.remove(j);
+            int k = i;
+            while(k < indices.length)
+            {
+              indices[k]--;
+              k++;
+            }         
+            break;
+          }
+        }
+      }
+    }
   }
   
   private void buildPanel()
@@ -86,8 +151,8 @@ public class StepPanel extends JPanel
     stepsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     stepsScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     
-    stepsAddButton = new JButton("Add");
-    stepsDeleteButton = new JButton("Delete");
+    stepsAddButton = new JButton(ADD);
+    stepsDeleteButton = new JButton(DELETE);
     
     this.add(stepsActionLabel);
     this.add(stepsActionBox);
@@ -101,4 +166,41 @@ public class StepPanel extends JPanel
     this.add(stepsScrollPane);
     this.add(stepsDeleteButton);
   }
+  
+  /**
+   * Updates JComboBoxes when something is added or removed from the other panels.
+   * @param ingredientsModel object
+   * @param utensilModel object
+   */
+  public void updateBoxes(final DefaultListModel<String> ingredientsModel, 
+      final DefaultListModel<String> utensilModel) 
+  {
+    if(ingredientsModel != null)
+    {
+      stepsOnBox.removeAllItems();
+      for(int i = 0; i < ingredientsModel.size(); i++)
+      {
+        String ingredientString;
+        ingredientString = ingredientsModel.get(i);
+        stepsOnBox.addItem(ingredientString.substring(
+            ingredientString.lastIndexOf(" "), ingredientString.length()));
+      }
+      for(int j = 0; j < stepsUtensilBox.getItemCount(); j++) 
+      {
+        stepsOnBox.addItem(stepsUtensilBox.getItemAt(j));
+      }
+    }
+    if(utensilModel != null)
+    { 
+      stepsOnBox.removeAllItems();
+      stepsUtensilBox.removeAllItems();
+      for(int i = 0; i < utensilModel.size(); i++)
+      {
+        stepsOnBox.addItem(utensilModel.get(i));
+        stepsUtensilBox.addItem(utensilModel.get(i));
+      }
+    }
+  }
+  
+
 }

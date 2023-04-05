@@ -6,6 +6,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
+
+import steps.*;
 /**
  * Listener class for an IngredientPanel.
  * @author Mike Buckingham
@@ -20,6 +22,7 @@ public class IngredientPanelListener implements ActionListener
   private List<Ingredient> ingredientObjectList;
   private JList<String> ingredientJList;
   private JTextField ingredientsAmountBox, ingredientsDetailsBox, ingredientsNameBox;
+  private StepPanel stepsPanel;
   
   /**
    * Constructor for an ingredientPanelListener.
@@ -101,5 +104,16 @@ public class IngredientPanelListener implements ActionListener
         }
       }
     }
+    stepsPanel.updateBoxes(ingredientListModel, null);
+  }
+  
+  /**
+   * sets the StepsPanel object.
+   * 
+   * @param sp StepsPanel
+   */
+  public void setStepsPanel(final StepPanel sp)
+  {
+    this.stepsPanel = sp;
   }
 }

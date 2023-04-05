@@ -1,12 +1,12 @@
 package utensil;
 
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import steps.*;
 
 /**
  * A JPanel used to construct and store Utensil objects.
@@ -75,5 +75,23 @@ public class UtensilPanel extends JPanel
     this.add(utensilAddButton); 
     this.add(utensilScrollPane);
     this.add(utensilDeleteButton);  
+  }
+  
+  /**
+   * Returns the DefaultListModel attribute.
+   * @return utensilListModel
+   */
+  public DefaultListModel<String> getModel()
+  {
+    return utensilListModel;
+  }
+  
+  public void setStepsPanel(StepPanel sp)
+  {
+    utensilListener.setStepsPanel(sp);
+  }
+  
+  public List<Utensils> getUtensilList() {
+    return utensilList;
   }
 }

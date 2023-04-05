@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import steps.*;
 /**
  * A JPanel used to construct and store ingredients.
  * @author Mike Buckingham
@@ -19,6 +20,7 @@ public class IngredientPanel extends JPanel
       ingredientsNameLabel, ingredientsUnitsLabel;
   private JList<String> ingredientsJList;
   private JScrollPane ingredientsScrollPane;
+  
   
 
   private JTextField ingredientsAmountBox, ingredientsDetailsBox, ingredientsNameBox;
@@ -100,4 +102,21 @@ public class IngredientPanel extends JPanel
     this.add(ingredientsDeleteButton);
   }
   
+  /**
+   * Returns DefaultListModel object.
+   * @return ingredientsListModel
+   */
+  public DefaultListModel<String> getModel()
+  {
+    return ingredientsListModel;
+  }
+  
+  public void setStepsPanel(final StepPanel sp) 
+  {
+    ingredientListener.setStepsPanel(sp);
+  }
+  
+  public List<Ingredient> getIngredientList() {
+    return ingredientList;
+  }
 }

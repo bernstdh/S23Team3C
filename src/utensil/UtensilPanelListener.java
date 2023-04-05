@@ -3,8 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
-
-import ingredients.Formatter;
+import steps.*;
+import app.*;
+import ingredients.*;
 /**
  * A listener for the UtensilPanel class.
  * @author Mike Buckingham
@@ -15,6 +16,7 @@ public class UtensilPanelListener implements ActionListener
   private List<Utensils> utensilObjectList;
   private JList<String> utensilJList;
   private JTextField utensilNameBox, utensilDetailsBox;
+  private StepPanel stepsPanel;
   
   /**
    * Constructor for a UtensilPanelListener object.
@@ -79,5 +81,15 @@ public class UtensilPanelListener implements ActionListener
         }
       }
     }
+    stepsPanel.updateBoxes(null, utensilListModel);
+  }
+  
+  /**
+   * Sets the stepsPanel object.
+   * @param sp stepPanel object
+   */
+  public void setStepsPanel(final StepPanel sp) 
+  {
+    this.stepsPanel = sp;
   }
 }

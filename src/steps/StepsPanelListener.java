@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 /**
  * Listener for a StepsPanel object.
  * @author Mike Buckingham
- *
+ * this class is no longer being used
  */
 public class StepsPanelListener implements ActionListener
 {
