@@ -1,4 +1,3 @@
-package meals;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,15 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import app.Serializer;
-import ingredients.Ingredient;
-import ingredients.Ingredients;
-import recipe.Recipes;
-import steps.Steps;
-import utensil.Utensils;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -57,48 +50,10 @@ public class MealEditor extends JFrame implements ActionListener {
 	private JScrollPane recipeScrollPane;
 	
 	public MealEditor() {
-		
 		super("KiLowBites Meal Editor");
-		
-		// set this.meal to something so it wouldnt break
-		Ingredient newIngredient = new Ingredient(Ingredients.COD, "cod", 5.0, "pds");
-		ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
-		ingredientList.add(newIngredient);
-		Utensils newUtensil = new Utensils("spoon", "spoon");
-		ArrayList<Utensils> utensilList = new ArrayList<Utensils>();
-		utensilList.add(newUtensil);
-		Steps testStep = new Steps("julian steps", newIngredient, newUtensil);
-		ArrayList<Steps> stepList = new ArrayList<Steps>();
-		stepList.add(testStep);
-
-		Recipes newRecipe = new Recipes("Julian7", 5, ingredientList, utensilList, stepList);
-		Recipes newRecipe2 = new Recipes("Julian8", 5, ingredientList, utensilList, stepList);
-		Recipes newRecipe3 = new Recipes("recipe3", 4, ingredientList, utensilList, stepList);
-
-		ArrayList<Recipes> recipeTestList = new ArrayList<Recipes>();
-		// recipeTestList.add(newRecipe);
-		recipeTestList.add(newRecipe2);
-		recipeTestList.add(newRecipe3);
-
-		Meals testMeal = new Meals("testMeal", recipeTestList);
-		this.meal = new Meals("julian3", recipeTestList);
-		
-		try {
-			Serializer.serializeRecipe("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", newRecipe3);
-			Serializer.serializeRecipe("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", newRecipe2);
-			Serializer.serializeMeal("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", testMeal);
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// all of these are for testing above
-		// maybe I should initialize this.meal to a new null meal
-		
 				
 		nameLabel = new JLabel("Name:");
 		nameBox = new JTextField(10); 
-		
 		Dimension buttonSize = new Dimension(30, 30);
 		
 		newButton = new JButton(new ImageIcon("newButton.png"));
@@ -192,9 +147,6 @@ public class MealEditor extends JFrame implements ActionListener {
 	        if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fileChooser.getSelectedFile();
 		        String tempFileName = file.toString();
-		        // System.out.println(tempFileName);
-		        // System.out.println(this.meal.getName());
-		        // System.out.println(this.meal.getRecipes().get(0).getName());
 		        try {
 		        	if (tempFileName.contains(".rcp")) {
 		        		meal.addRecipe(Serializer.deserializeRecipe(tempFileName));
@@ -213,7 +165,6 @@ public class MealEditor extends JFrame implements ActionListener {
 	        if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fileChooser.getSelectedFile();
 		        String tempFileName = file.getName();
-		        // String fileName = tempFileName.substring(0, tempFileName.length() - 4);
 		        try {
 		        	if (tempFileName.contains(".mel")) {
 		        		this.meal = Serializer.deserializeMeal(tempFileName);
@@ -224,7 +175,6 @@ public class MealEditor extends JFrame implements ActionListener {
 		        		this.recipeListModel.addElement(meal.getRecipes().get(i).getName());
 		        	}
 		        } catch (IOException | ClassNotFoundException ia) {
-		        	
 		        }
 	        }
 	    } else if (e.getSource() == newButton) {
@@ -244,7 +194,6 @@ public class MealEditor extends JFrame implements ActionListener {
     		try {
 				Serializer.serializeMeal(fileChooser.getCurrentDirectory().toString(), 
 						meal);
-				System.out.println(fileChooser.getCurrentDirectory().toString());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
