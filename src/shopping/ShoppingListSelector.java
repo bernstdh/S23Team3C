@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import app.Serializer;
+import ingredients.Formatter;
 import ingredients.Ingredient;
 import recipe.Recipes;
 
@@ -103,7 +104,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
   {
     if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null)
     {
-      //Reload the GridLayout
+      // Reload the GridLayout
       gl = new GridLayout(2, 1);
       add(file);
       setSize(200, 250);
@@ -166,7 +167,8 @@ public class ShoppingListSelector extends JFrame implements ActionListener
   {
     for(Ingredient i : r.getIngredients())
     {
-      list.add(i.getName());
+      list.add(String.format(Formatter.INGREDIENT, i.getAmount(), i.getUnit(), i.getDetails(),
+          i.getName()));
     }
   }
 }
