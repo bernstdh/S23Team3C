@@ -3,42 +3,47 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 /**
  * Creates and reads both .rcp and .mel objects.
- * @author beaumueller
+ * @author Beau Mueller
  *
  */
 public class Serializer
 {
   private static final String RECIPE = ".rcp";
   private static final String MEAL = ".mel";
-//  *EXAMPLE DRIVER*
-//  public static void main(String[] args) {
-//    Recipes r = new Recipes("example", 99990, new ArrayList<Ingredient>(),
-//        new ArrayList<Utensils>());
-//    Recipes r2 = null;
-//    System.out.println(r.getName());
-//    System.out.println(r.numPpl());
-//    try {
-//      serializeRecipe(r);
-//    } catch (IOException ioe) {
-//      
-//    }
-//    try
-//    {
-//      r2 = deserializeRecipe("example.rcp");
-//    }
-//    catch (ClassNotFoundException | IOException e)
-//    {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
-//    System.out.println("Now printing deserialized Recipes object");
-//    System.out.println(r2.getName());
-//    System.out.println(r2.numPpl());
-//  }
+  private static final String BACKSLASH = "\\";
+  /**
+   * main method.
+   * @param args
+   */
+  public static void main(final String[] args)
+  {
+    Recipes r = new Recipes("example", 99990, new ArrayList<Ingredient>(),
+        new ArrayList<Utensils>(), new ArrayList<Steps>());
+    Recipes r2 = null;
+    System.out.println(r.getName());
+    System.out.println(r.numPpl());
+    try {
+      serializeRecipe(r);
+    } catch (IOException ioe) {
+      
+    }
+    try
+    {
+      r2 = deserializeRecipe("example.rcp");
+    }
+    catch (ClassNotFoundException | IOException e)
+    {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    System.out.println("Now printing deserialized Recipes object");
+    System.out.println(r2.getName());
+    System.out.println(r2.numPpl());
+  }
   /**
    * Creates a new .rcp file.
    * @param r The object to make the file from
@@ -60,7 +65,7 @@ public class Serializer
    */
   public static void serializeRecipe(final String dir, final Recipes r) throws IOException
   {
-    FileOutputStream fileOut = new FileOutputStream(dir + r.getName() + RECIPE);
+    FileOutputStream fileOut = new FileOutputStream(dir + BACKSLASH + r.getName() + RECIPE);
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
     out.writeObject(r);
     fileOut.close();
@@ -87,7 +92,7 @@ public class Serializer
    */
   public static void serializeMeal(final String dir, final Meals m) throws IOException
   {
-    FileOutputStream fileOut = new FileOutputStream(dir + "\\" + m.getName() + MEAL);
+    FileOutputStream fileOut = new FileOutputStream(dir + BACKSLASH + m.getName() + MEAL);
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
     out.writeObject(m);
     fileOut.close();
