@@ -18,7 +18,7 @@ public class RecipeEditor extends JFrame
 
   private StepPanel stepsPanel;
   private UtensilPanel utensilsPanel;
-  private UtensilPanelListener utensilsListener;
+ 
  
 
   /**
@@ -47,8 +47,6 @@ public class RecipeEditor extends JFrame
     ingredientsPanel = new IngredientPanel();
     stepsPanel = new StepPanel();
     utensilsPanel = new UtensilPanel();
-    
-    
     
     recipePanel.add(utensilsPanel);
     recipePanel.add(ingredientsPanel);

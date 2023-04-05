@@ -1,11 +1,10 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JTextArea;
+import javax.swing.JList;
 import javax.swing.JTextField;
-
 /**
  * Listener class for an IngredientPanel.
  * @author Mike Buckingham
@@ -14,30 +13,34 @@ import javax.swing.JTextField;
 public class IngredientPanelListener implements ActionListener
 {
   public static final String NEWLINE = "\n";
+  
+  private DefaultListModel<String> ingredientListModel;
   private JComboBox<String> ingredientsUnitsBox;
-  private List<Ingredient> ingredientList;
-  private JTextArea ingredientsTextArea;
+  private List<Ingredient> ingredientObjectList;
+  private JList<String> ingredientJList;
   private JTextField ingredientsAmountBox, ingredientsDetailsBox, ingredientsNameBox;
   
   /**
    * Constructor for an ingredientPanelListener.
    * @param iab ingredientsAmountBox
    * @param idb ingredientsDetailsBox
-   * @param il  ingredientsLIst
+   * @param iol  ingredientsObjectList
    * @param inb ingredientsNameBox
-   * @param ita ingredientsTextArea
+   * @param ijl ingredientsJList
    * @param iub ingredientsUnitsBox
+   * @param ilm ingredientsListModel
    */
   public IngredientPanelListener(final JTextField iab, final JTextField idb, 
-      final List<Ingredient> il, final JTextField inb, final JTextArea ita, 
-      final JComboBox<String> iub)
+      final List<Ingredient> iol, final JTextField inb, final JList<String>ijl, 
+      final JComboBox<String> iub, final DefaultListModel<String> ilm)
   {
     this.ingredientsAmountBox = iab;
     this.ingredientsDetailsBox = idb;
-    this.ingredientList = il;
+    this.ingredientObjectList = iol;
     this.ingredientsNameBox = inb;
-    this.ingredientsTextArea = ita;
+    this.ingredientJList = ijl;
     this.ingredientsUnitsBox = iub;
+    this.ingredientListModel = ilm;
   }
   
   /**
@@ -64,35 +67,38 @@ public class IngredientPanelListener implements ActionListener
         amount = -1.0;
       }
       ingredientName = ingredientsNameBox.getText();
-      System.out.println(ingredientName);
       i = Ingredients.fromCode(ingredientName);
-      System.out.println(i);
       details = ingredientsDetailsBox.getText();
       unit = (String)ingredientsUnitsBox.getSelectedItem();
-
       ingredient = new Ingredient(i, details, amount, unit);
       formattedIngredient = String.format(
           Formatter.INGREDIENT, amount, unit, details, ingredient.getName());
-      ingredientList.add(ingredient);
-      ingredientsTextArea.setText(ingredientsTextArea.getText() + formattedIngredient + NEWLINE);
-      System.out.println(ingredientList.size());
+      
+      ingredientObjectList.add(ingredient);
+      ingredientListModel.addElement(formattedIngredient);
+
     }
     else if(command.equals("Delete"))
     {
-
-      if(ingredientList.size() > 0) 
+      int[] indices = ingredientJList.getSelectedIndices();
+      for(int i = 0; i < indices.length; i++)
       {
-        String[] textAreaLines;
-        textAreaLines = ingredientsTextArea.getText().split(NEWLINE);
-        ingredientList.remove(ingredientList.size() - 1);
-        ingredientsTextArea.setText("");
-        for(int i = 0; i < textAreaLines.length - 1; i++) 
+        for(int j = 0; j < ingredientListModel.size(); j++) 
         {
-          ingredientsTextArea.setText(ingredientsTextArea.getText() + textAreaLines[i] + NEWLINE);
-        }   
-        System.out.println(ingredientList.size());
+          if(j == indices[i]) 
+          { 
+            ingredientListModel.remove(j);
+            ingredientObjectList.remove(j);
+            int k = i;
+            while(k < indices.length)
+            {
+              indices[k]--;
+              k++;
+            }         
+            break;
+          }
+        }
       }
- 
     }
   }
 }

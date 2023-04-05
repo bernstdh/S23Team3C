@@ -2,31 +2,24 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
+import javax.swing.*;
 /**
  * A JPanel used to construct and store ingredients.
  * @author Mike Buckingham
- *
  */
 public class IngredientPanel extends JPanel
 {
   private static final long serialVersionUID = 1L;
+  private DefaultListModel<String> ingredientsListModel;
   private IngredientPanelListener ingredientListener;
   private JButton ingredientsAddButton, ingredientsDeleteButton;
   private JComboBox<String> ingredientsUnitsBox;
   private JLabel ingredientsAmountLabel, ingredientsDetailsLabel, 
       ingredientsNameLabel, ingredientsUnitsLabel;
+  private JList<String> ingredientsJList;
   private JScrollPane ingredientsScrollPane;
-  private JTextArea ingredientsTextArea;
+  
+
   private JTextField ingredientsAmountBox, ingredientsDetailsBox, ingredientsNameBox;
   private List<Ingredient> ingredientList;
   /**
@@ -38,7 +31,8 @@ public class IngredientPanel extends JPanel
     buildPanel();
     ingredientList = new ArrayList<>();
     ingredientListener = new IngredientPanelListener(ingredientsAmountBox, ingredientsDetailsBox, 
-        ingredientList, ingredientsNameBox, ingredientsTextArea, ingredientsUnitsBox);
+        ingredientList, ingredientsNameBox, ingredientsJList, 
+        ingredientsUnitsBox, ingredientsListModel);
     ingredientsAddButton.addActionListener(ingredientListener);
     ingredientsDeleteButton.addActionListener(ingredientListener);
   }
@@ -82,12 +76,14 @@ public class IngredientPanel extends JPanel
     ingredientsAddButton = new JButton("Add");
     ingredientsDeleteButton = new JButton("Delete");
     
-    ingredientsTextArea = new JTextArea();
-    ingredientsTextArea.setEditable(false);
-    ingredientsTextArea.setPreferredSize(new Dimension(450, 300));
-    ingredientsTextArea.setLineWrap(true);
-    ingredientsScrollPane = new JScrollPane(ingredientsTextArea);
+  
+    ingredientsListModel = new DefaultListModel<>();
+    ingredientsJList = new JList<>(ingredientsListModel);
+    ingredientsJList.setPreferredSize(new Dimension(400, 300));
+    
+    ingredientsScrollPane = new JScrollPane(ingredientsJList);
     ingredientsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    ingredientsScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     ingredientsScrollPane.setPreferredSize(new Dimension(400, 150));
     
     this.add(ingredientsNameLabel);
