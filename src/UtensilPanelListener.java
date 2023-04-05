@@ -1,38 +1,35 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
+import javax.swing.*;
 /**
  * A listener for the UtensilPanel class.
  * @author Mike Buckingham
  */
 public class UtensilPanelListener implements ActionListener
-{
-  private static final String NEWLINE = "\n";
-  
-  private List<Utensils> utensilList;
-  private JTextArea utensilTextArea;
+{  
+  private DefaultListModel<String> utensilListModel;
+  private List<Utensils> utensilObjectList;
+  private JList<String> utensilJList;
   private JTextField utensilNameBox, utensilDetailsBox;
-  
-  
   
   /**
    * Constructor for a UtensilPanelListener object.
-   * @param utensilList attribute from UtensilPanel
+   * @param utensilObjectList attribute from UtensilPanel
    * @param utensilNameBox attribute from UtensilPanel
    * @param utensilDetailsBox attribute from UtensilPanel
-   * @param utensilTextArea attribute from UtensilPanel
+   * @param utensilJList attribute from UtensilPanel
+   * @param utensilListModel attribute from UtensilPanel
    */
-  public UtensilPanelListener(final JTextField utensilDetailsBox, final List<Utensils> utensilList, 
-      final JTextField utensilNameBox,  final JTextArea utensilTextArea)
+  public UtensilPanelListener(final JTextField utensilDetailsBox, 
+      final List<Utensils> utensilObjectList, final JTextField utensilNameBox,  
+      final JList<String> utensilJList, final DefaultListModel<String> utensilListModel)
   {
-    this.utensilList = utensilList;
+    this.utensilObjectList = utensilObjectList;
     this.utensilDetailsBox = utensilDetailsBox;
     this.utensilNameBox = utensilNameBox;
-    this.utensilTextArea = utensilTextArea;
+    this.utensilJList = utensilJList;
+    this.utensilListModel = utensilListModel;
   }
   
   /**
@@ -45,31 +42,39 @@ public class UtensilPanelListener implements ActionListener
     command = ae.getActionCommand();
     if(command.equals("Add"))
     {
-      //string is added to list of utensils
+      String utensilName, utensilDetails;
       Utensils utensil;
-      utensil = new Utensils(utensilNameBox.getText(), utensilDetailsBox.getText());
-      utensilList.add(utensil);
-      //also uploaded to text area
-      utensilTextArea.setText(utensilTextArea.getText() 
-          + String.format(Formatter.UTENSIL, utensil.getName(), utensil.getDetails()) + "\n");
+      utensilName = utensilNameBox.getText();
+      utensilDetails = utensilDetailsBox.getText();
+    
+      utensil = new Utensils(utensilName, utensilDetails);
+      utensilObjectList.add(utensil);
+      
+      utensilListModel.addElement(String.format(
+          Formatter.UTENSIL, utensil.getDetails(), utensil.getName()));
     }
     else if(command.equals("Delete"))
     {
-      if(utensilList.size() > 0) 
-      { 
-        String[] textAreaLines;
-        
-        utensilList.remove(utensilList.size() - 1);
-        textAreaLines = utensilTextArea.getText().split("\n");
-        utensilTextArea.setText("");
-        for(int i = 0; i < textAreaLines.length - 1; i++) 
+      int[] indices = utensilJList.getSelectedIndices();
+      for(int i = 0; i < indices.length; i++)
+      {
+        for(int j = 0; j < utensilListModel.size(); j++) 
         {
-          utensilTextArea.setText(utensilTextArea.getText() + textAreaLines[i] + NEWLINE);
-        }    
+          if(j == indices[i]) 
+          { 
+            utensilListModel.remove(j);
+            utensilObjectList.remove(j);
+            
+            int k = i;
+            while(k < indices.length)
+            {
+              indices[k]--;
+              k++;
+            }         
+            break;
+          }
+        }
       }
-      //most previous line added is removed both
-      //from the list and from the jtextarea
-      
     }
   }
 }
