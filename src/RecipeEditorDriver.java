@@ -13,7 +13,7 @@ public class RecipeEditorDriver
   {
     RecipeEditor re;
     re = new RecipeEditor();
-    re.setVisible(true);
+    
 
   }
 }

@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * An enum that contains an ingredients name as well as calories/gram
  * and grams/millileter values.
  * @author Mike Buckingham
  *
  */
-public enum Ingredients
+public enum Ingredients implements Serializable
 {
   ALCOHOL("Alcohol", 2.75, 0.79),
   ALMOND("Almond", 6.01, 0.46),
