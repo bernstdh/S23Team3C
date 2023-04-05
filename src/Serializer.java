@@ -52,6 +52,19 @@ public class Serializer
   }
   
   /**
+   * Creates a new .rcp file with a custom directory.
+   * @param dir the directory
+   * @param r the recipe to save
+   * @throws IOException If there's input/output trouble
+   */
+  public static void serializeRecipe(final String dir, final Recipes r) throws IOException{
+    FileOutputStream fileOut = new FileOutputStream(dir + r.getName() + RECIPE);
+    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    out.writeObject(r);
+    fileOut.close();
+  }
+  
+  /**
    * Creates a new .mel file.
    * @param m The object to make the file from
    * @throws IOException  If there is Input/Output trouble
@@ -59,6 +72,20 @@ public class Serializer
   public static void serializeMeal(final Meals m) throws IOException
   {
     FileOutputStream fileOut = new FileOutputStream(m.getName() + MEAL);
+    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    out.writeObject(m);
+    fileOut.close();
+  }
+  
+  /**
+   * Creates a new .mel file with custom directory.
+   * @param dir the directory
+   * @param m the meals object to be made into a file
+   * @throws IOException  if there's a problem with Input/output
+   */
+  public static void serializeMeal(final String dir, final Meals m) throws IOException
+  {
+    FileOutputStream fileOut = new FileOutputStream(dir + m.getName() + MEAL);
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
     out.writeObject(m);
     fileOut.close();
