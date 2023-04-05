@@ -1,8 +1,10 @@
+import java.io.Serializable;
 
-public class Steps {
+public class Steps implements Serializable {
 	
 	
-	
+	private static final long serialVersionUID = 1L;
+
 	private String action;
 	private Ingredient ingredientSource;
 	private Utensils utensilSource = null;

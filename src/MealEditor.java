@@ -1,22 +1,19 @@
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -34,7 +31,6 @@ public class MealEditor extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JLabel nameLabel;
 	private JTextField nameBox;
-	private JTextArea recipeTextBox;
 	private JButton addRecipeButton;
 	private JButton deleteRecipeButton;
 	
@@ -47,6 +43,9 @@ public class MealEditor extends JFrame implements ActionListener {
 	private Meals meal;
 	// 
 	private JFileChooser fileChooser;
+	private DefaultListModel<String> recipeListModel;
+	private JList<String> jlistModel;
+	private JScrollPane recipeScrollPane;
 	
 	public MealEditor() {
 		
@@ -59,21 +58,35 @@ public class MealEditor extends JFrame implements ActionListener {
 		Utensils newUtensil = new Utensils("spoon", "spoon");
 		ArrayList<Utensils> utensilList = new ArrayList<Utensils>();
 		utensilList.add(newUtensil);
-		Recipes newRecipe = new Recipes("Julian", 5, ingredientList, utensilList);
+		Steps testStep = new Steps("julian steps", newIngredient, newUtensil);
+		ArrayList<Steps> stepList = new ArrayList<Steps>();
+		stepList.add(testStep);
+
+		Recipes newRecipe = new Recipes("Julian7", 5, ingredientList, utensilList, stepList);
+		Recipes newRecipe2 = new Recipes("Julian8", 5, ingredientList, utensilList, stepList);
+		Recipes newRecipe3 = new Recipes("recipe3", 4, ingredientList, utensilList, stepList);
+
 		ArrayList<Recipes> recipeTestList = new ArrayList<Recipes>();
-		recipeTestList.add(newRecipe);
+		// recipeTestList.add(newRecipe);
+		recipeTestList.add(newRecipe2);
+
+		Meals testMeal = new Meals("julian3", recipeTestList);
+		this.meal = new Meals("julian3", recipeTestList);
 		
-		this.meal = new Meals("julian", recipeTestList);
+		try {
+			Serializer.serializeRecipe("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", newRecipe3);
+			Serializer.serializeRecipe("C:\\Users\\Julian Barrett\\OneDrive\\Desktop\\345FinalProject\\julianrepository\\S23Team3C", newRecipe2);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// all of these are for testing above
+		// maybe I should initialize this.meal to a new null meal
 		
-		
-		
-		
-		
-		
+				
 		nameLabel = new JLabel("Name:");
-		nameBox = new JTextField(10);
-		recipeTextBox = new JTextArea(20, 40);
-		recipeTextBox.setEditable(false); 
+		nameBox = new JTextField(10); 
 		
 		Dimension buttonSize = new Dimension(30, 30);
 		
@@ -95,8 +108,6 @@ public class MealEditor extends JFrame implements ActionListener {
 
 		
 		this.setLayout(new BorderLayout());
-		// changed layout to grid
-		//this.setLayout(new GridLayout(2, 0));
 		
 		// buttons on the top
 	    JPanel p = new JPanel();
@@ -129,12 +140,20 @@ public class MealEditor extends JFrame implements ActionListener {
 		addRecipeButton.addActionListener(this);
 		addRecipeFlow.add(addRecipeButton);
 				
-		recipeTextBox = new JTextArea ( 15, 25 );
-	    recipeTextBox.setEditable ( false ); // set textArea non-editable
-	    JScrollPane scroll = new JScrollPane (recipeTextBox);
-	    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        addRecipeFlow.add(scroll, BorderLayout.CENTER);
-	    
+		
+		recipeListModel = new DefaultListModel<>();
+		jlistModel = new JList<>(recipeListModel);
+		jlistModel.setPreferredSize(new Dimension(400, 150));
+		recipeScrollPane = new JScrollPane(jlistModel);
+	    recipeScrollPane.setViewportView(jlistModel);
+		recipeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		recipeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		recipeScrollPane.setPreferredSize(new Dimension(250, 200));
+        addRecipeFlow.add(recipeScrollPane, BorderLayout.CENTER);
+        /// testing the list
+        recipeListModel.add(0, this.meal.getRecipes().get(0).getName());
+        // jfiodsnf
+        
         JPanel deletePanel = new JPanel(new BorderLayout());
 		deleteRecipeButton = new JButton("Delete");
 		deleteRecipeButton.addActionListener(this);
@@ -163,17 +182,24 @@ public class MealEditor extends JFrame implements ActionListener {
 	    	int returnVal = fileChooser.showOpenDialog(MealEditor.this);
 	        if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File file = fileChooser.getSelectedFile();
-		        String tempFileName = file.getName();
-		        String fileName = tempFileName.substring(0, tempFileName.length() - 4);
-		        
+		        String tempFileName = file.toString();
+		        // String fileName = tempFileName.substring(0, tempFileName.length() - 4);
+		        System.out.println(tempFileName);
+		        System.out.println(this.meal.getName());
+		        // System.out.println(this.meal.getRecipes().get(0).getName());
 		        try {
-		        	this.meal.addRecipe(Serializer.deserializeRecipe(fileName));
+		        	meal.addRecipe(Serializer.deserializeRecipe(tempFileName));
+	        		recipeListModel.addElement(meal.getRecipes().get(meal.getRecipes().size() - 1).getName());
+	        		// System.out.println(meal.getRecipes().size());
+	        		//
 		        } catch (IOException | ClassNotFoundException ia) {
-		        	
+		        	ia.printStackTrace();
 		        }
 	        }
 	    } else if (e.getSource() == deleteRecipeButton) {
-	    	this.recipeTextBox.setText("");
+	    	int index = this.jlistModel.getSelectedIndex();
+	        recipeListModel.remove(index);
+	        this.meal.getRecipes().remove(index);
 	    } else if (e.getSource() == openButton) {
 	    	int returnVal = fileChooser.showOpenDialog(MealEditor.this);
 	        if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -182,13 +208,16 @@ public class MealEditor extends JFrame implements ActionListener {
 		        String fileName = tempFileName.substring(0, tempFileName.length() - 4);
 		        try {
 		        	this.meal = Serializer.deserializeMeal(fileName);
+		        	this.recipeListModel.removeAllElements();
+		        	for (int i = 0; i < meal.getRecipes().size() - 1; i++) {
+		        		this.recipeListModel.addElement(meal.getRecipes().get(i).getName());
+		        	}
 		        } catch (IOException | ClassNotFoundException ia) {
 		        	
 		        }
 	        }
 	    } else if (e.getSource() == newButton) {
-	        // this.meal = Serializer.serializeMeal(null);
-	        
+	        this.meal = new Meals(null, null);	        
 	    } else if (e.getSource() == saveButton) {
 				try {
 					Serializer.serializeMeal(this.meal);
@@ -209,13 +238,13 @@ public class MealEditor extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 	    } else if (e.getSource() == closeButton) {
-
+	        this.dispose();
 	    } else if (e.getSource() == nameBox) {
-	    	// this.recipeTextBox.setText(nameBox.getText());
-	    	this.meal.setName(nameBox.getText());
+	    	meal.setName(nameBox.getText());
 	    }
 	  }
-	
+	  
+	  	
 	    
 	    
 	    

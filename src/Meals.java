@@ -8,6 +8,10 @@ import java.util.List;
  */
 public class Meals implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Recipes> recipes;
 	private String name;
 

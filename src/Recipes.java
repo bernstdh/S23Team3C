@@ -9,6 +9,10 @@ import java.util.List;
  */
 public class Recipes implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Ingredient> ingredients;
 	private List<Steps> steps;
 	private List<Utensils> utensils;
@@ -45,7 +49,13 @@ public class Recipes implements Serializable {
 		
 	}
 	
-	
+	/**
+	 * returns steps.
+	 * @return steps list.
+	 */
+	public List<Steps> getSteps () {
+		return this.steps;
+	}
 	/**
 	 * getter.
 	 * @return ingredients list.
