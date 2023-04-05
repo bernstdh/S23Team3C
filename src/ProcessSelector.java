@@ -18,6 +18,8 @@ public class ProcessSelector extends JFrame implements ActionListener
 {
   private static final long serialVersionUID = 1L;
   
+  private final String newLine = "\n";
+  
   private JButton confirmRecipe;
   private FlowLayout fl;
   private JButton chooseFile;
@@ -71,11 +73,30 @@ public class ProcessSelector extends JFrame implements ActionListener
       {
         System.out.println("Failed to deserialize recipe: " + e1.toString());
       }
-      r.alphabetize(r.getIngredients());
-      String utensils = "Test\ntest2\ntest3";
-      String steps = "Test\ntest2\ntest33";
-      pv.setUtensils(utensils);
-      pv.setSteps(steps);
+      if(r != null)
+      {
+        r.alphabetize(r.getIngredients());
+        r.alphabetizeU(r.getUtensils());
+        String steps = "";
+        String utensils = "";
+        for(Steps s : r.getSteps()) {
+          if(s.getUtensilsSource() == s.getDestination()) // STEP_SINGLE
+          {
+            // steps += String.format(Formatter.STEP_SINGLE, s.getAction(), s.getDestination(), s.getDetails());
+          } else if (s.getUtensilsSource() == null) // STEP_INGREDIENT
+          {
+            // steps += String.format(Formatter.STEP_INGREDIENT, s.getAction(), s.getIngredientSource(), s.getDestination(), s.getDetails()) + newLine;
+          } else // STEP_MUL
+          {
+            // steps += String.format(Formatter.STEP_MUL, s.getAction(), s.getUtensilsSource(), s.getDestination(), s.getDetails()) + newLine;
+          }
+        }
+        for(Utensils u : r.getUtensils()) {
+          utensils += String.format(Formatter.UTENSIL, u.getDetails(), u.getName()) + newLine;
+        }
+        pv.setUtensils(utensils);
+        pv.setSteps(steps);
+      }
     }
     // If 'Choose File' is pressed, open fileChooser so the user can select a .rcp.
     if(e.getSource() == chooseFile)
