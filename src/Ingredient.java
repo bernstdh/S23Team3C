@@ -1,11 +1,13 @@
+import java.io.Serializable;
 
-public class Ingredient {
+public class Ingredient implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String details;
 	private double amount;
 	private String unit;
-	private double caloriesPerg;
+	private Ingredients ingredient;
 
 	/**
 	 * @param name for name of ingredient.
@@ -14,14 +16,17 @@ public class Ingredient {
 	 * @param unit amount in units.
 	 * @param caloriesPerg for calories per gram.
 	 */
-	public Ingredient(String name, String details, double amount, String unit, double caloriesPerg) {
-		this.name = name;
+	public Ingredient(Ingredients ingredients, String details, double amount, String unit) {
+		this.ingredient = ingredients;
+		this.name = ingredient.getIngredientName();
 		this.details = details;
 		this.amount = amount;
 		this.unit = unit;
-		this.caloriesPerg = caloriesPerg;
 	}
 
+	public Ingredients getIngredient() {
+		return this.ingredient;
+	}
 	/**
 	 * returns name.
 	 * @return this.name;

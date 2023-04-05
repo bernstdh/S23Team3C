@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -6,29 +7,72 @@ import java.util.List;
  * @author Julian Barrett
  *
  */
-public class Recipes {
+public class Recipes implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Ingredient> ingredients;
+	private List<Steps> steps;
 	private List<Utensils> utensils;
 	private String name;
 	private int numPpl;
+	
+	
 	/**
-	 * Constructor
-	 * 
-	 * @param ingredients for list of alphabetical ingredients.
-	 * @param utensils    for list of alphabetical utensils.
+	 * Constructor.
+	 * @param name for recipe name.
+	 * @param numPpl for how many ppl.
+	 * @param ingredients for ingredient list.
+	 * @param utensils for utensil list.
+	 * @param steps for cooking.
 	 */
-	public Recipes(String name, int numPpl, List<Ingredient> ingredients, List<Utensils> utensils) 
+	public Recipes(String name, int numPpl, List<Ingredient> ingredients,
+			List<Utensils> utensils, List<Steps> steps) 
 	{
+		this.ingredients = new ArrayList<Ingredient>();
+		for (Ingredient i : ingredients) {
+			this.ingredients.add(i);
+		}
+		alphabetize(this.ingredients);
+		
 		this.name = name;
 		this.numPpl = numPpl;
-		this.ingredients = ingredients;
-		alphabetize(this.ingredients);
+		this.steps =steps;
 
-		this.utensils = utensils;
+		this.utensils = new ArrayList<Utensils>();
+		for (Utensils b : utensils) {
+			this.utensils.add(b);
+		}
 		alphabetizeU(this.utensils);
+		
 	}
 	
+	/**
+	 * returns steps.
+	 * @return steps list.
+	 */
+	public List<Steps> getSteps () {
+		return this.steps;
+	}
+	/**
+	 * getter.
+	 * @return ingredients list.
+	 */
+	public List<Ingredient> getIngredients()
+	{
+		return this.ingredients;	
+	}
+	
+	/**
+	 * getter.
+	 * @return utensils list.
+	 */
+	public List<Utensils> getUtensils() 
+	{
+		return this.utensils;
+	}
 	
 	/**
 	 * Returns name.
