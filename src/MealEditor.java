@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
@@ -50,6 +51,24 @@ public class MealEditor extends JFrame implements ActionListener {
 	public MealEditor() {
 		
 		super("KiLowBites Meal Editor");
+		
+		// set this.meal to something so it wouldnt break
+		Ingredient newIngredient = new Ingredient(Ingredients.COD, "cod", 5.0, "pds");
+		ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
+		ingredientList.add(newIngredient);
+		Utensils newUtensil = new Utensils("spoon", "spoon");
+		ArrayList<Utensils> utensilList = new ArrayList<Utensils>();
+		utensilList.add(newUtensil);
+		Recipes newRecipe = new Recipes("Julian", 5, ingredientList, utensilList);
+		ArrayList<Recipes> recipeTestList = new ArrayList<Recipes>();
+		recipeTestList.add(newRecipe);
+		
+		this.meal = new Meals("julian", recipeTestList);
+		
+		
+		
+		
+		
 		
 		nameLabel = new JLabel("Name:");
 		nameBox = new JTextField(10);
@@ -146,6 +165,7 @@ public class MealEditor extends JFrame implements ActionListener {
 	            File file = fileChooser.getSelectedFile();
 		        String tempFileName = file.getName();
 		        String fileName = tempFileName.substring(0, tempFileName.length() - 4);
+		        
 		        try {
 		        	this.meal.addRecipe(Serializer.deserializeRecipe(fileName));
 		        } catch (IOException | ClassNotFoundException ia) {
@@ -154,79 +174,48 @@ public class MealEditor extends JFrame implements ActionListener {
 	        }
 	    } else if (e.getSource() == deleteRecipeButton) {
 	    	this.recipeTextBox.setText("");
-	    	
 	    } else if (e.getSource() == openButton) {
-	    	
+	    	int returnVal = fileChooser.showOpenDialog(MealEditor.this);
+	        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File file = fileChooser.getSelectedFile();
+		        String tempFileName = file.getName();
+		        String fileName = tempFileName.substring(0, tempFileName.length() - 4);
+		        try {
+		        	this.meal = Serializer.deserializeMeal(fileName);
+		        } catch (IOException | ClassNotFoundException ia) {
+		        	
+		        }
+	        }
 	    } else if (e.getSource() == newButton) {
-	        
+	        // this.meal = Serializer.serializeMeal(null);
 	        
 	    } else if (e.getSource() == saveButton) {
-	    	
+				try {
+					Serializer.serializeMeal(this.meal);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
 	    } else if (e.getSource() == saveAsButton) {
-	    	
+			File newFile = new File(this.meal.getName() + ".mel");
+	        fileChooser.setSelectedFile(newFile);
+    		int returnVal = fileChooser.showSaveDialog(MealEditor.this);
+    		try {
+				Serializer.serializeMeal(fileChooser.getCurrentDirectory().toString(), 
+						meal);
+				System.out.println(fileChooser.getCurrentDirectory().toString());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	    } else if (e.getSource() == closeButton) {
-	    	
+
 	    } else if (e.getSource() == nameBox) {
 	    	// this.recipeTextBox.setText(nameBox.getText());
 	    	this.meal.setName(nameBox.getText());
 	    }
 	  }
 	
-	   public void write(String filename) throws IOException
-	   {
-	     ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename + ".txt"));
-	     out.writeObject(this);
-	     out.flush();
-	     out.close();
-	   }
-	   
-	   
-	   // return value is a File Object?
-	   // maybe return value should be a meal
-	    public static File open(String filename) throws IOException
-	   {
-	     ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename + ".txt"));
-	     File file;
-	     try
-	     {
-	       file = (File)in.readObject();
-	     }
-	     catch (ClassNotFoundException cnfe)
-	     {
-	       file = new File("Unknown");
-	     }
-	     in.close();
-	     
-	     return file;
-	   }
-	
-	  
-	  public void enableWrite(boolean enable) {
-		  this.addRecipeButton.setEnabled(enable);
-	  }
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  public void loadFile(String fileName) {
-		  JFileChooser chooser = new JFileChooser();
-		  int returnVal = chooser.showOpenDialog(this.recipeTextBox); //replace null with your swing container
-		  File file;
-		  if(returnVal == JFileChooser.APPROVE_OPTION) {   
-		    file = chooser.getSelectedFile();    
-		  }
-
-		  JTextArea text = new JTextArea();
-		  BufferedReader in = new BufferedReader(new FileReader(file));
-		  String line = in.readLine();
-	  }
 	    
 	    
 	    
