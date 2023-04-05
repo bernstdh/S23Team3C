@@ -86,6 +86,7 @@ public enum Ingredients implements Serializable
   TOMATO("Tomato", 0.20, 0.67),
   WINE("Wine", 0.83, 0.99);
   
+  private static final long serialVersionUID = 1L;
   private String ingredientName;
   private double caloriesPerGram;
   private double gramsPerMillileter;
