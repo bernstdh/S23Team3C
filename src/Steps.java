@@ -1,14 +1,20 @@
 import java.io.Serializable;
 
+/**
+ * Steps class.
+ * @author Julian Barrett
+ *
+ */
 public class Steps implements Serializable {
 	
 	
 	private static final long serialVersionUID = 1L;
 
 	private String action;
-	private Ingredient ingredientSource;
+	private String details;
+	private Ingredient ingredientSource = null;
 	private Utensils utensilSource = null;
-	private Utensils destination = null;
+	private Utensils destination;
 	
 	
 	/**
@@ -17,12 +23,21 @@ public class Steps implements Serializable {
 	 * @param source for source utensil.
 	 * @param destination for destination utensil.
 	 */
-	public Steps(String action, Utensils source, Utensils destination) {
+	public Steps(String details, String action, Utensils source, Utensils destination) {
+		this.details = details;
 		this.action = action;
 		this.utensilSource = source;
 		this.destination = destination;
 	}
 	
+	
+	/**
+	 * getter.
+	 * @return this.details.
+	 */
+	public String getDetails() {
+		return this.details;
+	}
 	
 	
 	/**

@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import process.ProcessViewer;
+
 /**
  * The middle-ground between the main menu and the ProcessViewer.
  * @author Beau Mueller
