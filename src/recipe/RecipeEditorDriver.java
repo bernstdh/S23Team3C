@@ -1,3 +1,4 @@
+package recipe;
 /**
  * i dont know what im doing. delete this class before you push anything
  * @author your boy.

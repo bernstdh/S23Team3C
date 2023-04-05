@@ -1,7 +1,10 @@
+package utensil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
+
+import ingredients.Formatter;
 /**
  * A listener for the UtensilPanel class.
  * @author Mike Buckingham

@@ -1,5 +1,8 @@
+package meals;
 import java.io.Serializable;
 import java.util.List;
+
+import recipe.Recipes;
 
 /**
  * Meals class creates a list of recipes.

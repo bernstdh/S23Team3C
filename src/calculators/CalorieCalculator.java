@@ -1,3 +1,6 @@
+package calculators;
+import ingredients.Ingredients;
+
 /**
  * Calorie Calculator.
  * @author Trace Jones

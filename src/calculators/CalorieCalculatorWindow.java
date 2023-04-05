@@ -1,4 +1,8 @@
+package calculators;
 import javax.swing.*;
+
+import ingredients.Ingredients;
+
 import java.awt.*;
 import java.awt.event.*;
 /**

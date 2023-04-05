@@ -1,4 +1,5 @@
 package shopping;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,11 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import Ingredient;
-import Meals;
-import Recipes;
-import Serializer;
-import ShoppingListViewer;
+import app.Serializer;
+import ingredients.Ingredient;
+import recipe.Recipes;
+
+import meals.Meals;
 
 /**
  * A mid-point between the main menu and the ShoppingListViewer so the user can select what menu or

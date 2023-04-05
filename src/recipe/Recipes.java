@@ -1,7 +1,12 @@
+package recipe;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import ingredients.Ingredient;
+import steps.Steps;
+import utensil.Utensils;
 
 /**
  * @author Julian Barrett

@@ -1,3 +1,4 @@
+package ingredients;
 /**
  * Formats information according to the InteractionDesignDocument.
  * @author beaumueller

@@ -1,3 +1,4 @@
+package ingredients;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;

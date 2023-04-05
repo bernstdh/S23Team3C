@@ -1,4 +1,5 @@
 package process;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import Formatter;
-import Recipes;
-import Serializer;
-import Steps;
-import Utensils;
+import app.Serializer;
+import ingredients.Formatter;
+import recipe.Recipes;
+import steps.Steps;
+import utensil.Utensils;
 
 /**
  * The middle-ground between the main menu and the ProcessViewer.
@@ -89,13 +90,13 @@ public class ProcessSelector extends JFrame implements ActionListener
         for(Steps s : r.getSteps()) {
           if(s.getUtensilsSource() == s.getDestination()) // STEP_SINGLE
           {
-            // steps += String.format(Formatter.STEP_SINGLE, s.getAction(), s.getDestination(), s.getDetails());
+            steps += String.format(Formatter.STEP_SINGLE, s.getAction(), s.getDestination(), s.getDetails());
           } else if (s.getUtensilsSource() == null) // STEP_INGREDIENT
           {
-            // steps += String.format(Formatter.STEP_INGREDIENT, s.getAction(), s.getIngredientSource(), s.getDestination(), s.getDetails()) + newLine;
+            steps += String.format(Formatter.STEP_INGREDIENT, s.getAction(), s.getIngredientSource(), s.getDestination(), s.getDetails()) + newLine;
           } else // STEP_MUL
           {
-            // steps += String.format(Formatter.STEP_MUL, s.getAction(), s.getUtensilsSource(), s.getDestination(), s.getDetails()) + newLine;
+            steps += String.format(Formatter.STEP_MUL, s.getAction(), s.getUtensilsSource(), s.getDestination(), s.getDetails()) + newLine;
           }
         }
         for(Utensils u : r.getUtensils()) {

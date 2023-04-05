@@ -1,5 +1,10 @@
+package recipe;
 import java.awt.*;
 import javax.swing.*;
+
+import ingredients.IngredientPanel;
+import steps.StepPanel;
+import utensil.UtensilPanel;
 
 /**
  * GUI used to open, save, and edit recipes.

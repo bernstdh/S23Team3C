@@ -1,3 +1,4 @@
+package app;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,8 +8,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import about.AboutDialog;
+import calculators.CalorieCalculatorWindow;
+import calculators.UnitConverterWindow;
+import meals.MealEditor;
 import process.ProcessSelector;
 import process.ProcessViewer;
+import recipe.RecipeEditor;
 import shopping.ShoppingListSelector;
 
 /**

@@ -1,3 +1,6 @@
+package calculators;
+import ingredients.Ingredients;
+
 /**
  * The Unit Conversions.
  * @author Trace Jones, James Madison Univserity

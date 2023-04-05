@@ -17,6 +17,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import app.Serializer;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
