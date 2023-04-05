@@ -85,7 +85,7 @@ public class Serializer
    */
   public static void serializeMeal(final String dir, final Meals m) throws IOException
   {
-    FileOutputStream fileOut = new FileOutputStream(dir + m.getName() + MEAL);
+    FileOutputStream fileOut = new FileOutputStream(dir + "\\" + m.getName() + MEAL);
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
     out.writeObject(m);
     fileOut.close();
