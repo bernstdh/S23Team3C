@@ -3,7 +3,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 /**
  * Creates and reads both .rcp and .mel objects.
@@ -16,7 +16,8 @@ public class Serializer
   private static final String MEAL = ".mel";
 //  *EXAMPLE DRIVER*
 //  public static void main(String[] args) {
-//    Recipes r = new Recipes("example", 99990, new ArrayList<Ingredient>(), new ArrayList<Utensils>());
+//    Recipes r = new Recipes("example", 99990, new ArrayList<Ingredient>(),
+//        new ArrayList<Utensils>());
 //    Recipes r2 = null;
 //    System.out.println(r.getName());
 //    System.out.println(r.numPpl());
@@ -57,7 +58,8 @@ public class Serializer
    * @param r the recipe to save
    * @throws IOException If there's input/output trouble
    */
-  public static void serializeRecipe(final String dir, final Recipes r) throws IOException{
+  public static void serializeRecipe(final String dir, final Recipes r) throws IOException
+  {
     FileOutputStream fileOut = new FileOutputStream(dir + r.getName() + RECIPE);
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
     out.writeObject(r);

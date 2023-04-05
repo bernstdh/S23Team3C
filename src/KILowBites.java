@@ -5,7 +5,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * The driver class for the KILowBites program.
- * @author beaumueller
+ * @author Beau Mueller
  *
  */
 public class KILowBites implements Runnable
@@ -33,7 +33,6 @@ public class KILowBites implements Runnable
 	  InterruptedException
 	{
 		SwingUtilities.invokeAndWait(new KILowBites(args));
-
 	}
 	
 	/**
