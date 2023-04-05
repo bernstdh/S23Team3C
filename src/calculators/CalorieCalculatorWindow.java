@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 /**
  * Calorie Calculator from Grams GUI.
- * @author Shaury Gautam
+ * @author Shaury Gautam/Trace Jones
  *
  */
 public class CalorieCalculatorWindow extends JFrame implements ActionListener 
@@ -27,6 +27,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	private String gal = "gal";
 	private String ml = "ml";
 	private String calor = "Calories:";
+	private String invalid = "Calories: Please Enter a Valid Number";
 	
 	private String[] units = {g, dr, oz, lb, p, tsp, tbs, floz, cup, pt, qt, gal, ml};
 	
@@ -90,19 +91,24 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	 * Overridden method.
 	 * @param e ItemEvent
 	 */
-	public void actionPerformed(final ActionEvent e)
+	public void actionPerformed(final ActionEvent e) throws NumberFormatException
 	{
 	  if (e.getSource() == calc)
 	  {
 	    double amount = -1.0;
 	    String ingredient = (String) ingredientBox.getSelectedItem();
 	    if (amountBox.getText().equals("")) amount = 0.0;
-	    else amount = Double.parseDouble(amountBox.getText());
 	    String unit = (String) unitBox.getSelectedItem();
-
-	    double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
-
-	    calorieLabel.setText(String.format("Calories: %.2f", calories));
+	    try
+	    {
+	      amount = Double.parseDouble(amountBox.getText());
+	      double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
+	      calorieLabel.setText(String.format("Calories: %.2f", calories));
+	    }
+	    catch (NumberFormatException nfe)
+	    {
+	      calorieLabel.setText(invalid);
+	    } 
 	  }
 	  if (e.getSource() == reset)
 	  {

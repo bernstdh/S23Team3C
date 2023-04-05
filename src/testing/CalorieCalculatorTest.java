@@ -5,6 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import calculators.CalorieCalculator;
 
+/**
+ * CalorieCalculatorTest.
+ * @author Trace Jones, James Madison University
+ * @version 1.0
+ * 
+ * This work complies with the JMU Honor Code.
+ *
+ */
 class CalorieCalculatorTest
 {
 

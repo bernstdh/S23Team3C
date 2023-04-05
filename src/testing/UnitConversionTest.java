@@ -7,6 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import calculators.UnitConversion;
 
+/**
+ * UnitConversionTest.
+ * @author Trace Jones, James Madison University
+ * @version 1.0
+ * 
+ * This work complies with the JMU Honor Code.
+ *
+ */
 class UnitConversionTest
 {
 
