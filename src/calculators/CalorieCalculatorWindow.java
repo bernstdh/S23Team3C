@@ -103,7 +103,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	    {
 	      amount = Double.parseDouble(amountBox.getText());
 	      double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
-	      calorieLabel.setText(String.format("Calories: %.2f", calories));
+	      calorieLabel.setText(String.format("Calories: %.1f", calories));
 	    }
 	    catch (NumberFormatException nfe)
 	    {

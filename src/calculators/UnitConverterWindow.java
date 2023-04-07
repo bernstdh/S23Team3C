@@ -144,7 +144,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener
         try
         {
           amount = Double.parseDouble(amountBox.getText());
-          amountLabel.setText(String.format("%s %f", toAmount, amount));
+          amountLabel.setText(String.format("%s %.1f", toAmount, amount));
         }
         catch (NumberFormatException nfe)
         {
@@ -158,7 +158,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener
         {
           amount = Double.parseDouble(amountBox.getText());
           newAmount = converter(ingredient, fromUnit, toUnit, amount);
-          amountLabel.setText(String.format("To Amount: %f", newAmount));
+          amountLabel.setText(String.format("To Amount: %.1f", newAmount));
         }
         catch (NumberFormatException nfe)
         {
