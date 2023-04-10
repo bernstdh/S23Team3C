@@ -96,6 +96,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	  if (e.getSource() == calc)
 	  {
 	    double amount = -1.0;
+	    // test.
 	    String ingredient = (String) ingredientBox.getSelectedItem();
 	    if (amountBox.getText().equals("")) amount = 0.0;
 	    String unit = (String) unitBox.getSelectedItem();
