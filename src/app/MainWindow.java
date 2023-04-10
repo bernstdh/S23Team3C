@@ -114,9 +114,6 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == process)
     {
-      ProcessViewer a = new ProcessViewer();
-      a.setUtensils("forks\nspoon");
-      a.setSteps("eat fork\nmelt spoon\ndrink spoon");
       new ProcessSelector();
     }
     else if (e.getSource() == calorieCalculator)

@@ -100,11 +100,10 @@ public class ShoppingListViewer extends JFrame
 		
 	    for (String str : strings) {
 	        double multiplier = 1.0;
-	        if (Character.isDigit(str.charAt(0))) {
-	            multiplier = Double.parseDouble(String.valueOf(str.charAt(0)));
-	        }
+	        String digit = str.substring(0, str.indexOf(" "));
+	            multiplier = Double.parseDouble(digit);
 	        double result = numPeople * multiplier;
-	        display += result + str.substring(1) + "\n";
+	        display += result + str.substring(str.indexOf(" ")) + "\n";
 	    }
 		
 

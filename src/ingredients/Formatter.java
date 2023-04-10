@@ -12,7 +12,7 @@ public class Formatter
    */
   public static final String INGREDIENT = "%.2f %s of %s %s";
   
-  /*
+  /*xw
    * <action> the <ingredient> in the <utensil> <details>
    * Pour the mixed eggs in the bowl slowly
    */
