@@ -28,6 +28,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	private String ml = "ml";
 	private String calor = "Calories:";
 	private String invalid = "Calories: Please Enter a Valid Number";
+	private String negative = "Calories: Please Enter a Positive Number";
 	
 	private String[] units = {g, dr, oz, lb, p, tsp, tbs, floz, cup, pt, qt, gal, ml};
 	
@@ -103,8 +104,12 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	    try
 	    {
 	      amount = Double.parseDouble(amountBox.getText());
-	      double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
-	      calorieLabel.setText(String.format("Calories: %.1f", calories));
+	      if (amount < 0) calorieLabel.setText(negative);
+	      else
+	      {
+	        double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
+	        calorieLabel.setText(String.format("Calories: %.1f", calories));
+	      } 
 	    }
 	    catch (NumberFormatException nfe)
 	    {

@@ -41,6 +41,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener
   private String ind = "indivdual";
   private String toAmount = "To Amount:";
   private String invalid = "To Amount: Please Enter a Valid Number.";
+  private String negative = "To Amount: Please Enter a Positive Number";
   String[] units = {dr, g, oz, lb, p, tsp, tbs, floz, cup,
       pt, qt, gal, ml, ind};
   ArrayList<String> weight = new ArrayList<String>(
@@ -144,7 +145,8 @@ public class UnitConverterWindow extends JFrame implements ActionListener
         try
         {
           amount = Double.parseDouble(amountBox.getText());
-          amountLabel.setText(String.format("%s %.1f", toAmount, amount));
+          if (amount < 0) amountLabel.setText(negative);
+          else amountLabel.setText(String.format("%s %.1f", toAmount, amount));
         }
         catch (NumberFormatException nfe)
         {
@@ -157,8 +159,12 @@ public class UnitConverterWindow extends JFrame implements ActionListener
         try
         {
           amount = Double.parseDouble(amountBox.getText());
-          newAmount = converter(ingredient, fromUnit, toUnit, amount);
-          amountLabel.setText(String.format("To Amount: %.1f", newAmount));
+          if (amount < 0) amountLabel.setText(negative);
+          else
+          {
+            newAmount = converter(ingredient, fromUnit, toUnit, amount);
+            amountLabel.setText(String.format("To Amount: %.1f", newAmount));
+          }
         }
         catch (NumberFormatException nfe)
         {
