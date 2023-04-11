@@ -12,6 +12,7 @@ import ingredients.Ingredients;
 
 public class UnitConversion
 {
+  
   private static String cup = "cup";
   private static String dr = "dr";
   private static String floz = "floz";
@@ -25,6 +26,35 @@ public class UnitConversion
   private static String qt = "qt";
   private static String tbs = "tbs";
   private static String tsp = "tsp";
+
+  /**
+   * Performs Unit conversions.
+   * @param ingredient - the ingredient
+   * @param fromUnit - the current unit
+   * @param toUnit - the unit it is switching to
+   * @param amount - the amount of the current unit
+   * @return a double representing the new amount.
+   */
+  public static double converter(final String ingredient, final String fromUnit,
+      final String toUnit, final Double amount)
+  {
+    double result = 0.0;
+    if (fromUnit.equals(cup)) result = cupConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(dr)) result = dramsConversions(ingredient, toUnit, amount);
+    else if (fromUnit.equals(floz)) result = flozConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(g)) result = gramsConversions(ingredient, toUnit, amount);
+    else if (fromUnit.equals(gal)) result = galConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(lb)) result = lbConversions(ingredient, toUnit, amount);
+    else if (fromUnit.equals(ml)) result = mlConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(oz)) result = ozConversions(ingredient, toUnit, amount);
+    else if (fromUnit.equals(p)) result = pinchesConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(pt)) result = ptConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(qt)) result = qtConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(tbs)) result = tbsConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals(tsp)) result = tspConversion(ingredient, toUnit, amount);
+    else if (fromUnit.equals("individual")) result = amount;
+    return result;
+  }
   
   /**
    * Conversions for cup.
