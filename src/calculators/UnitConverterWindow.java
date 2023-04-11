@@ -195,33 +195,8 @@ public class UnitConverterWindow extends JFrame implements ActionListener
   private double converter(final String ingredient, final String fromUnit,
       final String toUnit, final double amount)
   {
-    double newAmount = -1.0;
-    if (fromUnit.equals(dr)) newAmount = 
-        UnitConversion.dramsConversions(ingredient, toUnit, amount);
-    else if (fromUnit.equals(g)) newAmount = 
-        UnitConversion.gramsConversions(ingredient, toUnit, amount);
-    else if (fromUnit.equals(oz)) newAmount = 
-        UnitConversion.ozConversions(ingredient, toUnit, amount);
-    else if (fromUnit.equals(lb)) newAmount = 
-        UnitConversion.lbConversions(ingredient, toUnit, amount);
-    else if (fromUnit.equals(p)) newAmount = 
-        UnitConversion.pinchesConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(tsp)) newAmount = 
-        UnitConversion.tspConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(tbs)) newAmount = 
-        UnitConversion.tbsConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(floz)) newAmount = 
-        UnitConversion.flozConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(cup)) newAmount = 
-        UnitConversion.cupConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(pt)) newAmount = 
-        UnitConversion.ptConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(qt)) newAmount = 
-        UnitConversion.qtConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(gal)) newAmount = 
-        UnitConversion.galConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(ml)) newAmount = 
-        UnitConversion.mlConversion(ingredient, toUnit, amount);
+    double newAmount = 0.0;
+    newAmount = UnitConversion.converter(ingredient, fromUnit, toUnit, amount);
     return newAmount;
   }
 
