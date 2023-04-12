@@ -1,5 +1,8 @@
 package shopping;
 import javax.swing.*;
+
+import calculators.UnitConversion;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ public class ShoppingListViewer extends JFrame
 	private JButton unitsButton;
 	private JTextArea shoppingListBox;
 	private ArrayList<String> box;
+	private ShoppingUnitWindow shop;
 	/**
 	 * Constructor.
 	 * @param strings Array List String
@@ -42,6 +46,7 @@ public class ShoppingListViewer extends JFrame
 		add(numPeopleLabel);
 		add(numPeopleBox);
 		add(generateButton);
+		add(unitsButton);
 		add(new JScrollPane(shoppingListBox));
 
 		generateButton.addActionListener(new ActionListener() 
@@ -56,7 +61,8 @@ public class ShoppingListViewer extends JFrame
 		{
 			public void actionPerformed(final ActionEvent e)
 			{
-				new ShoppingUnitWindow();
+				shop = new ShoppingUnitWindow();
+				changeUnit();
 			}
 		});
 
@@ -99,5 +105,67 @@ public class ShoppingListViewer extends JFrame
 		shoppingListBox.setText(display);
 	}
 	
+	private void changeUnit() {
+		String display = "";
+		String unit = shop.getUnit();
+		
+		for(int i = 0; i < box.size(); i++) {
+			String[] temp = box.get(i).split(" ");
+			String last = box.get(i).substring(box.get(i).indexOf(" "));
+			String first = "";
+			double convert = Double.parseDouble(temp[0]);
+			double val = UnitConversion.converter(temp[3], temp[1], converter(temp[1]), convert);
+			first = val + last;
+			display += first + "\n";
+ 		}
+		
+		shoppingListBox.setText(display);
+	}
+	
+	private String converter(String unit) {
+	    switch(unit.toLowerCase()) {
+	        case "cup":
+	            return "ml";
+	      
+	        case "dr":
+	            return "ml";
+	       
+	        case "floz":
+	            return "ml";
+	        case "ml":
+	            return "floz";
+	        case "g":
+	            return "oz";
+	        case "oz":
+	            return "g";
+	        case "gal":
+	            return "liters";
+	        case "liters":
+	            return "gal";
+	        case "lb":
+	            return "kg";
+	        case "kg":
+	            return "lb";
+	        case "tsp":
+	            return "ml";
+	       
+	        case "tbs":
+	            return "ml";
+	       
+	        case "p":
+	            return "ml";
+	       
+	        case "pt":
+	            return "ml";
+	        case "qt":
+	            return "gal";
+	       
+	        default:
+	            return "Unknown unit";
+	    }
+	}
+
+
+
 	
 }
