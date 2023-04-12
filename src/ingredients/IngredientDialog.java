@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 
 public class IngredientDialog extends JDialog {
 
-    private JTextField ingredientField;
+    private static final long serialVersionUID = 1L;
+	private JTextField ingredientField;
     private JTextField amountField;
     private JTextField caloriesField;
     private String ingredient;
