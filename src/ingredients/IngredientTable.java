@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  * A working list of all ingredients that were both given in the Domain Glossary and by the user.
+ * Only one instance of IngredientTable can exist at a time. To get the existing instance call the
+ * createInstance method.
  * @author Mike Buckingham, Beau Mueller
  *
  */
@@ -12,10 +14,13 @@ public class IngredientTable extends ArrayList<Ingredients> implements Serializa
 {
   private static final long serialVersionUID = 1L;
 
+  private boolean exists = false;
+  private IngredientTable instance = null;
+  
   /**
    * Creates a new ArrayList of Ingredients and adds all pre-existing Ingredients objects.
    */
-  public IngredientTable()
+  private IngredientTable()
   {
     super();
     add(new Ingredients("Alcohol", 2.75, 0.79));
@@ -95,6 +100,24 @@ public class IngredientTable extends ArrayList<Ingredients> implements Serializa
     add(new Ingredients("Thyme", 1.01, 0.46));
     add(new Ingredients("Tomato", 0.20, 0.67));
     add(new Ingredients("Wine", 0.83, 0.99));
+  }
+  
+  /**
+   * If an existing IngredientTable already exists, the current instance is returned, otherwise a
+   * new instance is created.
+   * @return  Either a new IngredientTable or the existing instance.
+   */
+  public IngredientTable createInstance()
+  {
+    if(exists)
+    {
+      return instance;
+    } else
+    {
+      instance = new IngredientTable();
+      exists = true;
+      return instance;
+    }
   }
   
   /**
