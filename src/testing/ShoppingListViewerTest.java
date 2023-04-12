@@ -23,13 +23,13 @@ public class ShoppingListViewerTest {
         return new ShoppingListViewer(itemList, "Test");
     }
     
-    @Test
-    public void testSortList() {
-    	ShoppingListViewer a = setUp();
-        List<String> sortedList = a.sortList(itemList);
-        assertEquals("apple", sortedList.get(0));
-        assertEquals("bread", sortedList.get(1));
-        assertEquals("cheese", sortedList.get(2));
-    }
+//    @Test
+//    public void testSortList() {
+//    	ShoppingListViewer a = setUp();
+//        List<String> sortesdList = a.sortList(itemList);
+//        assertEquals("apple", sortedList.get(0));
+//        assertEquals("bread", sortedList.get(1));
+//        assertEquals("cheese", sortedList.get(2));
+//    }
 
 }

@@ -15,8 +15,9 @@ public class ShoppingListViewer extends JFrame
 	private JLabel numPeopleLabel;
 	private JTextField numPeopleBox;
 	private JButton generateButton;
+	private JButton unitsButton;
 	private JTextArea shoppingListBox;
-
+	private ArrayList<String> box;
 	/**
 	 * Constructor.
 	 * @param strings Array List String
@@ -28,10 +29,12 @@ public class ShoppingListViewer extends JFrame
 			 final String title) 
 	{
 		super("KiLowBites Shopping List Viewer\t" + title);
-
+		
+		box = new ArrayList<String>();
 		numPeopleLabel = new JLabel("Number of People:");
 		numPeopleBox = new JTextField(10);
 		generateButton = new JButton("Generate Shopping List");
+		unitsButton = new JButton("Change units");
 		shoppingListBox = new JTextArea(20, 40);
 		shoppingListBox.setEditable(false); 
 
@@ -48,6 +51,14 @@ public class ShoppingListViewer extends JFrame
 				generateShoppingList(strings);
 			}
 		});
+		
+		unitsButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(final ActionEvent e)
+			{
+				new ShoppingUnitWindow();
+			}
+		});
 
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -56,28 +67,6 @@ public class ShoppingListViewer extends JFrame
 
 	}
 
-	/**
-	 * Generic selection sort alphabetical method.
-	 * @param list list
-	 * @return Sortedlist
-	 */
-	public ArrayList<String> sortList(final ArrayList<String> list)
-	{
-		ArrayList<String> sortedList = new ArrayList<>(list);
-		for (int i = 0; i < sortedList.size() - 1; i++)
-		{
-			for (int j = i + 1; j < sortedList.size(); j++) 
-			{
-				if (sortedList.get(i).compareTo(sortedList.get(j)) > 0) 
-				{
-					String temp = sortedList.get(i);
-					sortedList.set(i, sortedList.get(j));
-					sortedList.set(j, temp);
-				}
-			}
-		}
-		return sortedList;
-	}
 
 
 	/**
@@ -104,9 +93,11 @@ public class ShoppingListViewer extends JFrame
 	            multiplier = Double.parseDouble(digit);
 	        double result = numPeople * multiplier;
 	        display += result + str.substring(str.indexOf(" ")) + "\n";
+	        box.add(display);
 	    }
 		
-
 		shoppingListBox.setText(display);
 	}
+	
+	
 }
