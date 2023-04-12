@@ -105,67 +105,20 @@ public class ShoppingListViewer extends JFrame
 		shoppingListBox.setText(display);
 	}
 	
-	private void changeUnit() {
-		String display = "";
-		String unit = shop.getUnit();
-		
+	private boolean changeUnit() {
 		for(int i = 0; i < box.size(); i++) {
-			String[] temp = box.get(i).split(" ");
-			String last = box.get(i).substring(box.get(i).indexOf(" "));
-			String first = "";
-			double convert = Double.parseDouble(temp[0]);
-			double val = UnitConversion.converter(temp[3], temp[1], converter(temp[1]), convert);
-			first = val + last;
-			display += first + "\n";
+			String[] tempi = box.get(i).split(" ");
+			for(int j = 0; j < box.size(); j++) {
+				String[] tempj = box.get(i).split(" ");
+				if(tempi[3].equals(tempj[3]) && i != j) return true;
+	 		}
  		}
-		
-		shoppingListBox.setText(display);
-	}
-	
-	private String converter(String unit) {
-	    switch(unit.toLowerCase()) {
-	        case "cup":
-	            return "ml";
-	      
-	        case "dr":
-	            return "ml";
-	       
-	        case "floz":
-	            return "ml";
-	        case "ml":
-	            return "floz";
-	        case "g":
-	            return "oz";
-	        case "oz":
-	            return "g";
-	        case "gal":
-	            return "liters";
-	        case "liters":
-	            return "gal";
-	        case "lb":
-	            return "kg";
-	        case "kg":
-	            return "lb";
-	        case "tsp":
-	            return "ml";
-	       
-	        case "tbs":
-	            return "ml";
-	       
-	        case "p":
-	            return "ml";
-	       
-	        case "pt":
-	            return "ml";
-	        case "qt":
-	            return "gal";
-	       
-	        default:
-	            return "Unknown unit";
-	    }
+		return false;
 	}
 
-
-
-	
 }
+
+
+
+	
+
