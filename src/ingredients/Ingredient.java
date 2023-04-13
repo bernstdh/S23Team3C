@@ -59,5 +59,12 @@ public class Ingredient implements Serializable {
 	public String getUnit() {
 		return this.unit;
 	}
+	
+	
+	public String toString() {
+		  String newString;
+		  newString = String.format("%f %s of %s %s", this.amount, this.unit, this.details, this.name);
+		  return newString;
+	}
 
 }

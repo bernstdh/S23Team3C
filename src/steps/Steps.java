@@ -34,16 +34,6 @@ public class Steps implements Serializable {
 		this.destination = destination;
 	}
 	
-	
-	/**
-	 * getter.
-	 * @return this.details.
-	 */
-	public String getDetails() {
-		return this.details;
-	}
-	
-	
 	/**
 	 * Ingredient source.
 	 * @param action for description.
@@ -55,6 +45,17 @@ public class Steps implements Serializable {
 		this.ingredientSource = source;
 		this.destination = destination;
 	}
+	
+	
+	/**
+	 * getter.
+	 * @return this.details.
+	 */
+	public String getDetails() {
+		return this.details;
+	}
+	
+	
 	
 	/**
 	 * Returns this.action.
@@ -81,18 +82,37 @@ public class Steps implements Serializable {
 		return this.ingredientSource;
 	}
 	
+	/**
+	 * Return destination.
+	 * @return destination.
+	 */
 	public Utensils getDestination() {
 		return this.destination;
 	}
 	
+	/**
+	 * toString for a step with an ingredient.
+	 * @return formatted string.
+	 */
+	public String IngredientStepToString() {
+		return String.format("%s the %s in the %s %s", 
+				this.action, this.ingredientSource.toString(),
+				this.destination.toString(), this.details);
+	}
 	
-//	public String toString() {
-//		String stepsString;
-//		if (this.utensilSource != null) {
-//			return String.format(", null)
-//		}
-//		return String.format(action, null)
-//	}
+	/**
+	 * toString for a step with two utensils.
+	 * @return formatted string.
+	 */
+	public String UtensilStepToString() {
+		if (this.utensilSource.equals(destination)) {
+			return String.format("%s the contents of the %s %s", 
+					this.action, this.utensilSource.toString(), this.details);
+		}
+		return String.format("%s the contents of the %s in the %s", 
+				this.action, this.utensilSource.toString(),
+				this.destination.toString());
+	}
 
 }
 
