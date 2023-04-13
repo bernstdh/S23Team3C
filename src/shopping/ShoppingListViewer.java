@@ -21,7 +21,10 @@ public class ShoppingListViewer extends JFrame
 	private JButton unitsButton;
 	private JTextArea shoppingListBox;
 	private ArrayList<String> box;
+	private ArrayList<String> repeat;
 	private ShoppingUnitWindow shop;
+	private String[] list;
+
 	/**
 	 * Constructor.
 	 * @param strings Array List String
@@ -30,10 +33,10 @@ public class ShoppingListViewer extends JFrame
 	 */
 
 	public ShoppingListViewer(final ArrayList<String> strings,
-			 final String title) 
+			final String title) 
 	{
 		super("KiLowBites Shopping List Viewer\t" + title);
-		
+
 		box = new ArrayList<String>();
 		numPeopleLabel = new JLabel("Number of People:");
 		numPeopleBox = new JTextField(10);
@@ -56,14 +59,12 @@ public class ShoppingListViewer extends JFrame
 				generateShoppingList(strings);
 			}
 		});
-		
-		unitsButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(final ActionEvent e)
-			{
-				shop = new ShoppingUnitWindow();
-				changeUnit();
-			}
+
+		unitsButton.addActionListener(new ActionListener() {
+		    public void actionPerformed(final ActionEvent e) {
+		        changeUnit();
+		        shop = new ShoppingUnitWindow(ShoppingListViewer.this, repeat);
+		    }
 		});
 
 		setResizable(false);
@@ -92,33 +93,61 @@ public class ShoppingListViewer extends JFrame
 			shoppingListBox.setText("Please enter a valid amount of people.");
 			return;
 		}
-		
-	    for (String str : strings) {
-	        double multiplier = 1.0;
-	        String digit = str.substring(0, str.indexOf(" "));
-	            multiplier = Double.parseDouble(digit);
-	        double result = numPeople * multiplier;
-	        display += result + str.substring(str.indexOf(" ")) + "\n";
-	        box.add(display);
-	    }
-		
+
+		for (String str : strings) {
+			double multiplier = 1.0;
+			String digit = str.substring(0, str.indexOf(" "));
+			multiplier = Double.parseDouble(digit);
+			double result = numPeople * multiplier;
+			display += result + str.substring(str.indexOf(" ")) + "\n";
+			box.add(display);
+		}
+
 		shoppingListBox.setText(display);
 	}
-	
-	private boolean changeUnit() {
+
+	/**
+	 * Adds items to repeated list.
+	 */
+	private void changeUnit() {
 		for(int i = 0; i < box.size(); i++) {
 			String[] tempi = box.get(i).split(" ");
 			for(int j = 0; j < box.size(); j++) {
 				String[] tempj = box.get(i).split(" ");
-				if(tempi[3].equals(tempj[3]) && i != j) return true;
-	 		}
- 		}
-		return false;
+				if(tempi[3].equals(tempj[3]) && i != j) {
+					repeat.add(tempi[1]);
+					repeat.add(tempj[1]);
+				}
+			}
+		}
+	}
+	
+	public void convertUnits(String newUnit) {
+	    for (int i = 0; i < box.size(); i++) {
+	        String[] parts = box.get(i).split(" ");
+	        String ingredient = parts[3];
+	        String fromUnit = parts[1];
+	        double amount = Double.parseDouble(parts[0]);
+
+	        if (repeat.contains(fromUnit)) {
+	            double convertedAmount = UnitConversion.converter(ingredient, fromUnit, newUnit, amount);
+	            String val = convertedAmount + newUnit + box.get(i).substring(box.get(i).indexOf("of") - 1);
+	            box.set(i, val);
+	        }
+	    }
+	    updateShoppingListDisplay();
+	}
+	private void updateShoppingListDisplay() {
+	    StringBuilder display = new StringBuilder();
+	    for (String entry : box) {
+	        display.append(entry).append("\n");
+	    }
+	    shoppingListBox.setText(display.toString());
 	}
 
 }
 
 
 
-	
+
 

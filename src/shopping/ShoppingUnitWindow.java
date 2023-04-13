@@ -4,41 +4,42 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-public class ShoppingUnitWindow extends JFrame {
-
+public class ShoppingUnitWindow extends JDialog {
     private static final long serialVersionUID = 1L;
-	private JComboBox<String> unitComboBox;
-    private String unit;
+	private JComboBox<String> unitsComboBox;
+    private JButton applyButton;
+    private JLabel unitLabel;
+    private ShoppingListViewer parent;
 
-    public ShoppingUnitWindow() {
-        super("Unit Chooser");
+    public ShoppingUnitWindow(ShoppingListViewer parent, ArrayList<String> repeat) {
+        super(parent, "Change Units", true);
 
-        unitComboBox = new JComboBox<>(new String[]{"US", "Metric"});
-        JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(e -> saveUnit());
+        this.parent = parent;
+        Set<String> uniqueUnits = new HashSet<>(repeat);
+        unitsComboBox = new JComboBox<>(uniqueUnits.toArray(new String[0]));
+        unitLabel = new JLabel("Select unit:");
+        applyButton = new JButton("Apply");
 
-        JPanel panel = new JPanel(new FlowLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel.add(unitComboBox);
-        panel.add(saveButton);
+        setLayout(new FlowLayout());
+        add(unitLabel);
+        add(unitsComboBox);
+        add(applyButton);
 
-        getContentPane().add(panel);
+        applyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedUnit = (String) unitsComboBox.getSelectedItem();
+                parent.convertUnits(selectedUnit);
+                setVisible(false);
+            }
+        });
 
         setSize(300, 100);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
         setResizable(false);
         setVisible(true);
     }
-
-    private void saveUnit() {
-        unit = (String) unitComboBox.getSelectedItem();
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-
 }
