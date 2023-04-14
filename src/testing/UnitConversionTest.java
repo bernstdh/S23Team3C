@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import calculators.UnitConversion;
+import math.UnitConversion;
 
 /**
  * UnitConversionTest.

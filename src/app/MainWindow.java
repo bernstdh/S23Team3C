@@ -7,14 +7,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import about.AboutDialog;
-import calculators.CalorieWindowSelector;
-import calculators.UnitConverterWindow;
-import meals.MealEditor;
-import process.ProcessSelector;
-import process.ProcessViewer;
-import recipe.RecipeEditor;
-import shopping.ShoppingListSelector;
+import gui.AboutDialog;
+import gui.CalorieWindowSelector;
+import gui.MealEditor;
+import gui.Preferences;
+import gui.ProcessSelector;
+import gui.ProcessViewer;
+import gui.RecipeEditor;
+import gui.ShoppingListSelector;
+import gui.UnitConverterWindow;
 
 /**
  * Main window for the KILowBites application. Contains a JMenuBar with all menus.

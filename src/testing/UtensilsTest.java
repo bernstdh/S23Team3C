@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import utensil.Utensils;
+import items.Utensils;
 
 
 class UtensilsTest {

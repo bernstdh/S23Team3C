@@ -1,10 +1,11 @@
 package testing;
 
 
-import shopping.ShoppingListViewer;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
+import gui.ShoppingListViewer;
 
 import java.util.ArrayList;
 import java.util.List;

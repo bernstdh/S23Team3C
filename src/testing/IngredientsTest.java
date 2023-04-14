@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import ingredients.Ingredients;
+import items.Ingredients;
 
 class IngredientsTest
 {
