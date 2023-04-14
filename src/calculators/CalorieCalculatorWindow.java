@@ -1,7 +1,7 @@
 package calculators;
 import javax.swing.*;
 
-import ingredients.Ingredients;
+import ingredients.IngredientTable;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -45,12 +45,12 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	public CalorieCalculatorWindow() 
 	{
 		super("Calorie Calculator");
-		Ingredients[] ingredient = Ingredients.values();
+		IngredientTable ingredients = IngredientTable.createInstance();
 		
 		ingredientBox = new JComboBox<>();
-    for (int i = 0; i < ingredient.length; i++)
+    for (int i = 0; i < ingredients.size(); i++)
     {
-      ingredientBox.addItem(ingredient[i].getIngredientName());
+      ingredientBox.addItem(ingredients.get(i).getIngredientName());
     }
     ingredientBox.addActionListener(this);
 		amountBox = new JTextField(10);

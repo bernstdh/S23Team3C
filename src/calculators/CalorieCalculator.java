@@ -1,4 +1,5 @@
 package calculators;
+import ingredients.IngredientTable;
 import ingredients.Ingredients;
 
 /**
@@ -36,10 +37,11 @@ public class CalorieCalculator
       final double amount, final String unit) 
   {
     if (amount < 0.0) return 0.0;
+    IngredientTable ingredients = IngredientTable.createInstance();
     double calories = 0.0;
-    Ingredients ing = Ingredients.fromCode(ingredient);
+    Ingredients ing = ingredients.fromCode(ingredient);
     if (unit.equals(g)) calories = amount * ing.getCaloriesPerGram();
-    else if (unit.equals(dr)) calories = UnitConversion.dramsConversions(ingredient,
+    else if (unit.equals(dr)) calories = UnitConversion.dramsConversion(ingredient,
         g, amount) * ing.getCaloriesPerGram();
     else if (unit.equals(oz)) calories = UnitConversion.ozConversions(ingredient,
         g, amount) * ing.getCaloriesPerGram();

@@ -1,5 +1,5 @@
 package calculators;
-import ingredients.Ingredients;
+import ingredients.IngredientTable;
 
 /**
  * The Unit Conversions.
@@ -12,7 +12,6 @@ import ingredients.Ingredients;
 
 public class UnitConversion
 {
-  
   private static String cup = "cup";
   private static String dr = "dr";
   private static String floz = "floz";
@@ -40,7 +39,7 @@ public class UnitConversion
   {
     double result = 0.0;
     if (fromUnit.equals(cup)) result = cupConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals(dr)) result = dramsConversions(ingredient, toUnit, amount);
+    else if (fromUnit.equals(dr)) result = dramsConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(floz)) result = flozConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(g)) result = gramsConversions(ingredient, toUnit, amount);
     else if (fromUnit.equals(gal)) result = galConversion(ingredient, toUnit, amount);
@@ -70,7 +69,6 @@ public class UnitConversion
     double value = -1.0;
     if (unitType.equals(cup)) return amount;
     value = (galConversion(ingredient, unitType, amount) / 16);
-    if (value < 0) value = 0.0;
     return value;
   }
 
@@ -81,12 +79,13 @@ public class UnitConversion
    * @param amount - the amount of the current unit
    * @return the amount in the new units
    */
-  public static double dramsConversions(final String ingredient, final String unitType,
+  public static double dramsConversion(final String ingredient, final String unitType,
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
-    double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
+    IngredientTable ingredients = IngredientTable.createInstance();
+    double value = 0.0;
+    double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(dr)) value = amount;
     
     else if (unitType.equals(oz)) value = amount / 16;
@@ -171,10 +170,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
+    double value = 0.0;
     if (unitType.equals(floz)) return amount;
     value = galConversion(ingredient, unitType, amount) / 128;
-    if (value < 0) value = 0.0;
     return value;
   }
   
@@ -189,8 +187,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
-    double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
+    IngredientTable ingredients = IngredientTable.createInstance();
+    double value = 0.0;
+    double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(g)) value = amount;
     else if (unitType.equals(oz)) value = amount / 28.34952;
     else if (unitType.equals(lb)) value = ((amount / 28.34952) / 16);
@@ -228,8 +227,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
-    double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
+    IngredientTable ingredients = IngredientTable.createInstance();
+    double value = 0.0;
+    double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(gal)) value = amount;
     else if (unitType.equals(lb))
     {
@@ -265,7 +265,6 @@ public class UnitConversion
     else if (unitType.equals(qt)) value = amount * 4;
     else if (unitType.equals(ml)) value =  amount * 3785.4117888;
     
-    if (value < 0) value = 0.0;
     return value;
   }
   
@@ -280,8 +279,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
-    double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
+    IngredientTable ingredients = IngredientTable.createInstance();
+    double value = 0.0;
+    double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(lb)) value = amount;
     else if (unitType.equals(oz)) value = amount * 16;
     else if (unitType.equals(g)) value = (amount * 16) * 28.34952;
@@ -363,10 +363,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
+    double value = 0.0;
     if (unitType.equals(ml)) return amount;
     value = galConversion(ingredient, unitType, amount) / 3785.4117888;
-    if (value < 0) value = 0.0;
     return value;
   }
   
@@ -381,8 +380,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
-    double volume = Ingredients.fromCode(ingredient).getGramsPerMillileter();
+    IngredientTable ingredients = IngredientTable.createInstance();
+    double value = 0.0;
+    double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(oz)) value = amount;
     else if (unitType.equals(lb)) value = amount / 16;
     else if (unitType.equals(g)) value = amount *  28.34952;
@@ -464,10 +464,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
+    double value = 0.0;
     if (unitType.equals(p)) return amount;
     value = (galConversion(ingredient, unitType, amount) / 12288);
-    if (value < 0) value = 0.0;
     return value;
   }
   
@@ -482,10 +481,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
+    double value = 0.0;
     if (unitType.equals(pt)) return amount;
     value = (galConversion(ingredient, unitType, amount) / 8);
-    if (value < 0) value = 0.0;
     return value;
   }
   
@@ -500,10 +498,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
+    double value = 0.0;
     if (unitType.equals(qt)) return amount;
     value = (galConversion(ingredient, unitType, amount) / 4);
-    if (value < 0) value = 0.0;
     return value;
   }
   
@@ -518,10 +515,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
+    double value = 0.0;
     if (unitType.equals(tbs)) return amount;
     value = (galConversion(ingredient, unitType, amount) / 256);
-    if (value < 0) value = 0.0;
     return value;
   }
   
@@ -536,10 +532,9 @@ public class UnitConversion
       final Double amount)
   {
     if (amount < 0) return 0.0;
-    double value = -1.0;
+    double value = 0.0;
     if (unitType.equals(tsp)) return amount;
     value = (galConversion(ingredient, unitType, amount) / 768);
-    if (value < 0) value = 0.0;
     return value;
   }
 

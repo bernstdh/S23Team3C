@@ -1,7 +1,7 @@
 package calculators;
 import javax.swing.*;
 
-import ingredients.Ingredients;
+import ingredients.IngredientTable;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -55,12 +55,12 @@ public class UnitConverterWindow extends JFrame implements ActionListener
   public UnitConverterWindow()
   {
     super("Unit Converter");
-    Ingredients[] ingredient = Ingredients.values();
+    IngredientTable ingredients = IngredientTable.createInstance();
     
     ingredientsBox = new JComboBox<>();
-    for (int i = 0; i < ingredient.length; i++)
+    for (int i = 0; i < ingredients.size(); i++)
     {
-      ingredientsBox.addItem(ingredient[i].getIngredientName());
+      ingredientsBox.addItem(ingredients.get(i).getIngredientName());
     }
     ingredientsBox.addActionListener(this);
     

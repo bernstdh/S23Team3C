@@ -15,14 +15,14 @@ import calculators.UnitConversion;
  * This work complies with the JMU Honor Code.
  *
  */
-class UnitConversionTest
+class UnitConversionTest extends UnitConversion
 {
 
   private String dr = "dr";
   private String oz = "oz";
   private String lb = "lb";
   private String g = "g";
-//  private String ind = "individual";
+  private String ind = "individual";
   private String p = "p";
   private String tsp = "tsp";
   private String tbs = "tbs";
@@ -43,49 +43,49 @@ class UnitConversionTest
   void dramsTest()
   {
     double drams = 4.328;
-    assertEquals(4.328, UnitConversion.dramsConversions(alc, dr, drams));
+    assertEquals(4.328, UnitConversion.dramsConversion(alc, dr, drams));
     
     drams = 17.45;
-    assertEquals(30.91869874, UnitConversion.dramsConversions(alc, g, drams));
+    assertEquals(30.91869874, UnitConversion.dramsConversion(alc, g, drams));
     
     drams = 578.564;
-    assertEquals(2.260015625, UnitConversion.dramsConversions(alc, lb, drams));
+    assertEquals(2.260015625, UnitConversion.dramsConversion(alc, lb, drams));
     
     drams = 3746.0;
-    assertEquals(234.125, UnitConversion.dramsConversions(alc, oz, drams), 0.01);
+    assertEquals(234.125, UnitConversion.dramsConversion(alc, oz, drams), 0.01);
     
     drams = -1645.8;
-    assertEquals(-1.0, UnitConversion.dramsConversions(alc, dr, drams));
+    assertEquals(0.0, UnitConversion.dramsConversion(alc, dr, drams));
     
     drams = 0.0;
-    assertEquals(-1.0, UnitConversion.dramsConversions(alc, "Trace", drams));
+    assertEquals(0.0, UnitConversion.dramsConversion(alc, "Trace", drams));
     
     drams = 54.3;
-    assertEquals(743.6085728309065, UnitConversion.dramsConversions("Bread", p, drams));
+    assertEquals(743.6085728309065, UnitConversion.dramsConversion("Bread", p, drams));
     
     drams = 163.2;
-    assertEquals(222.43472049230766, UnitConversion.dramsConversions("Lamb", ml, drams));
+    assertEquals(222.43472049230766, UnitConversion.dramsConversion("Lamb", ml, drams));
     
     drams = 21.1;
-    assertEquals(5.056675239738716, UnitConversion.dramsConversions("Honey", tsp, drams));
+    assertEquals(5.056675239738716, UnitConversion.dramsConversion("Honey", tsp, drams));
     
     drams = 99.2;
-    assertEquals(15.437378709364207, UnitConversion.dramsConversions("Lemon", tbs, drams), 0.01);
+    assertEquals(15.437378709364207, UnitConversion.dramsConversion("Lemon", tbs, drams), 0.01);
     
     drams = 276.94;
-    assertEquals(21.00299419421141, UnitConversion.dramsConversions("Kidney bean", floz, drams));
+    assertEquals(21.00299419421141, UnitConversion.dramsConversion("Kidney bean", floz, drams));
     
     drams = 963.78;
-    assertEquals(5.509843238481082, UnitConversion.dramsConversions(pasta, cup, drams));
+    assertEquals(5.509843238481082, UnitConversion.dramsConversion(pasta, cup, drams));
     
     drams = 5945.352;
-    assertEquals(185.52351309446, UnitConversion.dramsConversions("Cornflake", pt, drams));
+    assertEquals(185.52351309446, UnitConversion.dramsConversion("Cornflake", pt, drams));
     
     drams = 16382.956;
-    assertEquals(90.21650225524553, UnitConversion.dramsConversions("Cheddar cheese", qt, drams));
+    assertEquals(90.21650225524553, UnitConversion.dramsConversion("Cheddar cheese", qt, drams));
     
     drams = 5648362.54;
-    assertEquals(7145.514192262774, UnitConversion.dramsConversions("Broccoli", gal, drams));
+    assertEquals(7145.514192262774, UnitConversion.dramsConversion("Broccoli", gal, drams));
     
     
   }
@@ -106,10 +106,10 @@ class UnitConversionTest
     assertEquals(.42328759, UnitConversion.gramsConversions(alc, oz, grams), 0.01);
     
     grams = -46382.0;
-    assertEquals(-1.0, UnitConversion.gramsConversions(alc, g, grams));
+    assertEquals(0.0, UnitConversion.gramsConversions(alc, g, grams));
     
     grams = 564382.1;
-    assertEquals(-1.0, UnitConversion.gramsConversions(alc, "MAX", grams));
+    assertEquals(0.0, UnitConversion.gramsConversions(alc, "MAX", grams));
     
     grams = 475.3;
     assertEquals(2410.7707454709766, UnitConversion.gramsConversions("Carrot", p, grams));
@@ -152,10 +152,10 @@ class UnitConversionTest
     assertEquals(0.0, UnitConversion.lbConversions(alc, g, pound));
     
     pound = -10;
-    assertEquals(-1, UnitConversion.lbConversions(alc, p, pound));
+    assertEquals(0.0, UnitConversion.lbConversions(alc, p, pound));
     
     pound = 93.27;
-    assertEquals(-1.0, UnitConversion.lbConversions(alc, "GEE", pound));
+    assertEquals(0.0, UnitConversion.lbConversions(alc, "GEE", pound));
     
     pound = 34.2;
     assertEquals(8755.2, UnitConversion.lbConversions(alc, dr, pound));
@@ -199,10 +199,10 @@ class UnitConversionTest
     assertEquals(846.23, UnitConversion.ozConversions(alc, oz, ounce));
     
     ounce = -3672.5;
-    assertEquals(-1.0, UnitConversion.ozConversions(alc, p, ounce));
+    assertEquals(0.0, UnitConversion.ozConversions(alc, p, ounce));
     
     ounce = 84.2;
-    assertEquals(-1.0, UnitConversion.ozConversions(alc, "JMU", ounce));
+    assertEquals(0.0, UnitConversion.ozConversions(alc, "JMU", ounce));
     
     assertEquals(5.2625, UnitConversion.ozConversions(alc, lb, ounce));
     
@@ -247,10 +247,10 @@ class UnitConversionTest
     double pinch = 46372.0;
     assertEquals(46372.0, UnitConversion.pinchesConversion(alc, p, pinch));
     
-    assertEquals(-1.0, UnitConversion.pinchesConversion(alc, "Negative", pinch));
+    assertEquals(0.0, UnitConversion.pinchesConversion(alc, "Negative", pinch));
     
     pinch = -453.1;
-    assertEquals(-1.0, UnitConversion.pinchesConversion(alc, p, pinch));
+    assertEquals(0.0, UnitConversion.pinchesConversion(alc, p, pinch));
     
     pinch = 23.1;
     assertEquals(1.44375, UnitConversion.pinchesConversion(alc, tsp, pinch), 0.01);
@@ -295,10 +295,10 @@ class UnitConversionTest
     double tea = 364.2;
     assertEquals(364.2, UnitConversion.tspConversion(alc, tsp, tea));
     
-    assertEquals(-1.0, UnitConversion.tspConversion(alc, "CS", tea));
+    assertEquals(0.0, UnitConversion.tspConversion(alc, "CS", tea));
     
     tea = -0.01;
-    assertEquals(-1.0, UnitConversion.tspConversion(alc, gal, tea));
+    assertEquals(0.0, UnitConversion.tspConversion(alc, gal, tea));
     
     tea = 64.2;
     assertEquals(1027.2, UnitConversion.tspConversion(alc, p, tea));
@@ -344,10 +344,10 @@ class UnitConversionTest
     double table = 562.6;
     assertEquals(562.6, UnitConversion.tbsConversion(alc, tbs, table));
     
-    assertEquals(-1.0, UnitConversion.tbsConversion(alc, "Cole", table));
+    assertEquals(0.0, UnitConversion.tbsConversion(alc, "Cole", table));
     
     table = -85736.46;
-    assertEquals(-1.0, UnitConversion.tbsConversion(alc, gal, table));
+    assertEquals(0.0, UnitConversion.tbsConversion(alc, gal, table));
     
     table = 34.2;
     assertEquals(1641.6, UnitConversion.tbsConversion(alc, p, table), 0.01);
@@ -392,10 +392,10 @@ class UnitConversionTest
     double fluid = 6748.2;
     assertEquals(6748.2, UnitConversion.flozConversion(alc, floz, fluid));
     
-    assertEquals(-1.0, UnitConversion.flozConversion(alc, "Jeff", fluid));
+    assertEquals(0.0, UnitConversion.flozConversion(alc, "Jeff", fluid));
     
     fluid = -100.2;
-    assertEquals(-1.0, UnitConversion.flozConversion(alc, gal, fluid));
+    assertEquals(0.0, UnitConversion.flozConversion(alc, gal, fluid));
     
     fluid = 56.4;
     assertEquals(5414.4, UnitConversion.flozConversion(alc, p, fluid), 0.01);
@@ -440,10 +440,10 @@ class UnitConversionTest
     double cp = 5.1;
     assertEquals(5.1, UnitConversion.cupConversion(alc, cup, cp));
     
-    assertEquals(-1.0, UnitConversion.cupConversion(alc, "Bruce", cp));
+    assertEquals(0.0, UnitConversion.cupConversion(alc, "Bruce", cp));
     
     cp = -9463.2;
-    assertEquals(-1.0, UnitConversion.cupConversion(alc, gal, cp));
+    assertEquals(0.0, UnitConversion.cupConversion(alc, gal, cp));
     
     cp = 46437.1;
     assertEquals(35663692.8, UnitConversion.cupConversion(alc, p, cp), 0.01);
@@ -488,10 +488,10 @@ class UnitConversionTest
     double pint = .01;
     assertEquals(.01, UnitConversion.ptConversion(alc, pt, pint));
     
-    assertEquals(-1.0, UnitConversion.ptConversion(alc, "Steven", pint));
+    assertEquals(0.0, UnitConversion.ptConversion(alc, "Steven", pint));
     
     pint = -20.2;
-    assertEquals(-1.0, UnitConversion.ptConversion(alc, gal, pint));
+    assertEquals(0.0, UnitConversion.ptConversion(alc, gal, pint));
     
     pint = 1.2;
     assertEquals(1843.2, UnitConversion.ptConversion(alc, p, pint), 0.01);
@@ -536,10 +536,10 @@ class UnitConversionTest
     double quart = 19968.56;
     assertEquals(19968.56, UnitConversion.qtConversion(alc, qt, quart));
     
-    assertEquals(-1.0, UnitConversion.qtConversion(alc, "Quart", quart));
+    assertEquals(0.0, UnitConversion.qtConversion(alc, "Quart", quart));
     
     quart = -6553.29;
-    assertEquals(-1.0, UnitConversion.qtConversion(alc, gal, quart));
+    assertEquals(0.0, UnitConversion.qtConversion(alc, gal, quart));
     
     quart = 392.56;
     assertEquals(1205944.32, UnitConversion.qtConversion(alc, p, quart), 0.01);
@@ -584,10 +584,10 @@ class UnitConversionTest
     double gallon = 756.24;
     assertEquals(756.24, UnitConversion.galConversion(alc, gal, gallon));
     
-    assertEquals(-1.0, UnitConversion.galConversion(alc, "gallon", gallon));
+    assertEquals(0.0, UnitConversion.galConversion(alc, "gallon", gallon));
     
     gallon = -0.0001;
-    assertEquals(-1.0, UnitConversion.galConversion(alc, gal, gallon));
+    assertEquals(0.0, UnitConversion.galConversion(alc, gal, gallon));
     
     gallon = 968.1;
     assertEquals(11896012.8, UnitConversion.galConversion(alc, p, gallon), 0.01);
@@ -632,10 +632,10 @@ class UnitConversionTest
     double milli = 97.4;
     assertEquals(97.4, UnitConversion.mlConversion(alc, ml, milli));
     
-    assertEquals(-1.0, UnitConversion.mlConversion(alc, "liters", milli));
+    assertEquals(0.0, UnitConversion.mlConversion(alc, "liters", milli));
     
     milli = -5.75;
-    assertEquals(-1.0, UnitConversion.mlConversion(alc, gal, milli));
+    assertEquals(0.0, UnitConversion.mlConversion(alc, gal, milli));
     
     milli = 4167.37;
     assertEquals(13527.89219, UnitConversion.mlConversion(alc, p, milli), 0.01);
@@ -672,6 +672,58 @@ class UnitConversionTest
     
     milli = 9475.27;
     assertEquals(27.365109929550837, UnitConversion.mlConversion(pasta, lb, milli));
+  }
+  
+  @Test
+  void converterTest()
+  {
+    double total = 0.0;
+    assertEquals(0.0, UnitConversion.converter(pasta, ind, g, total));
+    
+    total = 57.0;
+    assertEquals(57.0, UnitConversion.converter(pasta, ind, g, total));
+    
+    total = 923.457;
+    assertEquals(2.0358744169213447, UnitConversion.converter(alc, g, lb, total));
+    
+    total = 97.2;
+    assertEquals(0.0, UnitConversion.converter(alc, "ABCDE", lb, total));
+    
+    total = 251.23;
+    assertEquals(103.52042459118039, UnitConversion.converter(alc, cup, lb, total));
+    
+    total = 506.543;
+    assertEquals(1.97868359375, UnitConversion.converter(mush, dr, lb, total));
+    
+    total = 157362.45;
+    assertEquals(12003.957199747381, UnitConversion.converter(mush, floz, lb, total));
+    
+    total = 4738.21;
+    assertEquals(20957.410115892893, UnitConversion.converter(berry, gal, lb, total));
+    
+    total = 395.43;
+    assertEquals(179364.01109759999, UnitConversion.converter(thyme, lb, g, total));
+    
+    total = 47576.645;
+    assertEquals(21885.2567, UnitConversion.converter(thyme, ml, g, total));
+    
+    total = 5736.432;
+    assertEquals(162625.09371264, UnitConversion.converter(mush, oz, g, total));
+    
+    total = 2945.5049;
+    assertEquals(925.532873687885, UnitConversion.converter(cherry, p, g, total));
+    
+    total = 46362.49;
+    assertEquals(2.2376392316025566E7, UnitConversion.converter(cherry, pt, g, total));
+    
+    total = 7.2;
+    assertEquals(6950.016044236801, UnitConversion.converter(cherry, qt, g, total));
+    
+    total = 5736.23;
+    assertEquals(86516.68952567808, UnitConversion.converter(cherry, tbs, g, total));
+    
+    total = 4746.4384;
+    assertEquals(23862.719207886028, UnitConversion.converter(cherry, tsp, g, total));
   }
 
 }
