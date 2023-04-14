@@ -2,6 +2,7 @@ package shopping;
 import javax.swing.*;
 
 import calculators.UnitConversion;
+import ingredients.Ingredients;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -21,9 +22,8 @@ public class ShoppingListViewer extends JFrame
 	private JButton unitsButton;
 	private JTextArea shoppingListBox;
 	private ArrayList<String> box;
-	private ArrayList<String> repeat;
-	private ShoppingUnitWindow shop;
-	private String[] list;
+	private ArrayList<String> repeat = new ArrayList<String>();
+
 
 	/**
 	 * Constructor.
@@ -32,7 +32,7 @@ public class ShoppingListViewer extends JFrame
 	 * @param title Title
 	 */
 
-	public ShoppingListViewer(final ArrayList<String> strings,
+	public ShoppingListViewer(final ArrayList<Ingredients> strings,
 			final String title) 
 	{
 		super("KiLowBites Shopping List Viewer\t" + title);
@@ -63,7 +63,7 @@ public class ShoppingListViewer extends JFrame
 		unitsButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(final ActionEvent e) {
 		        changeUnit();
-		        shop = new ShoppingUnitWindow(ShoppingListViewer.this, repeat);
+		         new ShoppingUnitWindow(ShoppingListViewer.this, repeat);
 		    }
 		});
 
@@ -140,7 +140,7 @@ public class ShoppingListViewer extends JFrame
 	private void updateShoppingListDisplay() {
 	    StringBuilder display = new StringBuilder();
 	    for (String entry : box) {
-	        display.append(entry).append("\n");
+	        display.append(entry);
 	    }
 	    shoppingListBox.setText(display.toString());
 	}
