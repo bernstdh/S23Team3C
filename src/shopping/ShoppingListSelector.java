@@ -120,8 +120,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
         {
           Recipes r = Serializer.deserializeRecipe(fileChooser.getSelectedFile().toString());
           name = r.getName();
-          loadIngredientsList(ingredients, r);
-          new ShoppingListViewer(ingredients, name);
+          new ShoppingListViewer(r.getIngredients(), name);
         }
         catch (ClassNotFoundException | IOException e1)
         {
@@ -131,13 +130,15 @@ public class ShoppingListSelector extends JFrame implements ActionListener
       {
         try
         {
+          ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
           Meals m = Serializer.deserializeMeal(fileChooser.getSelectedFile().toString());
           name = m.getName();
           for(Recipes r : m.getRecipes())
           {
             loadIngredientsList(ingredients, r);
-            new ShoppingListViewer(ingredients, name);
+            new ShoppingListViewer(r.getIngredients(), name);
           }
+          new ShoppingListViewer();
         }
         catch (ClassNotFoundException | IOException e1)
         {
