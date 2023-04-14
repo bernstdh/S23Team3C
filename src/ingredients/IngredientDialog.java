@@ -5,6 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Shaury _, Beau Mueller
+ *
+ */
 public class IngredientDialog extends JDialog {
 
     private static final long serialVersionUID = 1L;
@@ -16,6 +21,7 @@ public class IngredientDialog extends JDialog {
     private String calories;
 
     public IngredientDialog(JFrame parent) {
+        // 
         super(parent, "Add Ingredient", true);
         setSize(400, 200);
         setLocationRelativeTo(parent);
