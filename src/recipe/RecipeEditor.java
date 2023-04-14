@@ -1,14 +1,16 @@
 package recipe;
 import java.awt.*;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.util.List;
 
 import app.*;
@@ -19,7 +21,7 @@ import utensil.*;
  * GUI used to open, save, and edit recipes.
  * @author Mike Buckingham (gui components)
  */
-public class RecipeEditor extends JFrame implements ActionListener, KeyListener
+public class RecipeEditor extends JFrame implements ActionListener, DocumentListener
 {
   
   private static final long serialVersionUID = 1L;
@@ -34,7 +36,8 @@ public class RecipeEditor extends JFrame implements ActionListener, KeyListener
   private IngredientPanel ingredientsPanel;
   private Recipes recipe;
   private StepPanel stepsPanel;
-  private String numberServed, recipeName, state;
+  private int numberServed;
+  private String recipeName, state;
   private final String changedState = "changedState";
   private final String unchangedState = "unchangedState";
   private final String nullState = "nullState";
@@ -101,6 +104,7 @@ public class RecipeEditor extends JFrame implements ActionListener, KeyListener
     }
     else if(ae.getSource() == openButton)
     {
+      String previousState = this.state;
       this.state = unchangedState;
       updateButtonStates();
       int returnVal = fileChooser.showOpenDialog(RecipeEditor.this);
@@ -125,9 +129,9 @@ public class RecipeEditor extends JFrame implements ActionListener, KeyListener
         }
         
       }
-      else
+      else if(returnVal == JFileChooser.CANCEL_OPTION)
       {//have to fix something here i think, has to go back to whatever state it was before
-        this.state = nullState;
+        this.state = previousState;
         updateButtonStates();
       }
     }
@@ -140,19 +144,39 @@ public class RecipeEditor extends JFrame implements ActionListener, KeyListener
     }
     else if(ae.getSource() == saveAsButton)
     {
+      
       this.state = unchangedState;
       updateButtonStates();
       File newFile = new File(recipeNameBox.getText() + RECIPE);
       fileChooser.setSelectedFile(newFile);
-      fileChooser.showSaveDialog(RecipeEditor.this);
+      int returnVal = fileChooser.showSaveDialog(RecipeEditor.this);
       
+      recipeName = recipeNameBox.getText();
       try
       {
-        Serializer.serializeRecipe(fileChooser.getCurrentDirectory().toString(), recipe);
+        numberServed = Integer.valueOf(numberServedBox.getText());
       }
-      catch(IOException ioe)
+      catch(NumberFormatException nfe)
       {
-        ioe.printStackTrace();
+        numberServed = 0;
+      }
+      recipe = new Recipes(recipeName, numberServed,  ingredientsPanel.getIngredientList(), 
+          utensilsPanel.getUtensilList(), stepsPanel.getStepsList());
+      if(returnVal == JFileChooser.APPROVE_OPTION)
+      {
+        try
+        {
+          Serializer.serializeRecipe(fileChooser.getCurrentDirectory().toString(), recipe);
+        }
+        catch(IOException ioe)
+        {
+          ioe.printStackTrace();
+        }
+      } 
+      else if(returnVal == JFileChooser.CANCEL_OPTION)
+      {
+        this.state = changedState;
+        updateButtonStates();
       }
     }
     else if(ae.getSource() == saveButton)
@@ -163,33 +187,28 @@ public class RecipeEditor extends JFrame implements ActionListener, KeyListener
       List<Ingredient> ingredientList;
       List<Steps> stepsList;
       recipeName = recipeNameBox.getText();
-      numberServed = numberServedBox.getText();
-      int serves;
+
       try
       {
-        serves = Integer.parseInt(numberServed);
+        numberServed = Integer.parseInt(numberServedBox.getText());
       }
       catch(NumberFormatException nfe)
       {
-        serves = 0;
+        numberServed = 0;
       }
       utensilList = utensilsPanel.getUtensilList();
       ingredientList = ingredientsPanel.getIngredientList();
       stepsList = stepsPanel.getStepsList();
       
-      
-      recipe = new Recipes(recipeName, serves, ingredientList, utensilList, stepsList);
+      recipe = new Recipes(recipeName, numberServed, ingredientList, utensilList, stepsList);
       try
       {
         Serializer.serializeRecipe(recipe);
       }
       catch (IOException e)
       {
-        // TODO Auto-generated catch block
         e.printStackTrace();
-      }
-      
-      
+      }  
     }
   }
   // GUI  helper methods
@@ -232,33 +251,19 @@ public class RecipeEditor extends JFrame implements ActionListener, KeyListener
     recipeNameLabel = new JLabel("Name:");
     recipeNameBox = new JTextField();
     recipeNameBox.setPreferredSize(new Dimension(220, 20));
+    recipeNameBox.getDocument().addDocumentListener(this);
     recipeAttributesPanel.add(recipeNameLabel);
     recipeAttributesPanel.add(recipeNameBox);
  
     numberServedLabel = new JLabel("Serves:" );
     numberServedBox = new JTextField();
     numberServedBox.setPreferredSize(new Dimension(60, 20));
-    numberServedBox.addKeyListener(this);
+    numberServedBox.getDocument().addDocumentListener(this);
     recipeAttributesPanel.add(numberServedLabel);
     recipeAttributesPanel.add(numberServedBox);
   }
 
-  
-  @Override
-  public void keyTyped(final KeyEvent ke)
-  {
-    
-  }
 
-  @Override
-  public void keyPressed(final KeyEvent ke)
-  {
-  }
-
-  @Override
-  public void keyReleased(final KeyEvent ke)
-  {
-  }
   
   private void updateButtonStates() 
   {
@@ -311,4 +316,31 @@ public class RecipeEditor extends JFrame implements ActionListener, KeyListener
     updateButtonStates();
   }
 
+  @Override
+  public void insertUpdate(final DocumentEvent e)
+  {
+    processTextChanges(e);
+  }
+
+  @Override
+  public void removeUpdate(final DocumentEvent e)
+  {
+    processTextChanges(e);
+  }
+
+  @Override
+  public void changedUpdate(final DocumentEvent e)
+  {
+    processTextChanges(e);
+  }
+
+  // if Someone changes the recipe name or number served 
+  private void processTextChanges(final DocumentEvent e)
+  {
+    if(this.state != nullState) 
+    {
+      this.state = changedState;
+      updateButtonStates();
+    }
+  }
 }
