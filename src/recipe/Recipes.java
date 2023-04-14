@@ -141,5 +141,13 @@ public class Recipes implements Serializable {
 			}
 		}
 	}
+	
+	public double calorieCalculator() {
+		double calories = 0;
+		for (int i = 0; i < ingredients.size(); i++) {
+			calories += ingredients.get(i).getIngredient().getCaloriesPerGram();
+		}
+		return calories;
+	}
 
 }

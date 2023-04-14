@@ -68,4 +68,13 @@ public class Meals implements Serializable {
 		}
 		return mealString;
 	}
+	
+	
+	public double calorieCalculator() {
+		double calories = 0;
+		for (int i = 0; i < recipes.size(); i++) {
+			calories += recipes.get(i).calorieCalculator();
+		}
+		return calories;
+	}
 }
