@@ -40,8 +40,9 @@ public class Steps implements Serializable {
 	 * @param source for source Ingredient.
 	 * @param destination for destination Utensil.
 	 */
-	public Steps(String action, Ingredient source, Utensils destination) {
-		this.action = action;
+	public Steps(String details, String action, Ingredient source, Utensils destination) {
+		this.details = details;
+	  this.action = action;
 		this.ingredientSource = source;
 		this.destination = destination;
 	}
