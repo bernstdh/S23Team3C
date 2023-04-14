@@ -32,7 +32,7 @@ public class ShoppingListViewer extends JFrame
 	 * @param title Title
 	 */
 
-	public ShoppingListViewer(final ArrayList<Ingredients> strings,
+	public ShoppingListViewer(final ArrayList<Ingredient> strings,
 			final String title) 
 	{
 		super("KiLowBites Shopping List Viewer\t" + title);
