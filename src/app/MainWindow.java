@@ -8,7 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import about.AboutDialog;
-import calculators.CalorieCalculatorWindow;
+import calculators.CalorieWindowSelector;
 import calculators.UnitConverterWindow;
 import meals.MealEditor;
 import process.ProcessSelector;
@@ -118,7 +118,7 @@ public class MainWindow extends JFrame implements ActionListener
     }
     else if (e.getSource() == calorieCalculator)
     {
-      new CalorieCalculatorWindow();
+      new CalorieWindowSelector();
     }
     else if (e.getSource() == unitsConverter)
     {
