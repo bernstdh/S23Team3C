@@ -125,7 +125,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
         }
         catch (ClassNotFoundException | IOException e1)
         {
-          System.out.println("Couldn't load recipe shopping list: " + e1.toString());
+          e1.printStackTrace();
         }
       } else if(typeBox.getSelectedItem().equals(meal))
       {
@@ -141,7 +141,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
         }
         catch (ClassNotFoundException | IOException e1)
         {
-          System.out.println("Couldn't load meal shopping list: " + e1.toString());
+          e1.printStackTrace();;
         }
       }
     } else if(e.getSource().equals(chooseFile))
