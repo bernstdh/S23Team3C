@@ -14,8 +14,8 @@ public class IngredientTable extends ArrayList<Ingredients> implements Serializa
 {
   private static final long serialVersionUID = 1L;
 
-  private boolean exists = false;
-  private IngredientTable instance = null;
+  private static boolean exists = false;
+  private static IngredientTable instance = null;
   
   /**
    * Creates a new ArrayList of Ingredients and adds all pre-existing Ingredients objects.
@@ -107,7 +107,7 @@ public class IngredientTable extends ArrayList<Ingredients> implements Serializa
    * new instance is created.
    * @return  Either a new IngredientTable or the existing instance.
    */
-  public IngredientTable createInstance()
+  public static IngredientTable createInstance()
   {
     if(exists)
     {
