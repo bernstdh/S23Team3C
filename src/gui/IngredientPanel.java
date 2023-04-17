@@ -15,7 +15,6 @@ import javax.swing.event.ListSelectionListener;
 import items.Ingredient;
 import items.IngredientTable;
 import items.Ingredients;
-import steps.*;
 
 /**
  * A JPanel used to construct and store ingredients.
@@ -175,16 +174,8 @@ public class IngredientPanel extends JPanel
       if(i == null) 
       {
         id = new IngredientDialog(ingredientDialogFrame);
-        ingredientDialogFrame.setVisible(true);
-        
-        String newIngredientName = id.getIngredient();
-        ingredientTable.add(new Ingredients(newIngredientName, -1, -1));
-        ingredientsNameBox.setText(newIngredientName);
-        ingredientsAmountBox.setText(id.getAmount());
-        
-        
+        ingredientDialogFrame.setVisible(true);        
         ingredientDialogFrame.dispose();
-        
       }
 
       try
