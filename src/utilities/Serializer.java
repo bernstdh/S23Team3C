@@ -19,7 +19,7 @@ public class Serializer
 {
   private static final String RECIPE = ".rcp";
   private static final String MEAL = ".mel";
-  private static final String BACKSLASH = "\\";
+  private static final String SLASH = "/";
   /**
    * main method.
    * @param args
@@ -70,7 +70,7 @@ public class Serializer
    */
   public static void serializeRecipe(final String dir, final Recipes r) throws IOException
   {
-    FileOutputStream fileOut = new FileOutputStream(dir + BACKSLASH + r.getName() + RECIPE);
+    FileOutputStream fileOut = new FileOutputStream(dir + SLASH + r.getName() + RECIPE);
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
     out.writeObject(r);
     fileOut.close();
@@ -97,7 +97,7 @@ public class Serializer
    */
   public static void serializeMeal(final String dir, final Meals m) throws IOException
   {
-    FileOutputStream fileOut = new FileOutputStream(dir + BACKSLASH + m.getName() + MEAL);
+    FileOutputStream fileOut = new FileOutputStream(dir + SLASH + m.getName() + MEAL);
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
     out.writeObject(m);
     fileOut.close();
