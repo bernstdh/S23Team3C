@@ -7,6 +7,7 @@ public class Ingredient implements Serializable {
 	private String name;
 	private String details;
 	private double amount;
+	private double  ogAmount;
 	private String unit;
 	private Ingredients ingredient;
 
@@ -22,6 +23,7 @@ public class Ingredient implements Serializable {
 		this.name = ingredient.getIngredientName();
 		this.details = details;
 		this.amount = amount;
+		this.ogAmount = amount;
 		this.unit = unit;
 	}
 
@@ -50,6 +52,10 @@ public class Ingredient implements Serializable {
 	 */
 	public double getAmount() {
 		return this.amount;
+	}
+	
+	public double getOgAmount() {
+		return this.ogAmount;
 	}
 
 	/**

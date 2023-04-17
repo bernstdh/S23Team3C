@@ -29,7 +29,7 @@ public class ShoppingListViewer extends JFrame
 	private JTextArea shoppingListBox;
 	private ArrayList<Ingredient> box;
 	private ArrayList<String> repeat = new ArrayList<String>();
-
+	
 
 	/**
 	 * Constructor.
@@ -62,7 +62,7 @@ public class ShoppingListViewer extends JFrame
 		{
 			public void actionPerformed(final ActionEvent e)
 			{
-				generateShoppingList(ingrds);
+				numPeopleCalc(ingrds);
 			}
 		});
 
@@ -83,11 +83,11 @@ public class ShoppingListViewer extends JFrame
 
 
 	/**
-	 * generateList.
+	 * calculate Amounts.
 	 * @param ingredients String
 	 * @param num number of items
 	 */
-	private void generateShoppingList(final ArrayList<Ingredient> ingredients) 
+	private void numPeopleCalc(final ArrayList<Ingredient> ingredients) 
 	{
 		double numPeople = 0;
 		try 
@@ -101,7 +101,7 @@ public class ShoppingListViewer extends JFrame
 
 		for (Ingredient str : ingredients) {
 			double multiplier = 1.0;
-			multiplier = str.getAmount();
+			multiplier = str.getOgAmount();
 			double result = numPeople * multiplier;
 			str.setAmount(result);
 			box.add(str);
@@ -115,8 +115,8 @@ public class ShoppingListViewer extends JFrame
 	private void changeUnit() {
 		for(int i = 0; i < box.size(); i++) {
 			for(int j = 0; j < box.size(); j++) {
-				if(box.get(i).getIngredient().equals
-						(box.get(j).getIngredient()) && i != j) {
+				if(box.get(i).getIngredient().getIngredientName().equals
+						(box.get(j).getIngredient().getIngredientName()) && i != j) {
 					repeat.add(box.get(i).getUnit());
 					repeat.add(box.get(j).getUnit());
 
@@ -131,7 +131,7 @@ public class ShoppingListViewer extends JFrame
 	        String fromUnit = box.get(i).getUnit();
 	        double amount = box.get(i).getAmount();
 
-	        if (repeat.contains(fromUnit) && !fromUnit.equals(newUnit)) {
+	        if (repeat.contains(fromUnit) && ! (fromUnit.equals(newUnit))) {
 	            double convertedAmount = UnitConversion.converter(ingredient, fromUnit, newUnit, amount);
 	            box.get(i).setUnit(newUnit);
 	            box.get(i).setAmount(convertedAmount);
