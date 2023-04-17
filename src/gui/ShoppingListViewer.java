@@ -102,7 +102,7 @@ public class ShoppingListViewer extends JFrame
 
 		for (Ingredient str : ingredients) {
 			double multiplier = 1.0;
-			multiplier = Double.parseDouble(str.getUnit());
+			multiplier = str.getAmount();
 			double result = numPeople * multiplier;
 			display += result + str.toString().indexOf(" ") + "\n";
 			str.setAmount(result);
