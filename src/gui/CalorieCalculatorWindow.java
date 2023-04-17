@@ -145,6 +145,4 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
     return result;
   }
 
-
-
 }
