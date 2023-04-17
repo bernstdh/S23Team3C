@@ -15,9 +15,9 @@ public class ProcessViewer extends JFrame
 	/**
 	 * Process viewer constructor.
 	 */
-	public ProcessViewer() 
+	public ProcessViewer(String name) 
 	{
-		super("KiLowBites Process Viewer\t Recipe name");
+		super("KiLowBites Process Viewer\t" + name);
 
 		JLabel lblUtensils = new JLabel("Utensils");
 		utensilBox = new JTextArea(10, 30);

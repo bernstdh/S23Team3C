@@ -134,7 +134,7 @@ public class ShoppingListViewer extends JFrame
 	        String fromUnit = box.get(i).getUnit();
 	        double amount = box.get(i).getAmount();
 
-	        if (repeat.contains(fromUnit)) {
+	        if (repeat.contains(fromUnit) && !fromUnit.equals(newUnit)) {
 	            double convertedAmount = UnitConversion.converter(ingredient, fromUnit, newUnit, amount);
 	            box.get(i).setUnit(newUnit);
 	            box.get(i).setAmount(convertedAmount);
