@@ -1,76 +1,151 @@
 package gui;
 
 import javax.swing.*;
+
+import items.IngredientTable;
+
 import java.awt.*;
 
 /**
  * 
- * @author Shaury _, Beau Mueller
+ * @author Shaury Guatam, Beau Mueller
  *
  */
-public class IngredientDialog extends JDialog {
+public class IngredientDialog extends JDialog
+{
 
-    private static final long serialVersionUID = 1L;
-    private JTextField ingredientField;
-    private JTextField amountField;
-    private JTextField caloriesField;
-    private String ingredient;
-    private String amount;
-    private String calories;
+  private static final long serialVersionUID = 1L;
+  private JTextField ingredientField;
+  private JTextField densityField;
+  private JTextField caloriesField;
+  private String ingredient;
+  private double density;
+  private double calories;
+  private JButton okButton;
+  private JLabel error;
 
-    public IngredientDialog(JFrame parent) {
-        // 
-        super(parent, "Add Ingredient", true);
-        setSize(400, 200);
-        setLocationRelativeTo(parent);
-        setResizable(false);
+  /**
+   * Lets the user create a new ingredient and add it to the existing table.
+   * @param parent The parent window of the dialog box. (Most likely Recipe Editor)
+   */
+  public IngredientDialog(final JFrame parent)
+  {
+    super(parent, "Add Ingredient", true);
+    setSize(400, 200);
+    setLocationRelativeTo(parent);
+    setResizable(false);
 
-        setLayout(new BorderLayout());
+    setLayout(new BorderLayout());
+    
+    // Create a panel for all the inputs
+    JPanel inputPanel = new JPanel(new GridLayout(3, 2, 10, 10));
+    inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    add(inputPanel, BorderLayout.CENTER);
 
-        JPanel inputPanel = new JPanel(new GridLayout(3, 2, 10, 10));
-        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        add(inputPanel, BorderLayout.CENTER);
+    JLabel ingredientLabel = new JLabel("Ingredient:");
+    ingredientField = new JTextField();
+    inputPanel.add(ingredientLabel);
+    inputPanel.add(ingredientField);
 
-        JLabel ingredientLabel = new JLabel("Ingredient:");
-        ingredientField = new JTextField();
-        inputPanel.add(ingredientLabel);
-        inputPanel.add(ingredientField);
+    JLabel densityLabel = new JLabel("Density (g/ml):");
+    densityField = new JTextField();
+    inputPanel.add(densityLabel);
+    inputPanel.add(densityField);
 
-        JLabel amountLabel = new JLabel("Amount:");
-        amountField = new JTextField();
-        inputPanel.add(amountLabel);
-        inputPanel.add(amountField);
+    JLabel caloriesLabel = new JLabel("Calories (cals/gram):");
+    caloriesField = new JTextField();
+    inputPanel.add(caloriesLabel);
+    inputPanel.add(caloriesField);
 
-        JLabel caloriesLabel = new JLabel("Calories:");
-        caloriesField = new JTextField();
-        inputPanel.add(caloriesLabel);
-        inputPanel.add(caloriesField);
+    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    error = new JLabel("");
+    buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
+    okButton = new JButton("OK");
+    
+    // Upon pressing the OK button, the system will validate the user's inputs.
+    okButton.addActionListener(e ->
+    {
+      if (validateInputs())
+      {
+        dispose();
+      }
+    });
+    buttonPanel.add(error);
+    buttonPanel.add(okButton);
+    add(buttonPanel, BorderLayout.SOUTH);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
-        JButton okButton = new JButton("OK");
-        okButton.addActionListener(e -> {
-            ingredient = ingredientField.getText();
-            amount = amountField.getText();
-            calories = caloriesField.getText();
-            dispose();
-        });
-        buttonPanel.add(okButton);
-        add(buttonPanel, BorderLayout.SOUTH);
+    setVisible(true);
+  }
 
-        setVisible(true);
+  /**
+   * @return The ingredient name.
+   */
+  public String getIngredient()
+  {
+    return ingredient;
+  }
+
+  /**
+   * @return The density (in g/ml) of the ingredient
+   */
+  public double getDensity()
+  {
+    return density;
+  }
+
+  /**
+   * @return The calories (per gram) of the ingredient
+   */
+  public double getCalories()
+  {
+    return calories;
+  }
+
+  private boolean validateInputs()
+  {
+    IngredientTable it = IngredientTable.createInstance();
+    double tempDensity = -1;
+    double tempCalories = -1;
+    if (it.fromCode(ingredientField.getText()) != null)
+    {
+      error.setText("Please enter a unique ingredient name.");
+      return false;
+    }
+    else
+    {
+      ingredient = ingredientField.getText();
+    }
+    try
+    {
+      tempDensity = Double.valueOf(densityField.getText());
+    }
+    catch (NumberFormatException nfe)
+    {
+      tempDensity = -1;
+    }
+    try
+    {
+      tempCalories = Double.valueOf(caloriesField.getText());
+    }
+    catch (NumberFormatException nfe)
+    {
+      tempCalories = -1;
     }
 
-    public String getIngredient() {
-        return ingredient;
+    if (tempDensity <= 0)
+    {
+      densityField.setText("");
+      error.setText("Please enter a valid density.");
+      return false;
     }
-
-    public String getAmount() {
-        return amount;
+    if (tempCalories <= 0)
+    {
+      caloriesField.setText("");
+      error.setText("Please enter a valid calorie value.");
+      return false;
     }
-
-    public String getCalories() {
-        return calories;
-    }
-
+    density = tempDensity;
+    calories = tempCalories;
+    return true;
+  }
 }
