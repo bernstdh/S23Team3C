@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -53,11 +53,6 @@ public class MealEditor extends JFrame implements ActionListener {
 	private JList<String> jlistModel;
 	private JScrollPane recipeScrollPane;
 	
-	static final String NEWBUTTON = "newButton";
-	static final String OPENBUTTON = "openButton";
-	static final String SAVEBUTTON = "saveButton";
-	static final String SAVEASBUTTON = "saveAsButton";
-	static final String CLOSEBUTTON = "closeButton";
 	private final String changedState = "changedState";
 	private final String unchangedState = "unchangedState";
 	private final String nullState = "nullState";
@@ -66,48 +61,41 @@ public class MealEditor extends JFrame implements ActionListener {
 	public MealEditor() {
 		
 		super("KiLowBites Meal Editor");
-		setSize(700, 800);
+		// this.setSize(1200, 800);
 		setResizable(false);
 		this.state = nullState;
 		//this.nullstate true if doc is null state		
 		
 		nameLabel = new JLabel("Name:");
-		nameBox = new JTextField(10); 
+		nameBox = new JTextField(35); 
 		Dimension buttonSize = new Dimension(30, 30);
 		
-		newButton = createJButton("newButton.png", NEWBUTTON);
+		newButton = new JButton(new ImageIcon("newButton.png"));
 		newButton.setPreferredSize(buttonSize);
 		newButton.addActionListener(this);
 		newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
 		
-		openButton = createJButton("openButton.png", OPENBUTTON);
+		openButton = new JButton(new ImageIcon("openButton.png"));
 		openButton.setPreferredSize(buttonSize);
 		openButton.addActionListener(this);
 		openButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
 
-		saveButton = createJButton("saveButton.png", SAVEBUTTON);
+		saveButton = new JButton(new ImageIcon("saveButton.png"));
 		saveButton.setPreferredSize(buttonSize);
 		saveButton.addActionListener(this);
 		saveButton.setEnabled(state.equals(changedState));
 
-		saveAsButton = createJButton("saveAsButton.png", SAVEASBUTTON);
+		saveAsButton = new JButton(new ImageIcon("saveAsButton.png"));
 		saveAsButton.setPreferredSize(buttonSize);
 		saveAsButton.addActionListener(this);
 		saveAsButton.setEnabled(state.equals(unchangedState) || state.equals(changedState));
 
-		closeButton = createJButton("closeButton.png", CLOSEBUTTON);
+		closeButton = new JButton(new ImageIcon("closeButton.png"));
 		closeButton.setPreferredSize(buttonSize);
 		closeButton.addActionListener(this);
 		closeButton.setEnabled(state.equals(unchangedState));
 
 		// whooo hooo
-//		newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
-//		openButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
-//		saveButton.setEnabled(state.equals(changedState));
-//		saveAsButton.setEnabled(state.equals(unchangedState) || state.equals(changedState));
-//		closeButton.setEnabled(state.equals(unchangedState));
-
-		
 		this.setLayout(new BorderLayout());
 		
 		// buttons on the top
@@ -136,21 +124,23 @@ public class MealEditor extends JFrame implements ActionListener {
 		// JPanel with the add recipe and delete button	
 		JPanel recipeBigPanel = new JPanel(new BorderLayout());
 		
-		JPanel addRecipeFlow = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel addRecipeFlow = new JPanel(new BorderLayout());
+		JPanel addRecipeButtonFlow = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		addRecipeButton = new JButton("Add Recipe");
 		addRecipeButton.addActionListener(this);
 		addRecipeButton.setEnabled(!state.equals(nullState));
-		addRecipeFlow.add(addRecipeButton);
+		addRecipeButtonFlow.add(addRecipeButton);
+		addRecipeFlow.add(addRecipeButtonFlow, BorderLayout.NORTH);
 				
 		
 		recipeListModel = new DefaultListModel<>();
 		jlistModel = new JList<>(recipeListModel);
-		jlistModel.setPreferredSize(new Dimension(400, 250));
+		jlistModel.setPreferredSize(new Dimension(400, 400));
 		recipeScrollPane = new JScrollPane(jlistModel);
 	    recipeScrollPane.setViewportView(jlistModel);
 		recipeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		recipeScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		recipeScrollPane.setPreferredSize(new Dimension(250, 200));
+		recipeScrollPane.setPreferredSize(new Dimension(325, 200));
         addRecipeFlow.add(recipeScrollPane, BorderLayout.CENTER);
         
         JPanel deletePanel = new JPanel(new BorderLayout());
@@ -158,16 +148,34 @@ public class MealEditor extends JFrame implements ActionListener {
 		deleteRecipeButton.addActionListener(this);
 		deleteRecipeButton.setEnabled(false);
 		deletePanel.add(deleteRecipeButton, BorderLayout.SOUTH);
-		addRecipeFlow.add(deletePanel);
+		addRecipeFlow.add(deletePanel, BorderLayout.EAST);
 		recipeBigPanel.add(addRecipeFlow, BorderLayout.CENTER);
+		JPanel spacerP = new JPanel(new BorderLayout());
+		spacerP.add(new JLabel("    "));
+		recipeBigPanel.add(spacerP, BorderLayout.SOUTH);
+		JPanel spacerS = new JPanel(new BorderLayout());
+		spacerS.add(new JLabel("    "));
+		recipeBigPanel.add(spacerS, BorderLayout.WEST);
+		JPanel spacerE = new JPanel(new BorderLayout());
+		spacerE.add(new JLabel("       "));
+		recipeBigPanel.add(spacerE, BorderLayout.EAST);
 		recipeBigPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		
+		JPanel spacerEast = new JPanel(new BorderLayout());
+		JPanel spacerWest = new JPanel(new BorderLayout());
+		JPanel spacerSouth = new JPanel(new BorderLayout());
+		spacerSouth.add(new JLabel("    "));
+		spacerEast.add(new JLabel("    "));
+		spacerWest.add(new JLabel("    "));
+		this.add(spacerEast, BorderLayout.EAST);
+		this.add(spacerWest, BorderLayout.WEST);
+		this.add(spacerSouth, BorderLayout.SOUTH);
 		this.fileChooser = new JFileChooser();
 		
-		this.add(recipeBigPanel); 
+		this.add(recipeBigPanel, BorderLayout.CENTER); 
+		// add to east and west
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500, 400);
+		setSize(600, 350);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 
@@ -300,19 +308,5 @@ public class MealEditor extends JFrame implements ActionListener {
 	    }
 	  }
 	  
-	  private ImageIcon loadImageIcon(String name)
-	  {
-	    URL url = this.getClass().getResource("/icons/"+ name);
-	    ImageIcon icon = new ImageIcon(url);
-	    return icon;
-	  }
-	  
-	  private JButton createJButton(String name, String actionCommand)
-	  {
-	    JButton result = new JButton(loadImageIcon(name));
-	    result.setActionCommand(actionCommand);
-	    result.addActionListener(this);
-	    return result;
-	  }
-	  
 }
+
