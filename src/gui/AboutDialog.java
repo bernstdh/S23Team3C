@@ -1,8 +1,10 @@
 package gui;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 
 /**
@@ -31,7 +33,7 @@ public class AboutDialog {
         + " everything else that you could need is all in one\n neat and elegant application. Our application\n"
         + " is completely intuitive and built for all chefs,\n from the minute noodle kings and queens to the Michelin Star\n"
         + " winning kitchens.";
-
+    private JLabel pic;
     /**
      * Constructor.
      */
@@ -39,13 +41,19 @@ public class AboutDialog {
         JFrame frame = new JFrame("About Dialog");
         JTextArea text = new JTextArea(about);
         
-        frame.setSize(400, 250);
+     //   frame.setSize(400, 250);
         text.setFont(new Font("Times New Roman", Font.PLAIN, 16));
         text.setEditable(false);
         
+        
+        pic = new JLabel();
+        pic.setIcon(new ImageIcon("ram.png"));
+        
+      //  frame.add(pic, BorderLayout.NORTH);
         frame.add(text);
-        frame.setResizable(false);
+     //   frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
+        
     }
 }

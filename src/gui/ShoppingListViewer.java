@@ -1,13 +1,18 @@
-package shopping;
-import javax.swing.*;
-
-import calculators.UnitConversion;
-import ingredients.Ingredient;
-import ingredients.Ingredients;
-
-import java.awt.*;
-import java.awt.event.*;
+package gui;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import items.Ingredient;
+import math.UnitConversion;
 /**
  * 
  * @author Shaury Gautam
