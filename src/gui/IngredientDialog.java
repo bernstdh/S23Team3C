@@ -8,7 +8,7 @@ import items.Ingredients;
 import java.awt.*;
 
 /**
- * 
+ * Lets the user enter an ingredient with its information and adds that ingredient to the table.
  * @author Shaury Guatam, Beau Mueller
  *
  */
@@ -102,6 +102,11 @@ public class IngredientDialog extends JDialog
     return calories;
   }
 
+  /**
+   * Check to make sure that all information (name, density, calories) is readable by the system,
+   * then creates an Ingredients object if it is in the correct format. 
+   * @return False if inputs can't be read, true if they can.
+   */
   private boolean validateInputs()
   {
     IngredientTable it = IngredientTable.createInstance();

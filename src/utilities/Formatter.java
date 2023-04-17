@@ -10,7 +10,7 @@ public class Formatter
    * <amount> <unit> of <details> <name>
    * 3.42 grams of raw eggs
    */
-  public static final String INGREDIENT = "%.2f %s of %s %s";
+  public static final String INGREDIENT = "%.1f %s of %s %s";
   
   /*xw
    * <action> the <ingredient> in the <utensil> <details>

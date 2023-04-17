@@ -130,7 +130,7 @@ public class IngredientTable extends ArrayList<Ingredients> implements Serializa
   {
     for(Ingredients i : this)
     {
-      if(i.getIngredientName().equals(target)) return i;
+      if(i.getIngredientName().equalsIgnoreCase(target)) return i;
     }
     return null;
   }
