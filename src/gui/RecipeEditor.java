@@ -1,5 +1,6 @@
 package gui;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -7,6 +8,12 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+
+
 import java.util.List;
 import items.Ingredient;
 import items.Recipes;
@@ -249,16 +256,21 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     recipeAttributesPanel.add(recipeNameLabel);
     recipeAttributesPanel.add(recipeNameBox);
  
+    
     numberServedLabel = new JLabel("Serves:" );
     numberServedBox = new JTextField();
     numberServedBox.setPreferredSize(new Dimension(60, 20));
-    numberServedBox.getDocument().addDocumentListener(this);
+    
+    DocumentFilter filter;
+    filter = new WholeNumberDocumentFilter();
+    ((AbstractDocument) numberServedBox.getDocument()).setDocumentFilter(filter);
+  
+    
     recipeAttributesPanel.add(numberServedLabel);
     recipeAttributesPanel.add(numberServedBox);
+    
   }
 
-
-  
   private void updateButtonStates() 
   {
     newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
@@ -337,6 +349,19 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     {
       this.state = changedState;
       updateButtonStates();
+    }
+  }
+  
+  /**
+   * Used to filter out all non integer characters from numberServedBox.
+   */
+  private class WholeNumberDocumentFilter extends DocumentFilter 
+  {
+    @Override
+    public void replace(final DocumentFilter.FilterBypass fb, final int offset, final int length,
+        final String text, final AttributeSet attr) throws BadLocationException 
+    {
+      fb.insertString(offset, text.replaceAll("[^0-9]", ""), attr);   
     }
   }
 }
