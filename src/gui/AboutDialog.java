@@ -1,11 +1,13 @@
 package gui;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.net.URL;
 
 /**
  * About Dialog.
@@ -46,8 +48,7 @@ public class AboutDialog {
         text.setEditable(false);
         
         
-        pic = new JLabel();
-        pic.setIcon(new ImageIcon("ram.png"));
+        pic = createJLabel("ram.png");
         
         frame.add(pic, BorderLayout.EAST);
         frame.add(text);
@@ -55,5 +56,18 @@ public class AboutDialog {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
         
+    }
+    
+    private ImageIcon loadImageIcon(String name)
+    {
+      URL url = this.getClass().getResource("/icons/"+ name);
+      ImageIcon icon = new ImageIcon(url);
+      return icon;
+    }
+    
+    private JLabel createJLabel(String name)
+    {
+      JLabel result = new JLabel(loadImageIcon(name));
+      return result;
     }
 }
