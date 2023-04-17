@@ -41,7 +41,7 @@ public class AboutDialog {
         JFrame frame = new JFrame("About Dialog");
         JTextArea text = new JTextArea(about);
         
-     //   frame.setSize(400, 250);
+        frame.setSize(800, 250);
         text.setFont(new Font("Times New Roman", Font.PLAIN, 16));
         text.setEditable(false);
         
@@ -49,9 +49,9 @@ public class AboutDialog {
         pic = new JLabel();
         pic.setIcon(new ImageIcon("ram.png"));
         
-      //  frame.add(pic, BorderLayout.NORTH);
+        frame.add(pic, BorderLayout.EAST);
         frame.add(text);
-     //   frame.setResizable(false);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
         

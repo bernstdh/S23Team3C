@@ -13,12 +13,10 @@ public class ShoppingUnitWindow extends JDialog {
 	private JComboBox<String> unitsComboBox;
     private JButton applyButton;
     private JLabel unitLabel;
-    private ShoppingListViewer parent;
 
     public ShoppingUnitWindow(ShoppingListViewer parent, ArrayList<String> repeat) {
         super(parent, "Change Units", true);
 
-        this.parent = parent;
         Set<String> uniqueUnits = new HashSet<>(repeat);
         unitsComboBox = new JComboBox<>(uniqueUnits.toArray(new String[0]));
         unitLabel = new JLabel("Select unit:");

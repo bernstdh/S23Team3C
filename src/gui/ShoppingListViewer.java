@@ -90,7 +90,6 @@ public class ShoppingListViewer extends JFrame
 	private void generateShoppingList(final ArrayList<Ingredient> ingredients) 
 	{
 		double numPeople = 0;
-		String display = "";
 		try 
 		{
 			numPeople = Double.parseDouble(numPeopleBox.getText());
@@ -104,12 +103,10 @@ public class ShoppingListViewer extends JFrame
 			double multiplier = 1.0;
 			multiplier = str.getAmount();
 			double result = numPeople * multiplier;
-			display += result + str.toString().indexOf(" ") + "\n";
 			str.setAmount(result);
 			box.add(str);
 		}
-
-		shoppingListBox.setText(display);
+		updateShoppingListDisplay();
 	}
 
 	/**
