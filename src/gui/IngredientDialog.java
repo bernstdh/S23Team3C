@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 
 import items.IngredientTable;
+import items.Ingredients;
 
 import java.awt.*;
 
@@ -146,6 +147,7 @@ public class IngredientDialog extends JDialog
     }
     density = tempDensity;
     calories = tempCalories;
+    it.add(new Ingredients(ingredient, density, calories));
     return true;
   }
 }
