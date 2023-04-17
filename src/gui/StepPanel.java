@@ -1,5 +1,6 @@
 package gui;
 import javax.swing.*;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import ingredients.*;
 import items.Ingredient;
 import items.Steps;
 import items.Utensils;
@@ -264,7 +264,6 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
       stepsListModel.addElement(s.IngredientStepToString());
     }
     else stepsListModel.addElement(s.UtensilStepToString());
-    
   }
 
 }
