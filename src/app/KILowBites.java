@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import gui.MainWindow;
+
 /**
  * The driver class for the KILowBites program.
  * @author Beau Mueller

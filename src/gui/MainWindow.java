@@ -1,4 +1,4 @@
-package app;
+package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -6,16 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
-import gui.AboutDialog;
-import gui.CalorieWindowSelector;
-import gui.MealEditor;
-import gui.Preferences;
-import gui.ProcessSelector;
-import gui.ProcessViewer;
-import gui.RecipeEditor;
-import gui.ShoppingListSelector;
-import gui.UnitConverterWindow;
 
 /**
  * Main window for the KILowBites application. Contains a JMenuBar with all menus.
