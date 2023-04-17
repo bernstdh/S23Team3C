@@ -1,4 +1,5 @@
 package gui;
+
 import javax.swing.*;
 
 import items.IngredientTable;
@@ -6,6 +7,7 @@ import math.CalorieCalculator;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 /**
  * Calorie Calculator from Grams GUI.
  * @author Shaury Gautam/Trace Jones
@@ -14,6 +16,8 @@ import java.awt.event.*;
 public class CalorieCalculatorWindow extends JFrame implements ActionListener 
 {
 	private static final long serialVersionUID = 1L;
+	static final String CALCULATE = "Calculate";
+	static final String RESET = "Reset";
 	private String g = "g";
 	private String dr = "dr";
 	private String oz = "oz";
@@ -60,9 +64,8 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 		unitBox.addActionListener(this);
 
 		calorieLabel = new JLabel(calor);
-		calc = new JButton(new ImageIcon("calculate.png"));
-		calc.addActionListener(this);
-    reset = new JButton(new ImageIcon("reset.png"));
+		calc = createJButton("calculate.png", CALCULATE);
+    reset = createJButton("reset.png", RESET);
     reset.addActionListener(this);
 
 		JPanel panel = new JPanel(new GridLayout(2,1));
@@ -126,5 +129,20 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	  }
 	  
 	}
+	
+	private ImageIcon loadImageIcon(String name)
+	{
+	  URL url = this.getClass().getResource("/icons/"+ name);
+	  ImageIcon icon = new ImageIcon(url);
+	  return icon;
+	}
+	
+	private JButton createJButton(String name, String actionCommand)
+  {
+    JButton result = new JButton(loadImageIcon(name));
+    result.setActionCommand(actionCommand);
+    result.addActionListener(this);
+    return result;
+  }
 
 }

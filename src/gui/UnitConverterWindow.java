@@ -6,6 +6,7 @@ import math.UnitConversion;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.*;
 /**
  * The window for the unit converter.
@@ -26,6 +27,8 @@ public class UnitConverterWindow extends JFrame implements ActionListener
   private JButton reset;
   private JLabel amountLabel;
   
+  static final String CALCULATE = "Calculate";
+  static final String RESET = "Reset";
   private String dr = "dr";
   private String oz = "oz";
   private String lb = "lb";
@@ -77,9 +80,8 @@ public class UnitConverterWindow extends JFrame implements ActionListener
     
     amountLabel = new JLabel(toAmount);
     
-    calc = new JButton(new ImageIcon("calculate.png"));
-    calc.addActionListener(this);
-    reset = new JButton(new ImageIcon("reset.png"));
+    calc =  createJButton("calculate.png", CALCULATE);
+    reset = createJButton("reset.png", RESET);
     reset.addActionListener(this);
 
     JPanel panel = new JPanel(new GridLayout(2, 1));
@@ -199,6 +201,21 @@ public class UnitConverterWindow extends JFrame implements ActionListener
     double newAmount = 0.0;
     newAmount = UnitConversion.converter(ingredient, fromUnit, toUnit, amount);
     return newAmount;
+  }
+  
+  private ImageIcon loadImageIcon(String name)
+  {
+    URL url = this.getClass().getResource("/icons/"+ name);
+    ImageIcon icon = new ImageIcon(url);
+    return icon;
+  }
+  
+  private JButton createJButton(String name, String actionCommand)
+  {
+    JButton result = new JButton(loadImageIcon(name));
+    result.setActionCommand(actionCommand);
+    result.addActionListener(this);
+    return result;
   }
 
 }
