@@ -98,8 +98,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     else if(ae.getSource() == openButton)
     {
       String previousState = this.state;
-      this.state = unchangedState;
-      updateButtonStates();
+   
       int returnVal = fileChooser.showOpenDialog(RecipeEditor.this);
       if(returnVal == JFileChooser.APPROVE_OPTION)
       {
@@ -115,10 +114,12 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
           this.reset();
           this.loadFromRecipe(recipe);
           //add attributes to their respective list models.
+          this.state = unchangedState;
+          updateButtonStates();
         }
         catch(IOException | ClassNotFoundException ia )
         {
-          System.out.println("Did not select .rcp file");
+          ia.printStackTrace();
         }
         
       }
@@ -137,7 +138,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     }
     else if(ae.getSource() == saveAsButton)
     {
-      
+      this.saveButton.doClick();
       this.state = unchangedState;
       updateButtonStates();
       File newFile = new File(recipeNameBox.getText() + RECIPE);
@@ -285,6 +286,8 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
    */
   private void loadFromRecipe(final Recipes r)
   {
+    recipeNameBox.setText(r.getName());
+    numberServedBox.setText(String.valueOf(r.numPpl()));
     for(Ingredient i : r.getIngredients()) 
     {
       ingredientsPanel.load(i);
