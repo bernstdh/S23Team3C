@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,7 +18,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import items.Ingredient;
 import items.Meals;
 import items.Recipes;
-import utilities.Formatter;
 import utilities.Serializer;
 
 /**
@@ -111,7 +109,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
     } else if(e.getSource().equals(confirmItem) && fileSelection == JFileChooser.APPROVE_OPTION)
     {
       
-      ArrayList<String> ingredients = new ArrayList<String>();
+      // ArrayList<String> ingredients = new ArrayList<String>();
       String name;
       if(typeBox.getSelectedItem().equals(recipe))
       {
@@ -119,7 +117,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
         {
           Recipes r = Serializer.deserializeRecipe(fileChooser.getSelectedFile().toString());
           name = r.getName();
-          new ShoppingListViewer(r.getIngredients(), name);
+          new ShoppingListViewer((ArrayList<Ingredient>)r.getIngredients(), name);
         }
         catch (ClassNotFoundException | IOException e1)
         {
@@ -134,14 +132,16 @@ public class ShoppingListSelector extends JFrame implements ActionListener
           name = m.getName();
           for(Recipes r : m.getRecipes())
           {
-            loadIngredientsList(ingredients, r);
-            new ShoppingListViewer(r.getIngredients(), name);
+            for(Ingredient i : r.getIngredients())
+            {
+              ingredientList.add(i);
+            }
           }
-          new ShoppingListViewer();
+          new ShoppingListViewer(ingredientList, m.getName());
         }
         catch (ClassNotFoundException | IOException e1)
         {
-          e1.printStackTrace();;
+          e1.printStackTrace();
         }
       }
     } else if(e.getSource().equals(chooseFile))
@@ -160,15 +160,6 @@ public class ShoppingListSelector extends JFrame implements ActionListener
       fileChooser.setFileFilter(filter);
       fileSelection = fileChooser.showOpenDialog(this);
       fileName.setText(fileChooser.getSelectedFile().getName());
-    }
-  }
-  
-  private void loadIngredientsList(final List<String> list,final Recipes r)
-  {
-    for(Ingredient i : r.getIngredients())
-    {
-      list.add(String.format(Formatter.INGREDIENT, i.getAmount(), i.getUnit(), i.getDetails(),
-          i.getName()));
     }
   }
 }
