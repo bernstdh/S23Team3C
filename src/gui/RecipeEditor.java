@@ -1,26 +1,17 @@
 package gui;
 import java.awt.*;
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
 import java.util.List;
-
-import app.*;
-import steps.*;
-import ingredients.*;
 import items.Ingredient;
 import items.Recipes;
 import items.Steps;
 import items.Utensils;
-import utensil.*;
 import utilities.Serializer;
 /**
  * GUI used to open, save, and edit recipes.
@@ -84,15 +75,12 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     recipePanel.add(ingredientsPanel);
     recipePanel.add(stepsPanel);
     
-    
     fileChooser = new JFileChooser();
     this.state = nullState;
     updateButtonStates();
     recipe = null;
     this.add(recipePanel, BorderLayout.CENTER);
     this.setVisible(true);
-    
-
   }
   
   /**
