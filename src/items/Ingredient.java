@@ -60,6 +60,9 @@ public class Ingredient implements Serializable {
 		return this.unit;
 	}
 	
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 	
 	public String toString() {
 		  String newString;

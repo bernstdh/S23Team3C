@@ -1,8 +1,9 @@
-package gui;
+package shopping;
 import javax.swing.*;
 
-import items.Ingredients;
-import math.UnitConversion;
+import calculators.UnitConversion;
+import ingredients.Ingredient;
+import ingredients.Ingredients;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -21,23 +22,23 @@ public class ShoppingListViewer extends JFrame
 	private JButton generateButton;
 	private JButton unitsButton;
 	private JTextArea shoppingListBox;
-	private ArrayList<String> box;
+	private ArrayList<Ingredient> box;
 	private ArrayList<String> repeat = new ArrayList<String>();
 
 
 	/**
 	 * Constructor.
-	 * @param strings Array List String
+	 * @param ingrds Array List of Ingredients
 	 * @param num Int
 	 * @param title Title
 	 */
 
-	public ShoppingListViewer(final ArrayList<Ingredient> strings,
+	public ShoppingListViewer(final ArrayList<Ingredient> ingrds,
 			final String title) 
 	{
 		super("KiLowBites Shopping List Viewer\t" + title);
 
-		box = new ArrayList<String>();
+		box = new ArrayList<Ingredient>();
 		numPeopleLabel = new JLabel("Number of People:");
 		numPeopleBox = new JTextField(10);
 		generateButton = new JButton("Generate Shopping List");
@@ -56,7 +57,7 @@ public class ShoppingListViewer extends JFrame
 		{
 			public void actionPerformed(final ActionEvent e)
 			{
-				generateShoppingList(strings);
+				generateShoppingList(ingrds);
 			}
 		});
 
@@ -78,10 +79,10 @@ public class ShoppingListViewer extends JFrame
 
 	/**
 	 * generateList.
-	 * @param strings String
+	 * @param ingredients String
 	 * @param num number of items
 	 */
-	private void generateShoppingList(final ArrayList<String> strings) 
+	private void generateShoppingList(final ArrayList<Ingredient> ingredients) 
 	{
 		double numPeople = 0;
 		String display = "";
@@ -94,13 +95,13 @@ public class ShoppingListViewer extends JFrame
 			return;
 		}
 
-		for (String str : strings) {
+		for (Ingredient str : ingredients) {
 			double multiplier = 1.0;
-			String digit = str.substring(0, str.indexOf(" "));
-			multiplier = Double.parseDouble(digit);
+			multiplier = Double.parseDouble(str.getUnit());
 			double result = numPeople * multiplier;
-			display += result + str.substring(str.indexOf(" ")) + "\n";
-			box.add(display);
+			display += result + str.toString().indexOf(" ") + "\n";
+			str.setAmount(result);
+			box.add(str);
 		}
 
 		shoppingListBox.setText(display);
@@ -111,12 +112,12 @@ public class ShoppingListViewer extends JFrame
 	 */
 	private void changeUnit() {
 		for(int i = 0; i < box.size(); i++) {
-			String[] tempi = box.get(i).split(" ");
 			for(int j = 0; j < box.size(); j++) {
-				String[] tempj = box.get(i).split(" ");
-				if(tempi[3].equals(tempj[3]) && i != j) {
-					repeat.add(tempi[1]);
-					repeat.add(tempj[1]);
+				if(box.get(i).getIngredient().equals
+						(box.get(j).getIngredient()) && i != j) {
+					repeat.add(box.get(i).getUnit());
+					repeat.add(box.get(j).getUnit());
+
 				}
 			}
 		}
@@ -124,10 +125,9 @@ public class ShoppingListViewer extends JFrame
 	
 	public void convertUnits(String newUnit) {
 	    for (int i = 0; i < box.size(); i++) {
-	        String[] parts = box.get(i).split(" ");
-	        String ingredient = parts[3];
-	        String fromUnit = parts[1];
-	        double amount = Double.parseDouble(parts[0]);
+	        String ingredient = box.get(i).getIngredient().getIngredientName();
+	        String fromUnit = box.get(i).getUnit();
+	        double amount = box.get(i).getAmount();
 
 	        if (repeat.contains(fromUnit)) {
 	            double convertedAmount = UnitConversion.converter(ingredient, fromUnit, newUnit, amount);
