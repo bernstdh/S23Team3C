@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -41,6 +43,11 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   private StepPanel stepsPanel;
   private int numberServed;
   private String recipeName, state;
+  static final String NEWBUTTON = "newButton";
+  static final String OPENBUTTON = "openButton";
+  static final String SAVEBUTTON = "saveButton";
+  static final String SAVEASBUTTON = "saveAsButton";
+  static final String CLOSEBUTTON = "closeButton";
   private final String changedState = "changedState";
   private final String unchangedState = "unchangedState";
   private final String nullState = "nullState";
@@ -220,19 +227,19 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     buttonPanel = new JPanel();
     buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
     
-    newButton = new JButton(new ImageIcon("newButton.png"));
+    newButton = createJButton("newButton.png", NEWBUTTON);
     newButton.setPreferredSize(buttonSize);
     newButton.addActionListener(this);
-    openButton = new JButton(new ImageIcon("openButton.png"));
+    openButton = createJButton("openButton.png", OPENBUTTON);
     openButton.setPreferredSize(buttonSize);
     openButton.addActionListener(this);
-    saveButton = new JButton(new ImageIcon("saveButton.png"));
+    saveButton = createJButton("saveButton.png", SAVEBUTTON);
     saveButton.setPreferredSize(buttonSize);
     saveButton.addActionListener(this);
-    saveAsButton = new JButton(new ImageIcon("saveAsButton.png"));
+    saveAsButton = createJButton("saveAsButton.png", SAVEASBUTTON);
     saveAsButton.setPreferredSize(buttonSize);
     saveAsButton.addActionListener(this);
-    closeButton = new JButton(new ImageIcon("closeButton.png"));
+    closeButton = createJButton("closeButton.png", CLOSEBUTTON);
     closeButton.setPreferredSize(buttonSize);
     closeButton.addActionListener(this);
     
@@ -363,5 +370,20 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     {
       fb.insertString(offset, text.replaceAll("[^0-9]", ""), attr);   
     }
+  }
+  
+  private ImageIcon loadImageIcon(String name)
+  {
+    URL url = this.getClass().getResource("/icons/"+ name);
+    ImageIcon icon = new ImageIcon(url);
+    return icon;
+  }
+  
+  private JButton createJButton(String name, String actionCommand)
+  {
+    JButton result = new JButton(loadImageIcon(name));
+    result.setActionCommand(actionCommand);
+    result.addActionListener(this);
+    return result;
   }
 }

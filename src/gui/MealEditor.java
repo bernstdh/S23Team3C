@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
@@ -52,6 +53,11 @@ public class MealEditor extends JFrame implements ActionListener {
 	private JList<String> jlistModel;
 	private JScrollPane recipeScrollPane;
 	
+	static final String NEWBUTTON = "newButton";
+	static final String OPENBUTTON = "openButton";
+	static final String SAVEBUTTON = "saveButton";
+	static final String SAVEASBUTTON = "saveAsButton";
+	static final String CLOSEBUTTON = "closeButton";
 	private final String changedState = "changedState";
 	private final String unchangedState = "unchangedState";
 	private final String nullState = "nullState";
@@ -69,27 +75,27 @@ public class MealEditor extends JFrame implements ActionListener {
 		nameBox = new JTextField(10); 
 		Dimension buttonSize = new Dimension(30, 30);
 		
-		newButton = new JButton(new ImageIcon("newButton.png"));
+		newButton = createJButton("newButton.png", NEWBUTTON);
 		newButton.setPreferredSize(buttonSize);
 		newButton.addActionListener(this);
 		newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
 		
-		openButton = new JButton(new ImageIcon("openButton.png"));
+		openButton = createJButton("openButton.png", OPENBUTTON);
 		openButton.setPreferredSize(buttonSize);
 		openButton.addActionListener(this);
 		openButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
 
-		saveButton = new JButton(new ImageIcon("saveButton.png"));
+		saveButton = createJButton("saveButton.png", SAVEBUTTON);
 		saveButton.setPreferredSize(buttonSize);
 		saveButton.addActionListener(this);
 		saveButton.setEnabled(state.equals(changedState));
 
-		saveAsButton = new JButton(new ImageIcon("saveAsButton.png"));
+		saveAsButton = createJButton("saveAsButton.png", SAVEASBUTTON);
 		saveAsButton.setPreferredSize(buttonSize);
 		saveAsButton.addActionListener(this);
 		saveAsButton.setEnabled(state.equals(unchangedState) || state.equals(changedState));
 
-		closeButton = new JButton(new ImageIcon("closeButton.png"));
+		closeButton = createJButton("closeButton.png", CLOSEBUTTON);
 		closeButton.setPreferredSize(buttonSize);
 		closeButton.addActionListener(this);
 		closeButton.setEnabled(state.equals(unchangedState));
@@ -292,6 +298,21 @@ public class MealEditor extends JFrame implements ActionListener {
 	    		meal.setName(nameBox.getText());
 	    	}
 	    }
+	  }
+	  
+	  private ImageIcon loadImageIcon(String name)
+	  {
+	    URL url = this.getClass().getResource("/icons/"+ name);
+	    ImageIcon icon = new ImageIcon(url);
+	    return icon;
+	  }
+	  
+	  private JButton createJButton(String name, String actionCommand)
+	  {
+	    JButton result = new JButton(loadImageIcon(name));
+	    result.setActionCommand(actionCommand);
+	    result.addActionListener(this);
+	    return result;
 	  }
 	  
 }
