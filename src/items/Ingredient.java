@@ -63,7 +63,9 @@ public class Ingredient implements Serializable {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 	public String toString() {
 		  String newString;
 		  newString = String.format("%f %s of %s %s", this.amount, this.unit, this.details, this.name);

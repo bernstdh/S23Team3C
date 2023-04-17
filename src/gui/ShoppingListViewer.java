@@ -136,18 +136,18 @@ public class ShoppingListViewer extends JFrame
 
 	        if (repeat.contains(fromUnit)) {
 	            double convertedAmount = UnitConversion.converter(ingredient, fromUnit, newUnit, amount);
-	            String val = convertedAmount + newUnit + box.get(i).substring(box.get(i).indexOf("of") - 1);
-	            box.set(i, val);
+	            box.get(i).setUnit(newUnit);
+	            box.get(i).setAmount(convertedAmount);
 	        }
 	    }
 	    updateShoppingListDisplay();
 	}
 	private void updateShoppingListDisplay() {
-	    StringBuilder display = new StringBuilder();
-	    for (String entry : box) {
-	        display.append(entry);
+	    String display = "";
+	    for (Ingredient entry : box) {
+	        display += (entry.toString()) + "\n";
 	    }
-	    shoppingListBox.setText(display.toString());
+	    shoppingListBox.setText(display);
 	}
 
 }
