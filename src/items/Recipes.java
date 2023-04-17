@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import math.CalorieCalculator;
 
 /**
  * @author Julian Barrett
@@ -141,7 +142,8 @@ public class Recipes implements Serializable {
 	public double calorieCalculator() {
 		double calories = 0;
 		for (int i = 0; i < ingredients.size(); i++) {
-			calories += ingredients.get(i).getIngredient().getCaloriesPerGram();
+		  calories += CalorieCalculator.calculateCalories(ingredients.get(i).getName(),
+		      ingredients.get(i).getAmount(), ingredients.get(i).getUnit());
 		}
 		return calories;
 	}

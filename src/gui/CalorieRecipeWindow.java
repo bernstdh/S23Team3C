@@ -2,9 +2,8 @@ package gui;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import items.Recipes;
 import utilities.Serializer;
-
+import items.Recipes;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -81,6 +80,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
    */
   public void actionPerformed(final ActionEvent e) throws NumberFormatException
   {
+    double calories = 1.0;
     if (e.getSource() == recipeButton)
     {
       fileChooser = new JFileChooser();
@@ -93,6 +93,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
       try
       {
         Recipes rec = Serializer.deserializeRecipe(fileChooser.getSelectedFile().toString());
+        calories = rec.calorieCalculator();
         recipeButton.setText(rec.getName());
       }
       catch (ClassNotFoundException | IOException e1)
@@ -111,8 +112,6 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
         if (servings < 0) calorieLabel.setText(negative);
         else
         {
-          //double calories = rec.getCalories();
-          double calories = 69.420;
           calorieLabel.setText(String.format("Calories: %.1f", calories * servings));
         } 
       }
