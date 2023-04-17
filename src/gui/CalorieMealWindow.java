@@ -80,6 +80,7 @@ public class CalorieMealWindow extends JFrame implements ActionListener
    */
   public void actionPerformed(final ActionEvent e) throws NumberFormatException
   {
+    double calories = 0.0;
     if (e.getSource() == mealButton)
     {
       fileChooser = new JFileChooser();
@@ -102,16 +103,23 @@ public class CalorieMealWindow extends JFrame implements ActionListener
     else if (e.getSource() == calc)
     {
       double servings = -1.0;
-//      String ingredient = (String) recipeBox.getSelectedItem();
       if (servingsBox.getText().equals("")) servings = 0.0;
+      try
+      {
+        Meals meal = Serializer.deserializeMeal(fileChooser.getSelectedFile().toString());
+        calories = meal.calorieCalculator();
+        mealButton.setText(meal.getName());
+      }
+      catch (ClassNotFoundException | IOException e1)
+      {
+        System.out.println("Couldn't load meal.");
+      }
       try
       {
         servings = Double.parseDouble(servingsBox.getText());
         if (servings < 0) calorieLabel.setText(negative);
         else
         {
-          //double calories = meal.getCalories();
-          double calories = 69.420;
           calorieLabel.setText(String.format("Calories: %.1f", calories * servings));
         } 
       }
