@@ -1,7 +1,10 @@
 package items;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import utilities.Serializer;
 
 /**
  * A working list of all ingredients that were both given in the Domain Glossary and by the user.
@@ -100,6 +103,17 @@ public class IngredientTable extends ArrayList<Ingredients> implements Serializa
     add(new Ingredients("Thyme", 1.01, 0.46));
     add(new Ingredients("Tomato", 0.20, 0.67));
     add(new Ingredients("Wine", 0.83, 0.99));
+    
+    // Read in the custom user ingredients from UserIngredients.dat
+    ArrayList<Ingredients> al = new ArrayList<Ingredients>();
+    try
+    {
+      al = Serializer.retrieveIngredients();
+    } catch(IOException | ClassNotFoundException ioe)
+    {
+      ioe.printStackTrace();
+    }
+    addAll(al);
   }
   
   /**

@@ -1,11 +1,20 @@
 package gui;
+import java.awt.AWTEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import items.IngredientTable;
+import items.Ingredients;
+import utilities.Serializer;
 
 /**
  * Main window for the KILowBites application. Contains a JMenuBar with all menus.
@@ -13,7 +22,7 @@ import javax.swing.JMenuItem;
  * @author beaumueller
  *
  */
-public class MainWindow extends JFrame implements ActionListener
+public class MainWindow extends JFrame implements ActionListener, WindowListener
 {
   private static final long serialVersionUID = 1L;
   JMenuBar menuBar;
@@ -30,6 +39,7 @@ public class MainWindow extends JFrame implements ActionListener
   public MainWindow(final String name)
   {
     super(name);
+    addWindowListener(this);
     menuBar = new JMenuBar();
     addMenuItems(menuBar);
     setJMenuBar(menuBar);
@@ -123,5 +133,68 @@ public class MainWindow extends JFrame implements ActionListener
     {
       new AboutDialog();
     }
+  }
+
+  @Override
+  public void windowOpened(final WindowEvent e)
+  {
+    // Not needed
+    
+  }
+
+  @Override
+  public void windowClosing(final WindowEvent e)
+  {
+    ArrayList<Ingredients> table = IngredientTable.createInstance();
+    ArrayList<Ingredients> al = new ArrayList<Ingredients>();
+    for(int i = 77; i < table.size(); i++)
+    {
+      al.add(table.get(i));
+    }
+    try
+    {
+      Serializer.saveIngredients(al);
+    }
+    catch (IOException e1)
+    {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
+    
+  }
+
+  @Override
+  public void windowClosed(final WindowEvent e)
+  {
+    // Not needed
+    
+  }
+
+  @Override
+  public void windowIconified(final WindowEvent e)
+  {
+    // Not needed
+    
+  }
+
+  @Override
+  public void windowDeiconified(final WindowEvent e)
+  {
+    // Not needed
+    
+  }
+
+  @Override
+  public void windowActivated(final WindowEvent e)
+  {
+    // Not needed
+    
+  }
+
+  @Override
+  public void windowDeactivated(final WindowEvent e)
+  {
+    // Not needed
+    
   }
 }
