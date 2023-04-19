@@ -111,7 +111,8 @@ public class IngredientTable extends ArrayList<Ingredients> implements Serializa
       al = Serializer.retrieveIngredients();
     } catch(IOException | ClassNotFoundException ioe)
     {
-      ioe.printStackTrace();
+      // Coming here just means that the user hasn't ran the program before so no custom
+      // ingredients exist yet.
     }
     addAll(al);
   }

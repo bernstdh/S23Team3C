@@ -1,4 +1,5 @@
 package gui;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -25,9 +26,8 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
 {
   private static final long serialVersionUID = 1L;
   JMenuBar menuBar;
-  JMenu file, edit, view, tools, configure, help;
-  JMenuItem exit, recipe, meal, shoppingList, process, calorieCalculator, unitsConverter,
-      preferences, about;
+  JMenu file, edit, view, tools, help;
+  JMenuItem exit, recipe, meal, shoppingList, process, calorieCalculator, unitsConverter, about;
 
   /**
    * Creates a new MainWindow object and adds the all menus.
@@ -80,12 +80,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     unitsConverter.addActionListener(this);
     mb.add(tools);
 
-    configure = new JMenu("Configure");
-    preferences = new JMenuItem("Preferences");
-    configure.add(preferences);
-    preferences.addActionListener(this);
-    mb.add(configure);
-
     help = new JMenu("Help");
     about = new JMenuItem("About");
     help.add(about);
@@ -102,7 +96,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     else if (e.getSource() == recipe)
     {
-      new RecipeEditor(); 
+      new RecipeEditor();
     }
     else if (e.getSource() == meal)
     {
@@ -124,10 +118,6 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     {
       new UnitConverterWindow();
     }
-    else if (e.getSource() == preferences)
-    {
-      new Preferences();
-    }
     else if (e.getSource() == about)
     {
       new AboutDialog();
@@ -138,7 +128,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
   public void windowOpened(final WindowEvent e)
   {
     // Not needed
-    
+
   }
 
   @Override
@@ -146,7 +136,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
   {
     ArrayList<Ingredients> table = IngredientTable.createInstance();
     ArrayList<Ingredients> al = new ArrayList<Ingredients>();
-    for(int i = 77; i < table.size(); i++)
+    for (int i = 77; i < table.size(); i++)
     {
       al.add(table.get(i));
     }
@@ -159,41 +149,41 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
       // TODO Auto-generated catch block
       e1.printStackTrace();
     }
-    
+
   }
 
   @Override
   public void windowClosed(final WindowEvent e)
   {
     // Not needed
-    
+
   }
 
   @Override
   public void windowIconified(final WindowEvent e)
   {
     // Not needed
-    
+
   }
 
   @Override
   public void windowDeiconified(final WindowEvent e)
   {
     // Not needed
-    
+
   }
 
   @Override
   public void windowActivated(final WindowEvent e)
   {
     // Not needed
-    
+
   }
 
   @Override
   public void windowDeactivated(final WindowEvent e)
   {
     // Not needed
-    
+
   }
 }
