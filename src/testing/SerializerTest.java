@@ -20,8 +20,11 @@ class SerializerTest
   // Beginning of Recipe tests
   
   // Various recipes tested, saving and reading files should be fine.
+  /**
+   * Creates a simple recipe, assertEqual on all recipe properties before and after serialization.
+   */
   @Test
-  void RecipeReg()
+  void recipeReg()
   {
     // name, num, ingredients, utensils, steps
     IngredientTable it = IngredientTable.createInstance();
