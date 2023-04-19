@@ -29,9 +29,14 @@ import utilities.Serializer;
 public class RecipeEditor extends JFrame implements ActionListener, DocumentListener
 {
   
+  static final String NEWBUTTON = "newButton";
+  static final String OPENBUTTON = "openButton";
+  static final String SAVEBUTTON = "saveButton";
+  static final String SAVEASBUTTON = "saveAsButton";
+  static final String CLOSEBUTTON = "closeButton";
+  
   private static final long serialVersionUID = 1L;
   private static final String RECIPE = ".rcp";
-  
   
   private JButton closeButton, newButton, 
           openButton, saveAsButton, saveButton;
@@ -43,11 +48,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   private StepPanel stepsPanel;
   private int numberServed;
   private String recipeName, state;
-  static final String NEWBUTTON = "newButton";
-  static final String OPENBUTTON = "openButton";
-  static final String SAVEBUTTON = "saveButton";
-  static final String SAVEASBUTTON = "saveAsButton";
-  static final String CLOSEBUTTON = "closeButton";
+
   private final String changedState = "changedState";
   private final String unchangedState = "unchangedState";
   private final String nullState = "nullState";
@@ -372,14 +373,14 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     }
   }
   
-  private ImageIcon loadImageIcon(String name)
+  private ImageIcon loadImageIcon(final String name)
   {
     URL url = this.getClass().getResource("/icons/"+ name);
     ImageIcon icon = new ImageIcon(url);
     return icon;
   }
   
-  private JButton createJButton(String name, String actionCommand)
+  private JButton createJButton(final String name, final String actionCommand)
   {
     JButton result = new JButton(loadImageIcon(name));
     result.setActionCommand(actionCommand);
