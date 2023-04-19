@@ -29,6 +29,8 @@ public class ShoppingListViewer extends JFrame
 	private JTextArea shoppingListBox;
 	private ArrayList<Ingredient> box;
 	private ArrayList<String> repeat = new ArrayList<String>();
+	private ArrayList<String> repeatIng = new ArrayList<String>();
+
 	private int count = 0;
 
 	/**
@@ -120,6 +122,8 @@ public class ShoppingListViewer extends JFrame
 						(box.get(j).getIngredient().getIngredientName()) && i != j) {
 					repeat.add(box.get(i).getUnit());
 					repeat.add(box.get(j).getUnit());
+					repeatIng.add(box.get(i).getIngredient().getIngredientName());
+					repeatIng.add(box.get(j).getIngredient().getIngredientName());
 
 				}
 			}
@@ -132,7 +136,7 @@ public class ShoppingListViewer extends JFrame
 	        String fromUnit = box.get(i).getUnit();
 	        double amount = box.get(i).getAmount();
 
-	        if (repeat.contains(fromUnit) && ! (fromUnit.equals(newUnit))) {
+	        if (repeat.contains(fromUnit) && repeatIng.contains(ingredient) && !fromUnit.equals(newUnit)) {
 	            double convertedAmount = UnitConversion.converter(ingredient, fromUnit, newUnit, amount);
 	            box.get(i).setUnit(newUnit);
 	            box.get(i).setAmount(convertedAmount);
