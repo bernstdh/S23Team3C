@@ -103,7 +103,7 @@ public class Steps implements Serializable {
 	 * @return formatted string.
 	 */
 	public String UtensilStepToString() {
-		if (this.utensilSource.equals(destination)) {
+		if (this.utensilSource.getName().equals(destination.getName())) {
 			return String.format("%s the contents of the %s %s", 
 					this.action, this.utensilSource.toString(), this.details);
 		}
