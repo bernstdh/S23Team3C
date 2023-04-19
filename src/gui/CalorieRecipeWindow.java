@@ -15,13 +15,14 @@ import java.net.URL;
  */
 public class CalorieRecipeWindow extends JFrame implements ActionListener 
 {
+  static final String CALCULATE = "Calculate";
+  static final String RESET = "Reset";
   private static final long serialVersionUID = 1L;
   private String calor = "Calories:";
   private String invalid = "Calories: Please Enter a Valid Size";
   private String negative = "Calories: Please Enter a Positive Size";
   private String choose = "Choose File";
-  static final String CALCULATE = "Calculate";
-  static final String RESET = "Reset";
+  private String noRep = "Couldn't load recipe.";
   
   private JTextField servingsBox;
   private JLabel calorieLabel;
@@ -44,7 +45,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
     
     recipeButton = new JButton();
     recipeButton.addActionListener(this);
-    recipeButton.setText("Choose File");
+    recipeButton.setText(choose);
     servingsBox = new JTextField(10);
 
     calorieLabel = new JLabel(calor);
@@ -98,7 +99,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
       }
       catch (ClassNotFoundException | IOException e1)
       {
-        System.out.println("Couldn't load recipe.");
+        System.out.println(noRep);
       } 
     }
     else if (e.getSource() == calc)
@@ -113,7 +114,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
       }
       catch (ClassNotFoundException | IOException e1)
       {
-        System.out.println("Couldn't load recipe.");
+        System.out.println(noRep);
       } 
       try
       {
@@ -138,14 +139,14 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
     
   }
 
-  private ImageIcon loadImageIcon(String name)
+  private ImageIcon loadImageIcon(final String name)
   {
     URL url = this.getClass().getResource("/icons/"+ name);
     ImageIcon icon = new ImageIcon(url);
     return icon;
   }
 
-  private JButton createJButton(String name, String actionCommand)
+  private JButton createJButton(final String name, final String actionCommand)
   {
     JButton result = new JButton(loadImageIcon(name));
     result.setActionCommand(actionCommand);

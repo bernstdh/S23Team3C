@@ -15,9 +15,9 @@ import java.net.URL;
  */
 public class CalorieCalculatorWindow extends JFrame implements ActionListener 
 {
-	private static final long serialVersionUID = 1L;
-	static final String CALCULATE = "Calculate";
-	static final String RESET = "Reset";
+  static final String CALCULATE = "Calculate";
+  static final String RESET = "Reset";
+  private static final long serialVersionUID = 1L;
 	private String g = "g";
 	private String dr = "dr";
 	private String oz = "oz";
@@ -130,14 +130,14 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener
 	  
 	}
 	
-	private ImageIcon loadImageIcon(String name)
+	private ImageIcon loadImageIcon(final String name)
 	{
 	  URL url = this.getClass().getResource("/icons/"+ name);
 	  ImageIcon icon = new ImageIcon(url);
 	  return icon;
 	}
 	
-	private JButton createJButton(String name, String actionCommand)
+	private JButton createJButton(final String name, final String actionCommand)
   {
     JButton result = new JButton(loadImageIcon(name));
     result.setActionCommand(actionCommand);

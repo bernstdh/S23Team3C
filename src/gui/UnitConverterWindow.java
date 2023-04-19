@@ -17,6 +17,8 @@ import java.util.*;
  */
 public class UnitConverterWindow extends JFrame implements ActionListener
 {
+  static final String CALCULATE = "Calculate";
+  static final String RESET = "Reset";
   private static final long serialVersionUID = 1L;
   
   private JComboBox<String> fromUnitsBox;
@@ -26,9 +28,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener
   private JButton calc;
   private JButton reset;
   private JLabel amountLabel;
-  
-  static final String CALCULATE = "Calculate";
-  static final String RESET = "Reset";
+
   private String dr = "dr";
   private String oz = "oz";
   private String lb = "lb";
@@ -203,14 +203,14 @@ public class UnitConverterWindow extends JFrame implements ActionListener
     return newAmount;
   }
   
-  private ImageIcon loadImageIcon(String name)
+  private ImageIcon loadImageIcon(final String name)
   {
     URL url = this.getClass().getResource("/icons/"+ name);
     ImageIcon icon = new ImageIcon(url);
     return icon;
   }
   
-  private JButton createJButton(String name, String actionCommand)
+  private JButton createJButton(final String name, final String actionCommand)
   {
     JButton result = new JButton(loadImageIcon(name));
     result.setActionCommand(actionCommand);

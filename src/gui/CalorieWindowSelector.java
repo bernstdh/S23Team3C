@@ -22,6 +22,11 @@ import items.Recipes;
 import utilities.Formatter;
 import utilities.Serializer;
 
+/**
+ * CalorieWindowSelector.
+ * @author Trace Jones
+ *
+ */
 public class CalorieWindowSelector extends JFrame implements ActionListener
 {
   private static final long serialVersionUID = 1L;
@@ -45,6 +50,9 @@ public class CalorieWindowSelector extends JFrame implements ActionListener
   private final String meal = "Meal";
   private final String ing = "Ingredient";
   
+  /**
+   * Constructor.
+   */
   public CalorieWindowSelector()
   {
     super("Calorie Calculator Selector");
