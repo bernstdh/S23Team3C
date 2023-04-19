@@ -14,8 +14,9 @@ public class ProcessViewer extends JFrame
 	private JTextArea stepsBox;
 	/**
 	 * Process viewer constructor.
+	 * @param name name of recipe/meal
 	 */
-	public ProcessViewer(String name) 
+	public ProcessViewer(final String name) 
 	{
 		super("KiLowBites Process Viewer\t" + name);
 

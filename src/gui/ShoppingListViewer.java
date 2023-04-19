@@ -36,7 +36,6 @@ public class ShoppingListViewer extends JFrame
 	/**
 	 * Constructor.
 	 * @param ingrds Array List of Ingredients
-	 * @param num Int
 	 * @param title Title
 	 */
 
@@ -68,11 +67,13 @@ public class ShoppingListViewer extends JFrame
 			}
 		});
 
-		unitsButton.addActionListener(new ActionListener() {
-		    public void actionPerformed(final ActionEvent e) {
-		        changeUnit();
-		         new ShoppingUnitWindow(ShoppingListViewer.this, repeat);
-		    }
+		unitsButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(final ActionEvent e)
+			{
+				changeUnit();
+				new ShoppingUnitWindow(ShoppingListViewer.this, repeat);
+			}
 		});
 
 		setResizable(false);
@@ -87,7 +88,6 @@ public class ShoppingListViewer extends JFrame
 	/**
 	 * calculate Amounts.
 	 * @param ingredients String
-	 * @param num number of items
 	 */
 	private void numPeopleCalc(final ArrayList<Ingredient> ingredients) 
 	{
@@ -101,7 +101,8 @@ public class ShoppingListViewer extends JFrame
 			return;
 		}
 
-		for (Ingredient str : ingredients) {
+		for (Ingredient str : ingredients) 
+		{
 			double multiplier = 1.0;
 			multiplier = str.getOgAmount();
 			double result = numPeople * multiplier;
@@ -115,41 +116,62 @@ public class ShoppingListViewer extends JFrame
 	/**
 	 * Adds items to repeated list.
 	 */
-	private void changeUnit() {
-		for(int i = 0; i < box.size(); i++) {
-			for(int j = 0; j < box.size(); j++) {
+	private void changeUnit() 
+	{
+		for(int i = 0; i < box.size(); i++)
+		{
+			for(int j = 0; j < box.size(); j++) 
+			{
 				if(box.get(i).getIngredient().getIngredientName().equals
-						(box.get(j).getIngredient().getIngredientName()) && i != j) {
+						(box.get(j).getIngredient().getIngredientName()) 
+						&& i != j)
+				{
 					repeat.add(box.get(i).getUnit());
 					repeat.add(box.get(j).getUnit());
-					repeatIng.add(box.get(i).getIngredient().getIngredientName());
-					repeatIng.add(box.get(j).getIngredient().getIngredientName());
+					repeatIng.add(box.get(i).getIngredient()
+							.getIngredientName());
+					repeatIng.add(box.get(j).getIngredient()
+							.getIngredientName());
 
 				}
 			}
 		}
 	}
-	
-	public void convertUnits(String newUnit) {
-	    for (int i = 0; i < box.size(); i++) {
-	        String ingredient = box.get(i).getIngredient().getIngredientName();
-	        String fromUnit = box.get(i).getUnit();
-	        double amount = box.get(i).getAmount();
+	/**
+	 * Converts units.
+	 * @param newUnit Unit to be converted to
+	 */
+	public void convertUnits(final String newUnit) 
+	{
+		for (int i = 0; i < box.size(); i++) 
+		{
+			String ingredient = box.get(i).getIngredient().getIngredientName();
+			String fromUnit = box.get(i).getUnit();
+			double amount = box.get(i).getAmount();
 
-	        if (repeat.contains(fromUnit) && repeatIng.contains(ingredient) && !fromUnit.equals(newUnit)) {
-	            double convertedAmount = UnitConversion.converter(ingredient, fromUnit, newUnit, amount);
-	            box.get(i).setUnit(newUnit);
-	            box.get(i).setAmount(convertedAmount);
-	        }
-	    }
-	    updateShoppingListDisplay();
+			if (repeat.contains(fromUnit)
+					&& repeatIng.contains(ingredient) 
+					&& !fromUnit.equals(newUnit))
+			{
+				double convertedAmount = UnitConversion.
+						converter(ingredient, fromUnit, newUnit, amount);
+				box.get(i).setUnit(newUnit);
+				box.get(i).setAmount(convertedAmount);
+			}
+		}
+		updateShoppingListDisplay();
 	}
-	private void updateShoppingListDisplay() {
-	    String display = "";
-	    for (Ingredient entry : box) {
-	        display += (entry.toString()) + "\n";
-	    }
-	    shoppingListBox.setText(display);
+	/**
+	 * updates Display.
+	 */
+	private void updateShoppingListDisplay() 
+	{
+		String display = "";
+		for (Ingredient entry : box)
+		{
+			display += (entry.toString()) + "\n";
+		}
+		shoppingListBox.setText(display);
 	}
 
 }
