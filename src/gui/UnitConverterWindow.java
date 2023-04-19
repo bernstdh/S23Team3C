@@ -110,7 +110,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
     setResizable(false);
-    setSize(550, 200);
+    setSize(650, 200);
   }
   
   /**

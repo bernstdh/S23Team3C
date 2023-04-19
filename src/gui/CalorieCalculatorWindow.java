@@ -90,7 +90,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setResizable(false);
-		setSize(500, 200);
+		setSize(550, 200);
 	}
 
 	/**
