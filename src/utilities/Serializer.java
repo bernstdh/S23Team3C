@@ -22,7 +22,7 @@ public class Serializer
   private static final String RECIPE = ".rcp";
   private static final String MEAL = ".mel";
   private static final String SLASH = "/";
-  private static final String INGREDIENTS = "UserIngredients.dat";
+  private static final String INGREDIENTS = "UserIngredients.ntr";
 
   /**
    * main method.

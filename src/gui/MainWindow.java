@@ -72,7 +72,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     mb.add(view);
 
     tools = new JMenu("Tools");
-    calorieCalculator = new JMenuItem("Calorie Counter");
+    calorieCalculator = new JMenuItem("Calorie Calculator");
     unitsConverter = new JMenuItem("Units Converter");
     tools.add(calorieCalculator);
     tools.add(unitsConverter);
