@@ -29,7 +29,7 @@ public class ShoppingListViewer extends JFrame
 	private JTextArea shoppingListBox;
 	private ArrayList<Ingredient> box;
 	private ArrayList<String> repeat = new ArrayList<String>();
-	
+	private int count = 0;
 
 	/**
 	 * Constructor.
@@ -104,8 +104,9 @@ public class ShoppingListViewer extends JFrame
 			multiplier = str.getOgAmount();
 			double result = numPeople * multiplier;
 			str.setAmount(result);
-			box.add(str);
+			if(count < 1) 	box.add(str);
 		}
+		count++;
 		updateShoppingListDisplay();
 	}
 
