@@ -1,5 +1,4 @@
 package gui;
-import java.awt.AWTEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -19,7 +18,7 @@ import utilities.Serializer;
 /**
  * Main window for the KILowBites application. Contains a JMenuBar with all menus.
  * 
- * @author beaumueller
+ * @author Beau Mueller
  *
  */
 public class MainWindow extends JFrame implements ActionListener, WindowListener

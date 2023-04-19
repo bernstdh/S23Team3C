@@ -118,6 +118,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
           Recipes r = Serializer.deserializeRecipe(fileChooser.getSelectedFile().toString());
           name = r.getName();
           new ShoppingListViewer((ArrayList<Ingredient>)r.getIngredients(), name);
+          dispose();
         }
         catch (ClassNotFoundException | IOException e1)
         {
@@ -138,6 +139,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
             }
           }
           new ShoppingListViewer(ingredientList, m.getName());
+          dispose();
         }
         catch (ClassNotFoundException | IOException e1)
         {
