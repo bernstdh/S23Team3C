@@ -43,7 +43,7 @@ public class AboutDialog
 		JFrame frame = new JFrame("About Dialog");
 		JTextArea text = new JTextArea(about);
 
-		frame.setSize(500, 250);
+		frame.setSize(480, 250);
 		text.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		text.setEditable(false);
 
