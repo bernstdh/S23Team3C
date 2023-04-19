@@ -15,11 +15,13 @@ import java.util.*;
  * 
  * This work complies with the JMU Honor Code.
  */
-public class UnitConverterWindow extends JFrame implements ActionListener
+public class UnitConverterWindow extends JFrame implements ActionListener, WindowListener
 {
   static final String CALCULATE = "Calculate";
   static final String RESET = "Reset";
   private static final long serialVersionUID = 1L;
+  private static boolean exists = false;
+  private static UnitConverterWindow instance = null;
   
   private JComboBox<String> fromUnitsBox;
   private JComboBox<String> toUnitsBox;
@@ -56,9 +58,10 @@ public class UnitConverterWindow extends JFrame implements ActionListener
   /**
    * The constructor for the UnitConverterWindow.
    */
-  public UnitConverterWindow()
+  private UnitConverterWindow()
   {
     super("Unit Converter");
+    addWindowListener(this);
     IngredientTable ingredients = IngredientTable.createInstance();
     
     ingredientsBox = new JComboBox<>();
@@ -216,6 +219,73 @@ public class UnitConverterWindow extends JFrame implements ActionListener
     result.setActionCommand(actionCommand);
     result.addActionListener(this);
     return result;
+  }
+  
+  /**
+   * Makes a new UnitConverterWindow.
+   * @return UnitConverterWindow
+   */
+  public static UnitConverterWindow createInstance()
+  {
+    if (exists)
+    {
+      return instance;
+    }
+    else
+    {
+      instance = new UnitConverterWindow();
+      exists = true;
+      return instance;
+    }
+  }
+  
+  @Override
+  public void windowOpened(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowClosing(final WindowEvent e)
+  {
+    exists = false;
+    instance = null;
+  }
+
+  @Override
+  public void windowClosed(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowIconified(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowDeiconified(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowActivated(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowDeactivated(final WindowEvent e)
+  {
+    // Not needed
+
   }
 
 }

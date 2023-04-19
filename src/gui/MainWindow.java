@@ -112,11 +112,11 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     }
     else if (e.getSource() == calorieCalculator)
     {
-      new CalorieWindowSelector();
+      CalorieWindowSelector.createInstance();
     }
     else if (e.getSource() == unitsConverter)
     {
-      new UnitConverterWindow();
+      UnitConverterWindow.createInstance();
     }
     else if (e.getSource() == about)
     {

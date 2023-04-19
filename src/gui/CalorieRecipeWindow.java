@@ -13,11 +13,13 @@ import java.net.URL;
  * @author Trace Jones
  *
  */
-public class CalorieRecipeWindow extends JFrame implements ActionListener 
+public class CalorieRecipeWindow extends JFrame implements ActionListener, WindowListener
 {
   static final String CALCULATE = "Calculate";
   static final String RESET = "Reset";
   private static final long serialVersionUID = 1L;
+  private static boolean exists = false;
+  private static CalorieRecipeWindow instance = null;
   private String calor = "Calories:";
   private String invalid = "Calories: Please Enter a Valid Size";
   private String negative = "Calories: Please Enter a Positive Size";
@@ -39,10 +41,10 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
   /**
    * Constructor. 
    */
-  public CalorieRecipeWindow() 
+  private CalorieRecipeWindow() 
   {
     super("Calorie Calculator");
-    
+    addWindowListener(this);
     recipeButton = new JButton();
     recipeButton.addActionListener(this);
     recipeButton.setText(choose);
@@ -152,5 +154,72 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener
     result.setActionCommand(actionCommand);
     result.addActionListener(this);
     return result;
+  }
+  
+  /**
+   * makes new CalorieRecipeWindow.
+   * @return CalorieRecipeWindow.
+   */
+  public static CalorieRecipeWindow createInstance()
+  {
+    if (exists)
+    {
+      return instance;
+    }
+    else
+    {
+      instance = new CalorieRecipeWindow();
+      exists = true;
+      return instance;
+    }
+  }
+  
+  @Override
+  public void windowOpened(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowClosing(final WindowEvent e)
+  {
+    exists = false;
+    instance = null;
+  }
+
+  @Override
+  public void windowClosed(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowIconified(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowDeiconified(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowActivated(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowDeactivated(final WindowEvent e)
+  {
+    // Not needed
+
   }
 }

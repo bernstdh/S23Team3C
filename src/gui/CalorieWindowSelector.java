@@ -4,9 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,22 +13,17 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import items.Ingredient;
-import items.Meals;
-import items.Recipes;
-import utilities.Formatter;
-import utilities.Serializer;
 
 /**
  * CalorieWindowSelector.
  * @author Trace Jones
  *
  */
-public class CalorieWindowSelector extends JFrame implements ActionListener
+public class CalorieWindowSelector extends JFrame implements ActionListener, WindowListener
 {
   private static final long serialVersionUID = 1L;
+  private static boolean exists = false;
+  private static CalorieWindowSelector instance = null;
   private JComboBox<String> typeBox;
   private JButton confirmType;
   private JButton confirmItem;
@@ -53,10 +47,10 @@ public class CalorieWindowSelector extends JFrame implements ActionListener
   /**
    * Constructor.
    */
-  public CalorieWindowSelector()
+  private CalorieWindowSelector()
   {
     super("Calorie Calculator Selector");
-    
+    addWindowListener(this);
     setSize(200, 200);
     gl = new GridLayout(1, 1);
     gl.setVgap(10);
@@ -102,18 +96,85 @@ public class CalorieWindowSelector extends JFrame implements ActionListener
     if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
         && typeBox.getSelectedItem().toString().equals(ing))
     {
-      new CalorieCalculatorWindow();
+      CalorieCalculatorWindow.createInstance();
     }
     else if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
         && typeBox.getSelectedItem().toString().equals(recipe))
     {
-      new CalorieRecipeWindow();
+      CalorieRecipeWindow.createInstance();
     }
     else if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
         && typeBox.getSelectedItem().toString().equals(meal))
     {
-      new CalorieMealWindow();
+      CalorieMealWindow.createInstance();
     }
   }
-}
+  
+  /**
+   * Makes a new UnitConverterWindow.
+   * @return UnitConverterWindow
+   */
+  public static CalorieWindowSelector createInstance()
+  {
+    if (exists)
+    {
+      return instance;
+    }
+    else
+    {
+      instance = new CalorieWindowSelector();
+      exists = true;
+      return instance;
+    }
+  }
+  
+  @Override
+  public void windowOpened(final WindowEvent e)
+  {
+    // Not needed
 
+  }
+
+  @Override
+  public void windowClosing(final WindowEvent e)
+  {
+    exists = false;
+    instance = null;
+  }
+
+  @Override
+  public void windowClosed(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowIconified(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowDeiconified(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowActivated(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+  @Override
+  public void windowDeactivated(final WindowEvent e)
+  {
+    // Not needed
+
+  }
+
+}
