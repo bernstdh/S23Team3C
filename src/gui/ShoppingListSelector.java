@@ -85,7 +85,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
     file.setLayout(new FlowLayout());
     chooseFile = new JButton("Choose File");
     chooseFile.addActionListener(this);
-    confirmItem = new JButton("Confirm Item");
+    confirmItem = new JButton("Confirm File");
     confirmItem.addActionListener(this);
     fileName = new JLabel("");
     file.add(chooseFile);
