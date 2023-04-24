@@ -13,7 +13,7 @@ public class Ingredients implements Serializable
 
   private String ingredientName;
   private double caloriesPerGram;
-  private double individualCalories;
+  private double individualGrams;
   private double gramsPerMilliliter;
   
   /**
@@ -28,7 +28,7 @@ public class Ingredients implements Serializable
     this.ingredientName = ingredientName;
     this.caloriesPerGram = caloriesPerGram;
     this.gramsPerMilliliter = gramsPerMilliliter;
-    this.individualCalories = -1.0;
+    this.individualGrams = -1.0;
   }
   
   /**
@@ -36,15 +36,15 @@ public class Ingredients implements Serializable
    * @param ingredientName      The ingredient name
    * @param caloriesPerGram     The calories per gram of the new ingredient
    * @param gramsPerMilliliter  The grams per milliliter of the new ingredient
-   * @param individualCalories  The number of calories per individual ingredient
+   * @param individualGrams  The number of grams per individual ingredient
    */
   public Ingredients(final String ingredientName, final double caloriesPerGram,
-      final double gramsPerMilliliter, final double individualCalories)
+      final double gramsPerMilliliter, final double individualGrams)
   {
     this.ingredientName = ingredientName;
     this.caloriesPerGram = caloriesPerGram;
     this.gramsPerMilliliter = gramsPerMilliliter;
-    this.individualCalories = individualCalories;
+    this.individualGrams = individualGrams;
   }
   /**
    * Returns the caloriesPerGram attribute.
@@ -82,9 +82,22 @@ public class Ingredients implements Serializable
     return "g/ml";
   }
   
-  public double getIndividualCalories()
+  /**
+   * Gets the individual grams.
+   * @return the individual grams
+   */
+  public double getIndividualGrams()
   {
-    return this.individualCalories;
+    return this.individualGrams;
+  }
+  
+  /**
+   * Individual CaloriesPerGram.
+   * @return calories per individual
+   */
+  public double getCaloriesPerIndividual()
+  {
+    return this.caloriesPerGram * this.individualGrams;
   }
   
   
