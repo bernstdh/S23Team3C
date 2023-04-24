@@ -44,7 +44,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
   private String qt = "qt";
   private String gal = "gal";
   private String ml = "ml";
-  private String ind = "indivdual";
+  private String ind = "individual";
   private String toAmount = "To Amount:";
   private String invalid = "To Amount: Please Enter a Valid Number.";
   private String negative = "To Amount: Please Enter a Positive Number";
@@ -121,8 +121,8 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
   {
     String ingredient = "";
     String fromUnit = (String) fromUnitsBox.getSelectedItem();
-    if (fromUnit.equals(ind)) toUnitsBox.setEnabled(false);
-    else toUnitsBox.setEnabled(true);
+//    if (fromUnit.equals(ind)) toUnitsBox.setEnabled(false);
+//    else toUnitsBox.setEnabled(true);
     String toUnit = (String) toUnitsBox.getSelectedItem();
     double amount = 0.0;
     double newAmount = 0.0;
@@ -141,43 +141,43 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
     if (weight1 && vol2) ingredientsBox.setEnabled(true);
     if (vol1 && weight2) ingredientsBox.setEnabled(true);
     ingredient = (String) ingredientsBox.getSelectedItem();
+    if (fromUnit.equals(ind) || toUnit.equals(ind)) ingredientsBox.setEnabled(true);
   
     if (amountBox.getText().equals("")) amount = 0.0;
     
     if (e.getSource() == calc)
     {
-      if (fromUnit.equals(ind))
+//      if (fromUnit.equals(ind))
+//      {
+//        try
+//        {
+//          amount = Double.parseDouble(amountBox.getText());
+//          if (amount < 0) amountLabel.setText(negative);
+//          else amountLabel.setText(String.format("%s %.1f", toAmount, amount));
+//        }
+//        catch (NumberFormatException nfe)
+//        {
+//          amountLabel.setText(invalid);
+//        }
+//        
+//      }
+//      else
+//      {
+      try
       {
-        try
+        amount = Double.parseDouble(amountBox.getText());
+        if (amount < 0) amountLabel.setText(negative);
+        else
         {
-          amount = Double.parseDouble(amountBox.getText());
-          if (amount < 0) amountLabel.setText(negative);
-          else amountLabel.setText(String.format("%s %.1f", toAmount, amount));
+          newAmount = converter(ingredient, fromUnit, toUnit, amount);
+          amountLabel.setText(String.format("To Amount: %.1f", newAmount));
         }
-        catch (NumberFormatException nfe)
-        {
-          amountLabel.setText(invalid);
-        }
-        
       }
-      else
+      catch (NumberFormatException nfe)
       {
-        try
-        {
-          amount = Double.parseDouble(amountBox.getText());
-          if (amount < 0) amountLabel.setText(negative);
-          else
-          {
-            newAmount = converter(ingredient, fromUnit, toUnit, amount);
-            amountLabel.setText(String.format("To Amount: %.1f", newAmount));
-          }
-        }
-        catch (NumberFormatException nfe)
-        {
-          amountLabel.setText(invalid);
-        }  
-      } 
-    }
+        amountLabel.setText(invalid);
+      }  
+    } 
     
     if (e.getSource() == reset)
     {

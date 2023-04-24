@@ -25,6 +25,7 @@ public class UnitConversion
   private static String qt = "qt";
   private static String tbs = "tbs";
   private static String tsp = "tsp";
+  private static String ind = "individual";
 
   /**
    * Performs Unit conversions.
@@ -51,7 +52,7 @@ public class UnitConversion
     else if (fromUnit.equals(qt)) result = qtConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(tbs)) result = tbsConversion(ingredient, toUnit, amount);
     else if (fromUnit.equals(tsp)) result = tspConversion(ingredient, toUnit, amount);
-    else if (fromUnit.equals("individual")) result = amount;
+    else if (fromUnit.equals(ind)) result = individualConversion(ingredient, toUnit, amount);
     return result;
   }
   
@@ -84,6 +85,7 @@ public class UnitConversion
   {
     if (amount < 0) return 0.0;
     IngredientTable ingredients = IngredientTable.createInstance();
+    double gpm = ingredients.fromCode(ingredient).getIndividualGrams();
     double value = 0.0;
     double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(dr)) value = amount;
@@ -93,6 +95,8 @@ public class UnitConversion
     else if (unitType.equals(lb)) value = amount / 256;
     
     else if (unitType.equals(g)) value = amount * 1.7718452;
+    
+    else if (unitType.equals(ind)) value = (amount * 1.7718452) / gpm;
     
     else if (unitType.equals(ml))
     {
@@ -188,9 +192,11 @@ public class UnitConversion
   {
     if (amount < 0) return 0.0;
     IngredientTable ingredients = IngredientTable.createInstance();
+    double gpm = ingredients.fromCode(ingredient).getIndividualGrams();
     double value = 0.0;
     double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(g)) value = amount;
+    else if (unitType.equals(ind)) value = amount / gpm;
     else if (unitType.equals(oz)) value = amount / 28.34952;
     else if (unitType.equals(lb)) value = ((amount / 28.34952) / 16);
     else if (unitType.equals(dr)) value = (amount / 1.7718452);
@@ -228,6 +234,7 @@ public class UnitConversion
   {
     if (amount < 0) return 0.0;
     IngredientTable ingredients = IngredientTable.createInstance();
+    double gpm = ingredients.fromCode(ingredient).getIndividualGrams();
     double value = 0.0;
     double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(gal)) value = amount;
@@ -248,6 +255,12 @@ public class UnitConversion
       double milli = amount * 3785.4117888;
       double grams = milli * volume;
       value = gramsConversions(ingredient, g, grams);
+    }
+    else if (unitType.equals(ind))
+    {
+      double milli = amount * 3785.4117888;
+      double grams = milli * volume;
+      value = gramsConversions(ingredient, g, grams) / gpm;
     }
     else if (unitType.equals(dr))
     {
@@ -280,12 +293,14 @@ public class UnitConversion
   {
     if (amount < 0) return 0.0;
     IngredientTable ingredients = IngredientTable.createInstance();
+    double gpm = ingredients.fromCode(ingredient).getIndividualGrams();
     double value = 0.0;
     double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(lb)) value = amount;
     else if (unitType.equals(oz)) value = amount * 16;
     else if (unitType.equals(g)) value = (amount * 16) * 28.34952;
     else if (unitType.equals(dr)) value = (amount * 16) * 16;
+    else if (unitType.equals(ind)) value = ((amount * 16) * 28.34952) / gpm;
 
     else if (unitType.equals(ml))
     {
@@ -381,12 +396,14 @@ public class UnitConversion
   {
     if (amount < 0) return 0.0;
     IngredientTable ingredients = IngredientTable.createInstance();
+    double gpm = ingredients.fromCode(ingredient).getIndividualGrams();
     double value = 0.0;
     double volume = ingredients.fromCode(ingredient).getGramsPerMillileter();
     if (unitType.equals(oz)) value = amount;
     else if (unitType.equals(lb)) value = amount / 16;
     else if (unitType.equals(g)) value = amount *  28.34952;
     else if (unitType.equals(dr)) value = amount * 16;
+    else if (unitType.equals(ind)) value = (amount * 28.34952) / gpm;
 
     else if (unitType.equals(ml))
     {
@@ -536,6 +553,27 @@ public class UnitConversion
     if (unitType.equals(tsp)) return amount;
     value = (galConversion(ingredient, unitType, amount) / 768);
     return value;
+  }
+  
+  /**
+   * individual Conversions.
+   * @param ingredient - the ingredient
+   * @param unitType - the type of unit being switched to.
+   * @param amount - the amount in the current unit
+   * @return the amount in new units.
+   */
+  public static double individualConversion(final String ingredient, final String unitType,
+      final Double amount)
+  {
+    if (amount < 0) return 0.0;
+    if (unitType.equals(ind)) return amount;
+    double value = 0.0;
+    IngredientTable ingredients = IngredientTable.createInstance();
+    double gpm = ingredients.fromCode(ingredient).getIndividualGrams();
+    double totalGrams = gpm * amount;
+    value = gramsConversions(ingredient, unitType, totalGrams);
+    return value;
+    
   }
 
 }
