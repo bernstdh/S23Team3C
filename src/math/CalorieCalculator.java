@@ -14,6 +14,7 @@ public class CalorieCalculator
 {
   
   private static String g = "g";
+  private static String ind = "individual";
   private static String dr = "dr";
   private static String oz = "oz";
   private static String lb = "lb";
@@ -41,6 +42,7 @@ public class CalorieCalculator
     double calories = 0.0;
     Ingredients ing = ingredients.fromCode(ingredient);
     if (unit.equals(g)) calories = amount * ing.getCaloriesPerGram();
+    else if (unit.equals(ind)) calories = amount * ing.getCaloriesPerIndividual();
     else if (unit.equals(dr)) calories = UnitConversion.dramsConversion(ingredient,
         g, amount) * ing.getCaloriesPerGram();
     else if (unit.equals(oz)) calories = UnitConversion.ozConversions(ingredient,
