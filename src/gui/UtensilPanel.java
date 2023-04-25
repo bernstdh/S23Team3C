@@ -199,6 +199,18 @@ public class UtensilPanel extends JPanel
     utensilList.clear();
   }
   
+
+  /**
+   * Enables or disables all non button components.
+   * @param set used to enable or disable
+   */
+  public void setEnabledAll(final boolean set) 
+  {
+    utensilNameBox.setEnabled(set);
+    utensilDetailsBox.setEnabled(set);
+    utensilScrollPane.setEnabled(set);
+  }
+  
   /**
    * Loads in a Utensils object from an open file.
    * @param u Utensil object
