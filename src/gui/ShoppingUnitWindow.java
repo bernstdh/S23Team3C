@@ -38,7 +38,7 @@ public class ShoppingUnitWindow extends JDialog
 		add(unitLabel);
 		add(unitsComboBox);
 		add(applyButton);
-
+		
 		applyButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(final ActionEvent e)
