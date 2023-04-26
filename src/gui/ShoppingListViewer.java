@@ -111,6 +111,7 @@ public class ShoppingListViewer extends JFrame
 		}
 		count++;
 		changeUnit();
+		convertUnits(repeat.get(0));
 		mergeDuplicateIngredients();
 		updateShoppingListDisplay();
 	}
