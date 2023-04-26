@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -28,10 +29,12 @@ import utilities.Serializer;
  */
 public class MainWindow extends JFrame implements ActionListener, WindowListener
 {
+  static final String LOGO = "Logo";
   private static final long serialVersionUID = 1L;
   JMenuBar menuBar;
   JMenu file, edit, view, tools, help;
   JMenuItem exit, recipe, meal, shoppingList, process, calorieCalculator, unitsConverter, about;
+  private JLabel logo;
 
   /**
    * Creates a new MainWindow object and adds the all menus.
@@ -46,16 +49,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     menuBar = new JMenuBar();
     addMenuItems(menuBar);
     setJMenuBar(menuBar);
-    addLogo();
+    logo = new JLabel(loadImageIcon("ram.png"));
+    this.add(logo);
   }
 
-  private void addLogo() 
-  {
-    URL url = this.getClass().getResource("/icons/logoKILowBites.png");
-    ImageIcon icon = new ImageIcon(url);
-    JLabel picLabel = new JLabel(icon);
-    this.add(picLabel);
-  }
+//  private void addLogo() 
+//  {
+//    URL url = this.getClass().getResource("/icons/logoKILowBites.png");
+//    ImageIcon icon = new ImageIcon(url);
+//    JLabel picLabel = new JLabel(icon);
+//    this.add(picLabel);
+//  }
   
   private void addMenuItems(final JMenuBar mb)
   {
@@ -163,6 +167,13 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
       e1.printStackTrace();
     }
 
+  }
+  
+  private ImageIcon loadImageIcon(final String name)
+  {
+    URL url = this.getClass().getResource("/icons/"+ name);
+    ImageIcon icon = new ImageIcon(url);
+    return icon;
   }
 
   @Override
