@@ -88,6 +88,8 @@ class UnitConversionTest extends UnitConversion
     drams = 5648362.54;
     assertEquals(7145.514192262774, UnitConversion.dramsConversion("Broccoli", gal, drams));
     
+    drams = 564.44;
+    assertEquals(35.71786802457143, UnitConversion.dramsConversion(cheeseA, ind, drams));
     
   }
   
@@ -138,6 +140,9 @@ class UnitConversionTest extends UnitConversion
     
     grams = 76849.21;
     assertEquals(23.069788070522304, UnitConversion.gramsConversions("Oil", gal, grams));
+    
+    grams = 57564.4;
+    assertEquals(2055.8714285714286, UnitConversion.gramsConversions(cheeseA, ind, grams));
   }
   
   @Test
@@ -631,6 +636,9 @@ class UnitConversionTest extends UnitConversion
     
     gallon = 59.9201;
     assertEquals(180.02070902211693, UnitConversion.galConversion("Cabbage", lb, gallon));
+    
+    gallon = 381.23;
+    assertEquals(17523.509368679865, UnitConversion.galConversion(cheeseA, ind, gallon));
   }
   
   @Test
