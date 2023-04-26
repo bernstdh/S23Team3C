@@ -115,11 +115,12 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
       setEnabledAll(false);
       this.dispose();
     }
-    else if(ae.getSource() == openButton)
+    else if(ae.getSource() == openButton && openButton.isFocusOwner())
     {
       String previousState = this.state;
    
       int returnVal = fileChooser.showOpenDialog(RecipeEditor.this);
+      
       if(returnVal == JFileChooser.APPROVE_OPTION)
       {
         File file = fileChooser.getSelectedFile();
@@ -158,7 +159,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
       this.reset();
       this.setEnabledAll(true);
     }
-    else if(ae.getSource() == saveAsButton)
+    else if(ae.getSource() == saveAsButton && saveAsButton.isFocusOwner())
     {
       this.saveButton.doClick();
       this.state = unchangedState;
