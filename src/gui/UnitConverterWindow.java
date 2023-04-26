@@ -154,7 +154,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
         if (amount < 0) amountLabel.setText(negative);
         else
         {
-          if (ing.getIndividualGrams() == -1.0) 
+          if (ing.getIndividualGrams() == -1.0 && (fromUnit.equals(ind) || toUnit.equals(ind)))
             amountLabel.setText("To Amount: Please Pick an Ingredient with"
                 + " an Individual Value.");
           else

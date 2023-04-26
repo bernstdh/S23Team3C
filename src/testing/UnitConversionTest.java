@@ -38,6 +38,7 @@ class UnitConversionTest extends UnitConversion
   private String cherry = "Cherry";
   private String thyme = "Thyme";
   private String mush = "Mushroom";
+  private String cheeseA = "American cheese";
   
   @Test
   void dramsTest()
@@ -190,6 +191,9 @@ class UnitConversionTest extends UnitConversion
     pound = 1.2;
     assertEquals(0.2357240930288872, UnitConversion.lbConversions("Crab", gal, pound));
     
+    pound = 5.7;
+    assertEquals(92.33843657142857, UnitConversion.lbConversions(cheeseA, ind, pound));
+    
   }
   
   @Test
@@ -238,6 +242,9 @@ class UnitConversionTest extends UnitConversion
     
     ounce = 385563.5736;
     assertEquals(3173.125025871127, UnitConversion.ozConversions("Butter", gal, ounce));
+    
+    ounce = 2.0;
+    assertEquals(2.024965714285714, UnitConversion.ozConversions(cheeseA, ind, ounce));
     
   }
   
@@ -665,7 +672,7 @@ class UnitConversionTest extends UnitConversion
     assertEquals(7.011900000000001, UnitConversion.mlConversion(berry, g, milli));
     
     milli = 1046.309;
-    assertEquals(200.77660283189525, UnitConversion.mlConversion("American cheese", dr, milli));
+    assertEquals(200.77660283189525, UnitConversion.mlConversion(cheeseA, dr, milli));
     
     milli = 82658.48;
     assertEquals(3411.3601076843624, UnitConversion.mlConversion(mush, oz, milli));
@@ -678,10 +685,10 @@ class UnitConversionTest extends UnitConversion
   void converterTest()
   {
     double total = 0.0;
-    assertEquals(0.0, UnitConversion.converter(pasta, ind, g, total));
+    assertEquals(-0.0, UnitConversion.converter(pasta, ind, g, total));
     
     total = 57.0;
-    assertEquals(57.0, UnitConversion.converter(pasta, ind, g, total));
+    assertEquals(0.0, UnitConversion.converter(pasta, ind, g, total));
     
     total = 923.457;
     assertEquals(2.0358744169213447, UnitConversion.converter(alc, g, lb, total));
@@ -724,6 +731,19 @@ class UnitConversionTest extends UnitConversion
     
     total = 4746.4384;
     assertEquals(23862.719207886028, UnitConversion.converter(cherry, tsp, g, total));
+  }
+  
+  @Test
+  void individualTest()
+  {
+    double total = 1.0;
+    assertEquals(28.0, UnitConversion.converter(cheeseA, ind, g, total));
+    
+    total = 65746.0;
+    assertEquals(65746.0, UnitConversion.converter("A", ind, ind, total));
+    
+    total = -18465;
+    assertEquals(0.0, UnitConversion.converter("B", ind, g, total));
   }
 
 }
