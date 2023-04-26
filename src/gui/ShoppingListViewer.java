@@ -110,6 +110,8 @@ public class ShoppingListViewer extends JFrame
 			if(count < 1) 	box.add(str);
 		}
 		count++;
+		changeUnit();
+		mergeDuplicateIngredients();
 		updateShoppingListDisplay();
 	}
 
@@ -173,7 +175,37 @@ public class ShoppingListViewer extends JFrame
 		}
 		shoppingListBox.setText(display);
 	}
+	
+	/**
+	 * Merges duplicate ingredients.
+	 */
+	private void mergeDuplicateIngredients() {
+	    for (int i = 0; i < box.size(); i++) {
+	        for (int j = i + 1; j < box.size(); j++) {
+	            Ingredient ingr1 = box.get(i);
+	            Ingredient ingr2 = box.get(j);
+	            
+	            if (equal(ingr1, ingr2)) {
+	                ingr1.setAmount(ingr1.getAmount() + ingr2.getAmount());
+	                box.remove(j);
+	                j--; 
+	            }
+	        }
+	    }
+	}
 
+	/**
+	 * Checks if two ingredients are equal except for their amount.
+	 * @param ingr1 first ingredient
+	 * @param ingr2 second ingredient
+	 * @return if equal
+	 */
+	private boolean equal(Ingredient ingr1, Ingredient ingr2) {
+	    return ingr1.getIngredient().equals(ingr2.getIngredient()) &&
+	            ingr1.getName().equals(ingr2.getName()) &&
+	            ingr1.getDetails().equals(ingr2.getDetails()) &&
+	            ingr1.getUnit().equals(ingr2.getUnit());
+	}
 }
 
 
