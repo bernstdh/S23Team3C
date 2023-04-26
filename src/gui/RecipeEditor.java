@@ -39,6 +39,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   private static final long serialVersionUID = 1L;
   private static final String RECIPE = ".rcp";
   
+  
   private JButton closeButton, newButton, 
           openButton, saveAsButton, saveButton;
   private JFileChooser fileChooser;
@@ -54,6 +55,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   private final String unchangedState = "unchangedState";
   private final String nullState = "nullState";
   private UtensilPanel utensilsPanel;
+  private DocumentFilter numberServedFilter;
  
   /**
    * Constructor for the RecipeEditor Window.
@@ -150,7 +152,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     }
     else if(ae.getSource() == newButton)
     {
-      this.state = nullState;
+      this.state = unchangedState;
       updateButtonStates();
       recipe = null;
       this.reset();
@@ -274,9 +276,9 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     numberServedBox = new JTextField();
     numberServedBox.setPreferredSize(new Dimension(60, 20));
     
-    DocumentFilter filter;
-    filter = new WholeNumberDocumentFilter();
-    ((AbstractDocument) numberServedBox.getDocument()).setDocumentFilter(filter);
+
+    numberServedFilter = new WholeNumberDocumentFilter();
+    ((AbstractDocument) numberServedBox.getDocument()).setDocumentFilter(numberServedFilter);
   
     
     recipeAttributesPanel.add(numberServedLabel);
@@ -315,6 +317,10 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   public void reset()
   {
     recipeNameBox.setText("");
+    
+    ((AbstractDocument) numberServedBox.getDocument()).setDocumentFilter(null);
+    numberServedBox.setText("");
+    ((AbstractDocument) numberServedBox.getDocument()).setDocumentFilter(numberServedFilter);
     utensilsPanel.reset();
     ingredientsPanel.reset();
     stepsPanel.reset();
@@ -389,7 +395,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     public void replace(final DocumentFilter.FilterBypass fb, final int offset, final int length,
         final String text, final AttributeSet attr) throws BadLocationException 
     {
-      fb.insertString(offset, text.replaceAll("[^[0-9]+$|^$|^\\s$]", ""), attr);   
+      fb.insertString(offset, text.replaceAll("[^[0-9]]", ""), attr);   
     }
   }
   
