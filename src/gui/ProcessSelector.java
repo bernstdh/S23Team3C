@@ -60,7 +60,7 @@ public class ProcessSelector extends JFrame implements ActionListener
   public ProcessSelector()
   {
     // Create the frame
-    super("Recipe Selector");
+    super("Process Selector");
     setSize(200, 200);
     gl = new GridLayout(1, 1);
     gl.setVgap(10);

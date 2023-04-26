@@ -4,10 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -42,8 +46,17 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     menuBar = new JMenuBar();
     addMenuItems(menuBar);
     setJMenuBar(menuBar);
+    addLogo();
   }
 
+  private void addLogo() 
+  {
+    URL url = this.getClass().getResource("/icons/logoKILowBites.png");
+    ImageIcon icon = new ImageIcon(url);
+    JLabel picLabel = new JLabel(icon);
+    this.add(picLabel);
+  }
+  
   private void addMenuItems(final JMenuBar mb)
   {
 

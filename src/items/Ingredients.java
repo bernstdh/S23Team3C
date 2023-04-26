@@ -13,6 +13,7 @@ public class Ingredients implements Serializable
 
   private String ingredientName;
   private double caloriesPerGram;
+  private double individualGrams;
   private double gramsPerMilliliter;
   
   /**
@@ -27,6 +28,23 @@ public class Ingredients implements Serializable
     this.ingredientName = ingredientName;
     this.caloriesPerGram = caloriesPerGram;
     this.gramsPerMilliliter = gramsPerMilliliter;
+    this.individualGrams = -1.0;
+  }
+  
+  /**
+   * Creates a new ingredient object with individual ingredient calories.
+   * @param ingredientName      The ingredient name
+   * @param caloriesPerGram     The calories per gram of the new ingredient
+   * @param gramsPerMilliliter  The grams per milliliter of the new ingredient
+   * @param individualGrams  The number of grams per individual ingredient
+   */
+  public Ingredients(final String ingredientName, final double caloriesPerGram,
+      final double gramsPerMilliliter, final double individualGrams)
+  {
+    this.ingredientName = ingredientName;
+    this.caloriesPerGram = caloriesPerGram;
+    this.gramsPerMilliliter = gramsPerMilliliter;
+    this.individualGrams = individualGrams;
   }
   /**
    * Returns the caloriesPerGram attribute.
@@ -62,6 +80,24 @@ public class Ingredients implements Serializable
   public String getVolumeUnits()
   {
     return "g/ml";
+  }
+  
+  /**
+   * Gets the individual grams.
+   * @return the individual grams
+   */
+  public double getIndividualGrams()
+  {
+    return this.individualGrams;
+  }
+  
+  /**
+   * Individual CaloriesPerGram.
+   * @return calories per individual
+   */
+  public double getCaloriesPerIndividual()
+  {
+    return this.caloriesPerGram * this.individualGrams;
   }
   
   

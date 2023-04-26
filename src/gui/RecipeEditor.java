@@ -1,6 +1,7 @@
 package gui;
 import java.awt.*;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -92,6 +93,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     
     fileChooser = new JFileChooser();
     this.state = nullState;
+    this.setEnabledAll(false);
     updateButtonStates();
     recipe = null;
     this.add(recipePanel, BorderLayout.CENTER);
@@ -108,6 +110,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     {
       this.state = nullState;
       updateButtonStates();
+      setEnabledAll(false);
       this.dispose();
     }
     else if(ae.getSource() == openButton)
@@ -131,6 +134,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
           //add attributes to their respective list models.
           this.state = unchangedState;
           updateButtonStates();
+          this.setEnabledAll(true);
         }
         catch(IOException | ClassNotFoundException ia )
         {
@@ -139,7 +143,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
         
       }
       else if(returnVal == JFileChooser.CANCEL_OPTION)
-      {//have to fix something here i think, has to go back to whatever state it was before
+      {
         this.state = previousState;
         updateButtonStates();
       }
@@ -150,6 +154,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
       updateButtonStates();
       recipe = null;
       this.reset();
+      this.setEnabledAll(true);
     }
     else if(ae.getSource() == saveAsButton)
     {
@@ -279,6 +284,22 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     
   }
 
+  
+
+  /**
+   * Used to enable or disable all non-button components in
+   * the RecipeEditor.
+   * @param set used to enable or disable
+   */
+  private void setEnabledAll(final boolean set) 
+  {
+    //handles enabling all components that aren't the top row of buttons
+    recipeNameBox.setEnabled(set);
+    numberServedBox.setEnabled(set);
+    stepsPanel.setEnabledAll(set);
+    ingredientsPanel.setEnabledAll(set);
+    utensilsPanel.setEnabledAll(set);
+  }
   private void updateButtonStates() 
   {
     newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
@@ -294,7 +315,6 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   public void reset()
   {
     recipeNameBox.setText("");
-    numberServedBox.setText("");
     utensilsPanel.reset();
     ingredientsPanel.reset();
     stepsPanel.reset();
@@ -369,7 +389,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     public void replace(final DocumentFilter.FilterBypass fb, final int offset, final int length,
         final String text, final AttributeSet attr) throws BadLocationException 
     {
-      fb.insertString(offset, text.replaceAll("[^0-9]", ""), attr);   
+      fb.insertString(offset, text.replaceAll("[^[0-9]+$|^$|^\\s$]", ""), attr);   
     }
   }
   

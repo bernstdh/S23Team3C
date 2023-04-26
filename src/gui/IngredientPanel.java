@@ -26,6 +26,7 @@ public class IngredientPanel extends JPanel
   private static final long serialVersionUID = 1L;
   private DefaultListModel<String> ingredientsListModel;
 
+  @SuppressWarnings("unused")
   private IngredientDialog id;
   private JButton ingredientsAddButton, ingredientsDeleteButton;
   private JComboBox<String> ingredientsUnitsBox;
@@ -267,6 +268,19 @@ public class IngredientPanel extends JPanel
   {
     if(ingredientsJList.isSelectionEmpty()) ingredientsDeleteButton.setEnabled(false);
     else ingredientsDeleteButton.setEnabled(true);
+  }
+  
+  /**
+   * Enables or disables all non button components.
+   * @param set used to enable or disable
+   */
+  public void setEnabledAll(final boolean set) 
+  {
+    ingredientsNameBox.setEnabled(set);
+    ingredientsDetailsBox.setEnabled(set);
+    ingredientsAmountBox.setEnabled(set);
+    ingredientsUnitsBox.setEnabled(set);
+    ingredientsScrollPane.setEnabled(set);
   }
   
   /**

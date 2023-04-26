@@ -170,6 +170,7 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
     stepsOnBox.setPreferredSize(new Dimension(60, 20));
     stepsOnBox.setEditable(false);
     stepsOnBox.addActionListener(this);
+
     stepsUtensilBox = new JComboBox<>();
     stepsUtensilBox.setPreferredSize(new Dimension(90, 20));
     stepsUtensilBox.setEditable(false);
@@ -250,6 +251,19 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
     stepsDetailsBox.setText("");
     stepsListModel.removeAllElements();
     stepsList.clear();
+  }
+  
+  /**
+   * Enables or disables all non button components.
+   * @param set used to enable or disable
+   */
+  public void setEnabledAll(final boolean set) 
+  {
+    stepsOnBox.setEnabled(set);
+    stepsUtensilBox.setEnabled(set);
+    stepsActionBox.setEnabled(set);
+    stepsDetailsBox.setEnabled(set);
+    stepsScrollPane.setEnabled(set);
   }
   
   /**

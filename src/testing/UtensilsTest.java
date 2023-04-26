@@ -6,20 +6,18 @@ import org.junit.jupiter.api.Test;
 
 import items.Utensils;
 
+class UtensilsTest
+{
 
-class UtensilsTest {
+  @Test
+  void ingredientTest()
+  {
+    Utensils newtensil;
+    newtensil = new Utensils("spoon", "big spoon");
 
-	@Test
-	void ingredientTest() {
-		Utensils newtensil;
-		newtensil = new Utensils("spoon", "big spoon");
-		
-		
-		
-		
-	   assertEquals("spoon", newtensil.getName());
-	   assertEquals("big spoon", newtensil.getDetails());
+    assertEquals("spoon", newtensil.getName());
+    assertEquals("big spoon", newtensil.getDetails());
 
-	}
+  }
 
 }

@@ -48,9 +48,8 @@ public class AboutDialog
 		text.setEditable(false);
 
 
-		pic = new JLabel(loadImageIcon("ram.png"));
-
-	//	frame.add(pic, BorderLayout.EAST);
+//		pic = new JLabel(loadImageIcon("ram.png"));
+		frame.add(pic, BorderLayout.EAST);
 		frame.add(text);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

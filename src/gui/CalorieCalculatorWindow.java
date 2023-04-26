@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import items.IngredientTable;
+import items.Ingredients;
 import math.CalorieCalculator;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,6 +20,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
   private static boolean exists = false;
   private static CalorieCalculatorWindow instance = null;
 	private String g = "g";
+	private String ind = "individual";
 	private String dr = "dr";
 	private String oz = "oz";
 	private String lb = "lb";
@@ -35,7 +37,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 	private String invalid = "Calories: Please Enter a Valid Number";
 	private String negative = "Calories: Please Enter a Positive Number";
 	
-	private String[] units = {g, dr, oz, lb, p, tsp, tbs, floz, cup, pt, qt, gal, ml};
+	private String[] units = {g, dr, oz, lb, p, tsp, tbs, floz, cup, pt, qt, gal, ml, ind};
 	
 	private JComboBox<String> ingredientBox;
 	private JTextField amountBox;
@@ -90,7 +92,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setResizable(false);
-		setSize(500, 200);
+		setSize(550, 200);
 	}
 
 	/**
@@ -104,6 +106,8 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 	    double amount = -1.0;
 	    // test.
 	    String ingredient = (String) ingredientBox.getSelectedItem();
+	    IngredientTable ingredients = IngredientTable.createInstance();
+	    Ingredients ing = ingredients.fromCode(ingredient);
 	    if (amountBox.getText().equals("")) amount = 0.0;
 	    String unit = (String) unitBox.getSelectedItem();
 	    try
@@ -113,7 +117,10 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 	      else
 	      {
 	        double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
-	        calorieLabel.setText(String.format("Calories: %.1f", calories));
+	        if (calories < 0 && ing.getIndividualGrams() == -1.0) 
+	          calorieLabel.setText("Calories: Please Pick an Ingredient"
+	              + " with an Individual Value");
+	        else calorieLabel.setText(String.format("Calories: %.1f", calories));
 	      } 
 	    }
 	    catch (NumberFormatException nfe)
