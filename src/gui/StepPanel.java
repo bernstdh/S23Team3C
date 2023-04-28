@@ -157,6 +157,7 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
     stepsActionBox.addItem("dip");
     stepsActionBox.addItem("fry");
     stepsActionBox.addItem("drain");
+    stepsActionBox.addItem("grill");
     stepsActionBox.addItem("heat");
     stepsActionBox.addItem("ignite");
     stepsActionBox.addItem("melt");
@@ -164,6 +165,9 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
     stepsActionBox.addItem("saute");
     stepsActionBox.addItem("sear");
     stepsActionBox.addItem("simmer");
+    stepsActionBox.addItem("smoke");
+    stepsActionBox.addItem("spread");
+    stepsActionBox.addItem("toast");
     
     
     stepsOnBox = new JComboBox<>();
