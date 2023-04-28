@@ -48,8 +48,6 @@ public class AboutDialog
 		text.setEditable(false);
 
 
-//		pic = new JLabel(loadImageIcon("ram.png"));
-		frame.add(pic, BorderLayout.EAST);
 		frame.add(text);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,11 +55,5 @@ public class AboutDialog
 
 	}
 
-	private ImageIcon loadImageIcon(final String name)
-	{
-		URL url = this.getClass().getResource("/icons/"+ name);
-		ImageIcon icon = new ImageIcon(url);
-		return icon;
-	}
 
 }
