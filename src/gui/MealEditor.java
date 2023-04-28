@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import app.languageField;
 import app.languageField;
 import items.Meals;
 import items.Recipes;
@@ -79,9 +79,9 @@ public class MealEditor extends JFrame implements ActionListener
     // this.nullstate true if doc is null state
     
     // LANGUAGETEST
-   // ResourceBundle STRINGS = ResourceBundle.getBundle("Strings_english.properties");
-    nameLabel = new JLabel("Name:");
-    // nameLabel = new JLabel(STRINGS.getString(unchangedState));
+    // ResourceBundle STRINGS = ResourceBundle.getBundle("Strings");
+    // nameLabel = new JLabel("Name:");
+    nameLabel = new JLabel(languageField.STRINGS.getString(unchangedState));
     //fjdks
     nameBox = new JTextField(35);
     nameBox.setEnabled(false);
