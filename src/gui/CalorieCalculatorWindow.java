@@ -36,6 +36,10 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 	private String calor = "Calories:";
 	private String invalid = "Calories: Please Enter a Valid Number";
 	private String negative = "Calories: Please Enter a Positive Number";
+	private String in = "Ingredient";
+	private String am = "Amount";
+	private String un = "Unit";
+	private String indErr = "Calories: Please Pick an Ingredient with an Individual Value";
 	
 	private String[] units = {g, dr, oz, lb, p, tsp, tbs, floz, cup, pt, qt, gal, ml, ind};
 	
@@ -76,11 +80,11 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 		JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		upperPanel.add(calc);
 		upperPanel.add(reset);
-		lowerPanel.add(new JLabel("Ingredient:"));
+		lowerPanel.add(new JLabel(in+ ":"));
 		lowerPanel.add(ingredientBox);
-		lowerPanel.add(new JLabel("Amount:"));
+		lowerPanel.add(new JLabel(am + ":"));
 		lowerPanel.add(amountBox);
-		lowerPanel.add(new JLabel("Unit:"));
+		lowerPanel.add(new JLabel(un + ":"));
 		lowerPanel.add(unitBox);
 		lowerPanel.add(calorieLabel);
 		panel.add(upperPanel, 0);
@@ -118,9 +122,8 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 	      {
 	        double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
 	        if (calories < 0 && ing.getIndividualGrams() == -1.0) 
-	          calorieLabel.setText("Calories: Please Pick an Ingredient"
-	              + " with an Individual Value");
-	        else calorieLabel.setText(String.format("Calories: %.1f", calories));
+	          calorieLabel.setText(indErr);
+	        else calorieLabel.setText(String.format(calor +  " %.1f", calories));
 	      } 
 	    }
 	    catch (NumberFormatException nfe)
