@@ -1,8 +1,11 @@
 package app;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import gui.MainWindow;
 
@@ -13,6 +16,7 @@ import gui.MainWindow;
  */
 public class KILowBites implements Runnable
 {
+  
 
 	@SuppressWarnings("unused")
   private String[] args;
@@ -35,6 +39,7 @@ public class KILowBites implements Runnable
 	public static void main(final String[] args) throws InvocationTargetException,
 	  InterruptedException
 	{
+	  
 		SwingUtilities.invokeAndWait(new KILowBites(args));
 	}
 	

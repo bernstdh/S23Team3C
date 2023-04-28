@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -19,6 +20,9 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import app.languageField;
 import items.Meals;
 import items.Recipes;
 import utilities.Serializer;
@@ -61,6 +65,7 @@ public class MealEditor extends JFrame implements ActionListener
   private final String nullState = "nullState";
   private String state;
 
+
   /**
    * MealEditor class.
    */
@@ -72,9 +77,14 @@ public class MealEditor extends JFrame implements ActionListener
     setResizable(false);
     this.state = nullState;
     // this.nullstate true if doc is null state
-
-    nameLabel = new JLabel("Name:");
+    
+    // LANGUAGETEST
+    ResourceBundle STRINGS = ResourceBundle.getBundle("Strings_english.properties");
+    // nameLabel = new JLabel("Name:");
+    nameLabel = new JLabel(STRINGS.getString(unchangedState));
+    //fjdks
     nameBox = new JTextField(35);
+    nameBox.setEnabled(false);
     Dimension buttonSize = new Dimension(30, 30);
 
     newButton = new JButton(loadImageIcon("newButton.png"));
@@ -196,7 +206,7 @@ public class MealEditor extends JFrame implements ActionListener
       if (this.state != nullState)
       {
         this.state = changedState;
-        this.state = nullState;
+        nameBox.setEnabled(true);
         newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
         openButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
         saveButton.setEnabled(state.equals(changedState));
@@ -239,6 +249,7 @@ public class MealEditor extends JFrame implements ActionListener
     }
     else if (e.getSource() == openButton)
     {
+      nameBox.setEnabled(true);
       this.state = unchangedState;
       deleteRecipeButton.setEnabled(true);
       addRecipeButton.setEnabled(true);
@@ -258,6 +269,7 @@ public class MealEditor extends JFrame implements ActionListener
           {
             this.meal = Serializer.deserializeMeal(tempFileName);
             this.recipeListModel.removeAllElements();
+            nameBox.setText(this.meal.getName());
           }
           for (int i = 0; i < meal.getRecipes().size(); i++)
           {
@@ -272,6 +284,8 @@ public class MealEditor extends JFrame implements ActionListener
     }
     else if (e.getSource() == newButton)
     {
+      nameBox.setEnabled(true);
+      nameBox.setText("");
       this.state = unchangedState;
       addRecipeButton.setEnabled(true);
       deleteRecipeButton.setEnabled(true);
@@ -285,6 +299,7 @@ public class MealEditor extends JFrame implements ActionListener
     }
     else if (e.getSource() == saveButton)
     {
+      nameBox.setEnabled(true);
       this.state = unchangedState;
       newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
       openButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
@@ -303,6 +318,7 @@ public class MealEditor extends JFrame implements ActionListener
     }
     else if (e.getSource() == saveAsButton)
     {
+      nameBox.setEnabled(true);
       this.state = unchangedState;
       newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
       openButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
