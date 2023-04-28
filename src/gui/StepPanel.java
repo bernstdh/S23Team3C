@@ -124,7 +124,12 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
         numRemoved++;
         for(Steps s: stepsList) 
         {
-          if(s.toString().equals(stepsString))
+          if(s.getIngredientSource() != null && s.IngredientStepToString().equals(stepsString)) 
+          {
+            stepsList.remove(s);
+            break;
+          }
+          else if(s.UtensilStepToString().equals(stepsString))
           {
             stepsList.remove(s);
             break;
