@@ -49,7 +49,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
     menuBar = new JMenuBar();
     addMenuItems(menuBar);
     setJMenuBar(menuBar);
-    logo = new JLabel(loadImageIcon("ram.png"));
+    logo = new JLabel(loadImageIcon("logoKiLowBites.png"));
     this.add(logo);
   }
 
