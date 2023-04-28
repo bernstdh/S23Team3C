@@ -160,6 +160,7 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
     stepsActionBox.addItem("grill");
     stepsActionBox.addItem("heat");
     stepsActionBox.addItem("ignite");
+    stepsActionBox.addItem("juice");
     stepsActionBox.addItem("melt");
     stepsActionBox.addItem("put");
     stepsActionBox.addItem("saute");
