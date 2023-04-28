@@ -79,9 +79,9 @@ public class MealEditor extends JFrame implements ActionListener
     // this.nullstate true if doc is null state
     
     // LANGUAGETEST
-    ResourceBundle STRINGS = ResourceBundle.getBundle("Strings_english.properties");
-    // nameLabel = new JLabel("Name:");
-    nameLabel = new JLabel(STRINGS.getString(unchangedState));
+   // ResourceBundle STRINGS = ResourceBundle.getBundle("Strings_english.properties");
+    nameLabel = new JLabel("Name:");
+    // nameLabel = new JLabel(STRINGS.getString(unchangedState));
     //fjdks
     nameBox = new JTextField(35);
     nameBox.setEnabled(false);
