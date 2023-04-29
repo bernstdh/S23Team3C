@@ -16,15 +16,13 @@ public class IngredientDialog extends JDialog
 {
 
   private static final long serialVersionUID = 1L;
-  private JTextField ingredientField;
-  private JTextField densityField;
-  private JTextField caloriesField;
+  private JTextField ingredientField, densityField, caloriesField, individualField;
+  private JPanel ingredientPanel, densityPanel, caloriesPanel, individualPanel;
   private String ingredient;
   private double density;
   private double calories;
   private JButton okButton;
   private JLabel error;
-
   /**
    * Lets the user create a new ingredient and add it to the existing table.
    * @param parent The parent window of the dialog box. (Most likely Recipe Editor)
@@ -32,36 +30,56 @@ public class IngredientDialog extends JDialog
   public IngredientDialog(final JFrame parent)
   {
     super(parent, "Add Ingredient", true);
-    setSize(400, 200);
+    setSize(350, 200);
     setLocationRelativeTo(parent);
-    setResizable(false);
+    setResizable(true);
 
-    setLayout(new BorderLayout());
-    
+    GridLayout gl = new GridLayout(5, 0);
+    gl.setHgap(3);
+    setLayout(gl); 
     // Create a panel for all the inputs
-    JPanel inputPanel = new JPanel(new GridLayout(3, 2, 10, 10));
-    inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-    add(inputPanel, BorderLayout.CENTER);
 
     JLabel ingredientLabel = new JLabel("Ingredient:");
-    ingredientField = new JTextField();
-    inputPanel.add(ingredientLabel);
-    inputPanel.add(ingredientField);
+    ingredientPanel = new JPanel();
+    ingredientPanel.setLayout(new GridLayout(0, 2));
+    ingredientField = new JTextField(10);
+    ingredientPanel.add(ingredientLabel);
+    ingredientPanel.add(ingredientField);
+    add(ingredientPanel, 0);
+    
 
     JLabel densityLabel = new JLabel("Density (g/ml):");
-    densityField = new JTextField();
-    inputPanel.add(densityLabel);
-    inputPanel.add(densityField);
+    densityField = new JTextField(10);
+    densityPanel = new JPanel();
+    densityPanel.setLayout(new GridLayout(0, 2));
+    densityPanel.add(densityLabel);
+    densityPanel.add(densityField);
+    add(densityPanel, 1);
 
     JLabel caloriesLabel = new JLabel("Calories (cals/gram):");
-    caloriesField = new JTextField();
-    inputPanel.add(caloriesLabel);
-    inputPanel.add(caloriesField);
+    caloriesField = new JTextField(10);
+    caloriesPanel = new JPanel();
+    caloriesPanel.setLayout(new GridLayout(0, 2));
+    caloriesPanel.add(caloriesLabel);
+    caloriesPanel.add(caloriesField);
+    add(caloriesPanel, 2);
+    
+    JLabel individualLabel = new JLabel("Grams per Individual Unit: ");
+    individualField = new JTextField(10);
+    individualPanel = new JPanel();
+    individualPanel.setLayout(new GridLayout(0, 2));
+    individualPanel.add(individualLabel);
+    individualPanel.add(individualField);
+    add(individualPanel, 3);
+    
 
-    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
     error = new JLabel("");
-    buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
     okButton = new JButton("OK");
+    buttonPanel.setLayout(new FlowLayout());
+    buttonPanel.add(okButton);
+    buttonPanel.add(error);
+    add(buttonPanel, 4);
     
     // Upon pressing the OK button, the system will validate the user's inputs.
     okButton.addActionListener(e ->
@@ -71,10 +89,6 @@ public class IngredientDialog extends JDialog
         dispose();
       }
     });
-    buttonPanel.add(error);
-    buttonPanel.add(okButton);
-    add(buttonPanel, BorderLayout.SOUTH);
-
     setVisible(true);
   }
 
@@ -112,15 +126,23 @@ public class IngredientDialog extends JDialog
     IngredientTable it = IngredientTable.createInstance();
     double tempDensity = -1;
     double tempCalories = -1;
+    double tempIndividual = -1;
+    boolean useInd = false;
+    // Try getting the ingredient, given the text isn't null or of length 0.
     if (it.fromCode(ingredientField.getText()) != null)
     {
       error.setText("Please enter a unique ingredient name.");
+      return false;
+    }
+    if (ingredientField.getText().length() == 0) {
+      error.setText("Please enter an ingredient name.");
       return false;
     }
     else
     {
       ingredient = ingredientField.getText();
     }
+    // Try setting the density.
     try
     {
       tempDensity = Double.valueOf(densityField.getText());
@@ -129,6 +151,8 @@ public class IngredientDialog extends JDialog
     {
       tempDensity = -1;
     }
+    
+    // Try setting the calories.
     try
     {
       tempCalories = Double.valueOf(caloriesField.getText());
@@ -138,21 +162,41 @@ public class IngredientDialog extends JDialog
       tempCalories = -1;
     }
 
-    if (tempDensity <= 0)
+    /*
+     * Try setting the individual grams. If it's NaN set to -1
+     */
+    if(caloriesField.getText() != null) {
+      try
+      {
+        tempIndividual = Double.valueOf(caloriesField.getText());
+      } catch (NumberFormatException nfe) {
+        tempIndividual = -1;
+      }
+    }
+    if (tempDensity < 0)
     {
       densityField.setText("");
       error.setText("Please enter a valid density.");
       return false;
     }
-    if (tempCalories <= 0)
+    if (tempCalories < 0)
     {
       caloriesField.setText("");
       error.setText("Please enter a valid calorie value.");
       return false;
     }
+    if (tempIndividual < 0 && individualField.getText().length() < 1) {
+      useInd = false;
+    } else {
+      useInd = true;
+    }
     density = tempDensity;
     calories = tempCalories;
-    it.add(new Ingredients(ingredient, density, calories));
+    if(!useInd) {
+      it.add(new Ingredients(ingredient, density, calories));
+    } else {
+      it.add(new Ingredients(ingredient, density, calories, tempIndividual));
+    }
     return true;
   }
 }
