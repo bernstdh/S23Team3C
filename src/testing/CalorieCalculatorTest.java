@@ -9,11 +9,11 @@ import math.CalorieCalculator;
  * CalorieCalculatorTest.
  * @author Trace Jones, James Madison University
  * @version 1.0
- * 
+ * ß
  * This work complies with the JMU Honor Code.
  *
  */
-class CalorieCalculatorTest
+class CalorieCalculatorTest extends CalorieCalculator
 {
 
   @Test
@@ -91,6 +91,11 @@ class CalorieCalculatorTest
     amount = 79275.30958;
     unit = "Trace";
     assertEquals(0.0, CalorieCalculator.calculateCalories(ingredient, amount, unit), 0.01);
+    
+    ingredient = "American cheese";
+    amount = 5.2;
+    unit = "individual";
+    assertEquals(640.640, CalorieCalculator.calculateCalories(ingredient, amount, unit), 0.01);
     
   }
 
