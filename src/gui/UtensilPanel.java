@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import app.languageField; 
 import items.Utensils;
 
 /**
@@ -52,16 +55,17 @@ public class UtensilPanel extends JPanel
   
   private void buildPanel()
   {    
-    this.setBorder(BorderFactory.createTitledBorder("Utensils"));
+    this.setBorder(BorderFactory.createTitledBorder
+        (languageField.STRINGS.getString("utensilsBorderText")));
     this.setLayout(new FlowLayout(FlowLayout.LEFT));
     
-    utensilAddButton = new JButton("Add");
+    utensilAddButton = new JButton(languageField.STRINGS.getString("add"));
     utensilAddButton.setEnabled(false);
-    utensilDeleteButton = new JButton("Delete");
+    utensilDeleteButton = new JButton(languageField.STRINGS.getString("delete"));
     utensilDeleteButton.setEnabled(false);
      
-    utensilNameLabel = new JLabel("Name:");
-    utensilDetailsLabel = new JLabel("Details:");
+    utensilNameLabel = new JLabel(languageField.STRINGS.getString("name"));
+    utensilDetailsLabel = new JLabel(languageField.STRINGS.getString("details"));
     
     utensilNameBox = new JTextField();
     utensilNameBox.setPreferredSize(new Dimension(175, 20));
