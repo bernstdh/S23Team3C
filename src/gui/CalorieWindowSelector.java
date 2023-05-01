@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import app.languageField;
+
 /**
  * CalorieWindowSelector.
  * @author Trace Jones
@@ -61,14 +63,14 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
     
     type = new JPanel();
     typeBox = new JComboBox<String>();
-    typeBox.addItem(in);
-    typeBox.addItem(re);
-    typeBox.addItem(me);
+    typeBox.addItem(languageField.STRINGS.getString("in"));
+    typeBox.addItem(languageField.STRINGS.getString("re"));
+    typeBox.addItem(languageField.STRINGS.getString("me"));
     typeBox.setSelectedItem(null);
     setLayout(gl);
     
     //Type selector button
-    confirmType = new JButton(ct);
+    confirmType = new JButton(languageField.STRINGS.getString("ct"));
     confirmType.addActionListener(this);
     confirmType.setSize(50, 50);
     
@@ -80,9 +82,9 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
     
     file = new JPanel();
     file.setLayout(new FlowLayout());
-    chooseFile = new JButton(choose);
+    chooseFile = new JButton(languageField.STRINGS.getString("choose"));
     chooseFile.addActionListener(this);
-    confirmItem = new JButton(ci);
+    confirmItem = new JButton(languageField.STRINGS.getString("ci"));
     confirmItem.addActionListener(this);
     fileName = new JLabel("");
     file.add(chooseFile);
@@ -97,17 +99,17 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
   public void actionPerformed(final ActionEvent e)
   {
     if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
-        && typeBox.getSelectedItem().toString().equals(in))
+        && typeBox.getSelectedItem().toString().equals(languageField.STRINGS.getString("in")))
     {
       CalorieCalculatorWindow.createInstance();
     }
     else if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
-        && typeBox.getSelectedItem().toString().equals(re))
+        && typeBox.getSelectedItem().toString().equals(languageField.STRINGS.getString("re")))
     {
       CalorieRecipeWindow.createInstance();
     }
     else if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
-        && typeBox.getSelectedItem().toString().equals(me))
+        && typeBox.getSelectedItem().toString().equals(languageField.STRINGS.getString("me")))
     {
       CalorieMealWindow.createInstance();
     }

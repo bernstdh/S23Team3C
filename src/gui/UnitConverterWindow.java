@@ -1,6 +1,7 @@
 package gui;
 import javax.swing.*;
 
+import app.languageField;
 import items.IngredientTable;
 import items.Ingredients;
 import math.UnitConversion;
@@ -87,7 +88,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
     amountBox = new JTextField(10);
     
     
-    amountLabel = new JLabel(toAmount);
+    amountLabel = new JLabel(languageField.STRINGS.getString("toAmount"));
     
     calc =  createJButton("calculate.png", CALCULATE);
     reset = createJButton("reset.png", RESET);
@@ -98,13 +99,13 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
     JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     upperPanel.add(calc);
     upperPanel.add(reset);
-    lowerPanel.add(new JLabel(frU + ":"));
+    lowerPanel.add(new JLabel(languageField.STRINGS.getString("frU") + ":"));
     lowerPanel.add(fromUnitsBox);
-    lowerPanel.add(new JLabel(tU + ":"));
+    lowerPanel.add(new JLabel(languageField.STRINGS.getString("tU") + ":"));
     lowerPanel.add(toUnitsBox);
-    lowerPanel.add(new JLabel(in + ":"));
+    lowerPanel.add(new JLabel(languageField.STRINGS.getString("in") + ":"));
     lowerPanel.add(ingredientsBox);
-    lowerPanel.add(new JLabel(frA + ": "));
+    lowerPanel.add(new JLabel(languageField.STRINGS.getString("frA") + ": "));
     lowerPanel.add(amountBox);
     lowerPanel.add(amountLabel);
     panel.add(upperPanel, 0);
@@ -156,28 +157,29 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
       try
       {
         amount = Double.parseDouble(amountBox.getText());
-        if (amount < 0) amountLabel.setText(negativeUC);
+        if (amount < 0) amountLabel.setText(languageField.STRINGS.getString("negativeUC"));
         else
         {
           if (ing.getIndividualGrams() == -1.0 && (fromUnit.equals(ind) || toUnit.equals(ind)))
-            amountLabel.setText(indErrUC);
+            amountLabel.setText(languageField.STRINGS.getString("indErrUC"));
           else
           {
             newAmount = converter(ingredient, fromUnit, toUnit, amount);
-            amountLabel.setText(String.format(toAmount + " %.1f", newAmount));
+            amountLabel.setText(String.format(languageField.STRINGS.getString("toAmount")
+                + " %.1f", newAmount));
           }
         }
       }
       catch (NumberFormatException nfe)
       {
-        amountLabel.setText(invalidUC);
+        amountLabel.setText(languageField.STRINGS.getString("invalidUC"));
       }  
     } 
     
     if (e.getSource() == reset)
     {
       amountBox.setText("");
-      amountLabel.setText(toAmount);
+      amountLabel.setText(languageField.STRINGS.getString("toAmount"));
       ingredientsBox.setEnabled(true);
       ingredientsBox.setSelectedItem("Alcohol");
       fromUnitsBox.setSelectedItem(dr);

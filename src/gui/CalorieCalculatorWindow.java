@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+
+import app.languageField;
 import items.IngredientTable;
 import items.Ingredients;
 import math.CalorieCalculator;
@@ -70,7 +72,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 		unitBox = new JComboBox<>(units);
 		unitBox.addActionListener(this);
 
-		calorieLabel = new JLabel(calor);
+		calorieLabel = new JLabel(languageField.STRINGS.getString("calor"));
 		calc = createJButton("calculate.png", CALCULATE);
     reset = createJButton("reset.png", RESET);
     reset.addActionListener(this);
@@ -80,11 +82,11 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 		JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		upperPanel.add(calc);
 		upperPanel.add(reset);
-		lowerPanel.add(new JLabel(in+ ":"));
+		lowerPanel.add(new JLabel(languageField.STRINGS.getString("in")+ ":"));
 		lowerPanel.add(ingredientBox);
-		lowerPanel.add(new JLabel(am + ":"));
+		lowerPanel.add(new JLabel(languageField.STRINGS.getString("am") + ":"));
 		lowerPanel.add(amountBox);
-		lowerPanel.add(new JLabel(un + ":"));
+		lowerPanel.add(new JLabel(languageField.STRINGS.getString("un") + ":"));
 		lowerPanel.add(unitBox);
 		lowerPanel.add(calorieLabel);
 		panel.add(upperPanel, 0);
@@ -117,25 +119,26 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 	    try
 	    {
 	      amount = Double.parseDouble(amountBox.getText());
-	      if (amount < 0) calorieLabel.setText(negative);
+	      if (amount < 0) calorieLabel.setText(languageField.STRINGS.getString("negative"));
 	      else
 	      {
 	        double calories = CalorieCalculator.calculateCalories(ingredient, amount, unit);
 	        if (calories < 0 && ing.getIndividualGrams() == -1.0) 
-	          calorieLabel.setText(indErr);
-	        else calorieLabel.setText(String.format(calor +  " %.1f", calories));
+	          calorieLabel.setText(languageField.STRINGS.getString("indErr"));
+	        else calorieLabel.setText(String.format(languageField.STRINGS.getString("calor")
+	            +  " %.1f", calories));
 	      } 
 	    }
 	    catch (NumberFormatException nfe)
 	    {
-	      calorieLabel.setText(invalid);
+	      calorieLabel.setText(languageField.STRINGS.getString("invalid"));
 	    } 
 	  }
 	  if (e.getSource() == reset)
 	  {
 	    ingredientBox.setSelectedItem("Alcohol");
 	    unitBox.setSelectedItem(g);
-	    calorieLabel.setText(calor);
+	    calorieLabel.setText(languageField.STRINGS.getString("calor"));
 	    amountBox.setText("");
 	  }
 	  

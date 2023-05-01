@@ -2,6 +2,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import app.languageField;
 import utilities.Serializer;
 import items.Recipes;
 import java.awt.*;
@@ -49,10 +50,10 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
     addWindowListener(this);
     recipeButton = new JButton();
     recipeButton.addActionListener(this);
-    recipeButton.setText(choose);
+    recipeButton.setText(languageField.STRINGS.getString("choose"));
     servingsBox = new JTextField(10);
 
-    calorieLabel = new JLabel(calor);
+    calorieLabel = new JLabel(languageField.STRINGS.getString("calor"));
     calc = createJButton("calculate.png", CALCULATE);
     reset = createJButton("reset.png", RESET);
     reset.addActionListener(this);
@@ -63,9 +64,9 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
     JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     upperPanel.add(calc);
     upperPanel.add(reset);
-    lowerPanel.add(new JLabel(re + ":"));
+    lowerPanel.add(new JLabel(languageField.STRINGS.getString("re") + ":"));
     lowerPanel.add(recipeButton);
-    lowerPanel.add(new JLabel(se + ":"));
+    lowerPanel.add(new JLabel(languageField.STRINGS.getString("se") + ":"));
     lowerPanel.add(servingsBox);
     lowerPanel.add(calorieLabel);
     panel.add(upperPanel, 0);
@@ -103,7 +104,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
       }
       catch (ClassNotFoundException | IOException e1)
       {
-        System.out.println(noRep);
+        System.out.println(languageField.STRINGS.getString("noRep"));
       } 
     }
     else if (e.getSource() == calc)
@@ -118,26 +119,27 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
       }
       catch (ClassNotFoundException | IOException e1)
       {
-        System.out.println(noRep);
+        System.out.println(languageField.STRINGS.getString("noRep"));
       } 
       try
       {
         servings = Double.parseDouble(servingsBox.getText());
-        if (servings < 0) calorieLabel.setText(negative);
+        if (servings < 0) calorieLabel.setText(languageField.STRINGS.getString("negative"));
         else
         {
-          calorieLabel.setText(String.format(calor + " %.1f", calories * servings));
+          calorieLabel.setText(String.format(languageField.STRINGS.getString("calor")
+              + " %.1f", calories * servings));
         } 
       }
       catch (NumberFormatException nfe)
       {
-        calorieLabel.setText(invalid);
+        calorieLabel.setText(languageField.STRINGS.getString("invalid"));
       } 
     }
     if (e.getSource() == reset)
     {
-      recipeButton.setText(choose);
-      calorieLabel.setText(calor);
+      recipeButton.setText(languageField.STRINGS.getString("choose"));
+      calorieLabel.setText(languageField.STRINGS.getString("calor"));
       servingsBox.setText("");
     }
     
