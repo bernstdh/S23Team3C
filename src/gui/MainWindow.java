@@ -45,7 +45,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
    */
   public MainWindow(final String name)
   {
-    super(languageField.STRINGS.getString("KiLowBites"));
+    super(languageField.STRINGS.getString("KILowBites"));
     addWindowListener(this);
     menuBar = new JMenuBar();
     addMenuItems(menuBar);
