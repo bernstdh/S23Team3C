@@ -82,6 +82,12 @@ public class MealEditor extends JFrame implements ActionListener
     
     UIManager.put("FileChooser.cancelButtonText", languageField.STRINGS.getString("cancelButton"));
     UIManager.put("FileChooser.openButtonText", languageField.STRINGS.getString("openButton"));
+    // UIManager.put("FileChooser.saveAsButton", languageField.STRINGS.getString("cancelButton"));
+    // UIManager.put("FileChooser.File Format:", languageField.STRINGS.getString("cancelButton"));
+    UIManager.put("FileChooser.newFolderButtonText",
+        languageField.STRINGS.getString("newFolderButton"));
+    //UIManager.put("FileChooser.name ", languageField.STRINGS.getString("cancelButton"));
+    //UIManager.put("FileChooser.date modified", languageField.STRINGS.getString("cancelButton"));
 
 
     newButton = new JButton(loadImageIcon("newButton.png"));
