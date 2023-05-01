@@ -69,12 +69,12 @@ public class MealEditor extends JFrame implements ActionListener
   public MealEditor()
   {
 
-    super(languageField.STRINGS.getString("unchangedState"));
+    super(languageField.STRINGS.getString("KiLowBites"));
     // this.setSize(1200, 800);
     setResizable(false);
     this.state = nullState;    
-    nameLabel = new JLabel("Name:");
-    // nameLabel = new JLabel(languageField.STRINGS.getString("NameLabel"));
+    // nameLabel = new JLabel("Name:");
+    nameLabel = new JLabel(languageField.STRINGS.getString("NameLabel"));
     nameBox = new JTextField(35);
     nameBox.setEnabled(false);
     Dimension buttonSize = new Dimension(30, 30);
@@ -135,7 +135,7 @@ public class MealEditor extends JFrame implements ActionListener
 
     JPanel addRecipeFlow = new JPanel(new BorderLayout());
     JPanel addRecipeButtonFlow = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    addRecipeButton = new JButton("Add Recipe");
+    addRecipeButton = new JButton(languageField.STRINGS.getString("addRecipe"));
     addRecipeButton.addActionListener(this);
     addRecipeButton.setEnabled(!state.equals(nullState));
     addRecipeButtonFlow.add(addRecipeButton);
@@ -152,7 +152,7 @@ public class MealEditor extends JFrame implements ActionListener
     addRecipeFlow.add(recipeScrollPane, BorderLayout.CENTER);
 
     JPanel deletePanel = new JPanel(new BorderLayout());
-    deleteRecipeButton = new JButton("Delete");
+    deleteRecipeButton = new JButton(languageField.STRINGS.getString("deleteRecipe"));
     deleteRecipeButton.addActionListener(this);
     deleteRecipeButton.setEnabled(false);
     deletePanel.add(deleteRecipeButton, BorderLayout.SOUTH);

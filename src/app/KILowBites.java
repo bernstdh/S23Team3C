@@ -39,7 +39,8 @@ public class KILowBites implements Runnable
 	public static void main(final String[] args) throws InvocationTargetException,
 	  InterruptedException
 	{
-	  
+	  // languageField checks locale and sets correct language.
+	  new languageField();
 		SwingUtilities.invokeAndWait(new KILowBites(args));
 	}
 	
