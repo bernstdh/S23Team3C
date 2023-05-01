@@ -3,27 +3,37 @@ package app;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
 
+
+/**
+ * languageField class creates a resourceBundle for
+ * language support.
+ * @author Julian Barrett
+ *
+ */
 public class languageField
 {
-  
-  static public ResourceBundle STRINGS = ResourceBundle.getBundle("Strings");
-  
-  public languageField() {
-  if (Locale.getDefault() == Locale.ENGLISH) {
-    STRINGS =  ResourceBundle.getBundle("Strings_english.properties");
-  } else if (Locale.getDefault() == Locale.FRENCH) {
-    STRINGS = ResourceBundle.getBundle("Strings_french.properties");
 
-  } else if (Locale.getDefault() == Locale.GERMAN) {
-    STRINGS = ResourceBundle.getBundle("Strings_german.properties");
+  static public ResourceBundle STRINGS = ResourceBundle.getBundle("Strings");
+
+  /**
+   * Constructor.
+   */
+  public languageField()
+  {
+    if (Locale.getDefault() == Locale.ENGLISH)
+    {
+      STRINGS = ResourceBundle.getBundle("Strings.properties");
+    }
+    else if (Locale.getDefault() == Locale.FRENCH)
+    {
+      STRINGS = ResourceBundle.getBundle("Strings_fr.properties");
+    }
+    else if (Locale.getDefault() == Locale.GERMAN)
+    {
+      STRINGS = ResourceBundle.getBundle("Strings_de.properties");
+    }
   }
-  String step;
-  }
-  
-  
-//  FileNameExtensionFilter stringFilter;
-//  stringFilter = new FileNameExtensionFilter(STRINGS.getString("DATA_FILES"), "tax");
-  
+
+
 }

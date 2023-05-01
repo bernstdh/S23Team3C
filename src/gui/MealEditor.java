@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -20,8 +19,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import app.languageField;
 import app.languageField;
 import items.Meals;
 import items.Recipes;
@@ -72,17 +69,12 @@ public class MealEditor extends JFrame implements ActionListener
   public MealEditor()
   {
 
-    super("KiLowBites Meal Editor");
+    super(languageField.STRINGS.getString("unchangedState"));
     // this.setSize(1200, 800);
     setResizable(false);
-    this.state = nullState;
-    // this.nullstate true if doc is null state
-    
-    // LANGUAGETEST
-    // ResourceBundle STRINGS = ResourceBundle.getBundle("Strings");
-    // nameLabel = new JLabel("Name:");
-    nameLabel = new JLabel(languageField.STRINGS.getString(unchangedState));
-    //fjdks
+    this.state = nullState;    
+    nameLabel = new JLabel("Name:");
+    // nameLabel = new JLabel(languageField.STRINGS.getString("NameLabel"));
     nameBox = new JTextField(35);
     nameBox.setEnabled(false);
     Dimension buttonSize = new Dimension(30, 30);
@@ -90,7 +82,7 @@ public class MealEditor extends JFrame implements ActionListener
     newButton = new JButton(loadImageIcon("newButton.png"));
     newButton.setPreferredSize(buttonSize);
     newButton.addActionListener(this);
-    newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
+    // newButton.setEnabled(state.equals(unchangedState) || state.equals(nullState));
 
     openButton = new JButton(loadImageIcon("openButton.png"));
     openButton.setPreferredSize(buttonSize);
