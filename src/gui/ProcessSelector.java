@@ -204,7 +204,7 @@ public class ProcessSelector extends JFrame implements ActionListener
           }
           ProcessViewer pv = new ProcessViewer(m.getName());
           pv.setUtensils(strUtensils);
-          pv.setUtensils(strSteps);
+          pv.setSteps(strSteps);
           dispose();
         }
       }
@@ -233,6 +233,11 @@ public class ProcessSelector extends JFrame implements ActionListener
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Meals", "mel");
         fileChooser.setFileFilter(filter);
         fileSelection = fileChooser.showOpenDialog(this);
+        try{
+          fileName.setText(fileChooser.getSelectedFile().getName());
+        } catch(NullPointerException npe) {
+          fileName.setText("");
+        }
       }
     }
     else if (e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null)
