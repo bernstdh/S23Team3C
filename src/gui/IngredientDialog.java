@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 
+import app.languageField;
 import items.IngredientTable;
 import items.Ingredients;
 
@@ -29,7 +30,7 @@ public class IngredientDialog extends JDialog
    */
   public IngredientDialog(final JFrame parent)
   {
-    super(parent, "Add Ingredient", true);
+    super(parent, languageField.STRINGS.getString("addIng"), true);
     setSize(350, 200);
     setLocationRelativeTo(parent);
     setResizable(true);
@@ -39,7 +40,7 @@ public class IngredientDialog extends JDialog
     setLayout(gl); 
     // Create a panel for all the inputs
 
-    JLabel ingredientLabel = new JLabel("Ingredient:");
+    JLabel ingredientLabel = new JLabel(languageField.STRINGS.getString("ing"));
     ingredientPanel = new JPanel();
     ingredientPanel.setLayout(new GridLayout(0, 2));
     ingredientField = new JTextField(10);
@@ -48,7 +49,7 @@ public class IngredientDialog extends JDialog
     add(ingredientPanel, 0);
     
 
-    JLabel densityLabel = new JLabel("Density (g/ml):");
+    JLabel densityLabel = new JLabel(languageField.STRINGS.getString("density"));
     densityField = new JTextField(10);
     densityPanel = new JPanel();
     densityPanel.setLayout(new GridLayout(0, 2));
@@ -56,7 +57,7 @@ public class IngredientDialog extends JDialog
     densityPanel.add(densityField);
     add(densityPanel, 1);
 
-    JLabel caloriesLabel = new JLabel("Calories (cals/gram):");
+    JLabel caloriesLabel = new JLabel(languageField.STRINGS.getString("calories"));
     caloriesField = new JTextField(10);
     caloriesPanel = new JPanel();
     caloriesPanel.setLayout(new GridLayout(0, 2));
@@ -64,7 +65,7 @@ public class IngredientDialog extends JDialog
     caloriesPanel.add(caloriesField);
     add(caloriesPanel, 2);
     
-    JLabel individualLabel = new JLabel("Grams per Individual Unit: ");
+    JLabel individualLabel = new JLabel(languageField.STRINGS.getString("gramsPer"));
     individualField = new JTextField(10);
     individualPanel = new JPanel();
     individualPanel.setLayout(new GridLayout(0, 2));
@@ -75,7 +76,7 @@ public class IngredientDialog extends JDialog
 
     JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
     error = new JLabel("");
-    okButton = new JButton("OK");
+    okButton = new JButton(languageField.STRINGS.getString("confirm"));
     buttonPanel.setLayout(new FlowLayout());
     buttonPanel.add(okButton);
     buttonPanel.add(error);
@@ -131,11 +132,11 @@ public class IngredientDialog extends JDialog
     // Try getting the ingredient, given the text isn't null or of length 0.
     if (it.fromCode(ingredientField.getText()) != null)
     {
-      error.setText("Please enter a unique ingredient name.");
+      error.setText(languageField.STRINGS.getString("ingErr2"));
       return false;
     }
     if (ingredientField.getText().length() == 0) {
-      error.setText("Please enter an ingredient name.");
+      error.setText(languageField.STRINGS.getString("ingErr1"));
       return false;
     }
     else
@@ -176,13 +177,13 @@ public class IngredientDialog extends JDialog
     if (tempDensity < 0)
     {
       densityField.setText("");
-      error.setText("Please enter a valid density.");
+      error.setText(languageField.STRINGS.getString("densErr"));
       return false;
     }
     if (tempCalories < 0)
     {
       caloriesField.setText("");
-      error.setText("Please enter a valid calorie value.");
+      error.setText(languageField.STRINGS.getString("calsErr"));
       return false;
     }
     if (tempIndividual < 0 && individualField.getText().length() < 1) {
