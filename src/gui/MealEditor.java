@@ -19,6 +19,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
 import app.languageField;
 import items.Meals;
 import items.Recipes;
@@ -73,11 +75,13 @@ public class MealEditor extends JFrame implements ActionListener
     // this.setSize(1200, 800);
     setResizable(false);
     this.state = nullState;    
-    // nameLabel = new JLabel("Name:");
     nameLabel = new JLabel(languageField.STRINGS.getString("NameLabel"));
     nameBox = new JTextField(35);
     nameBox.setEnabled(false);
     Dimension buttonSize = new Dimension(30, 30);
+    
+    UIManager.put("FileChooser.cancelButtonText", "Cancelar");
+
 
     newButton = new JButton(loadImageIcon("newButton.png"));
     newButton.setPreferredSize(buttonSize);
@@ -179,6 +183,9 @@ public class MealEditor extends JFrame implements ActionListener
     this.add(spacerWest, BorderLayout.WEST);
     this.add(spacerSouth, BorderLayout.SOUTH);
     this.fileChooser = new JFileChooser();
+    // jk jk  
+    // UIManager.put("FileChooser.cancelButtonText", "Cancelar");
+
 
     this.add(recipeBigPanel, BorderLayout.CENTER);
     // add to east and west
