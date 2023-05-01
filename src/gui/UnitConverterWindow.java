@@ -67,7 +67,7 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
    */
   private UnitConverterWindow()
   {
-    super("Unit Converter");
+    super(languageField.STRINGS.getString("uCon"));
     addWindowListener(this);
     IngredientTable ingredients = IngredientTable.createInstance();
     

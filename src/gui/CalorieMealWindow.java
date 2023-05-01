@@ -46,7 +46,7 @@ public class CalorieMealWindow extends JFrame implements ActionListener, WindowL
    */
   private CalorieMealWindow() 
   {
-    super("Calorie Calculator");
+    super(languageField.STRINGS.getString("calC"));
     addWindowListener(this);
     mealButton = new JButton();
     mealButton.addActionListener(this);

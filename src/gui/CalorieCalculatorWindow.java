@@ -57,7 +57,7 @@ public class CalorieCalculatorWindow extends JFrame implements ActionListener, W
 	 */
 	private CalorieCalculatorWindow() 
 	{
-		super("Calorie Calculator");
+		super(languageField.STRINGS.getString("calC"));
 		addWindowListener(this);
 		IngredientTable ingredients = IngredientTable.createInstance();
 		

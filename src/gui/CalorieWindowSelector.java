@@ -54,7 +54,7 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
    */
   private CalorieWindowSelector()
   {
-    super("Calorie Calculator Selector");
+    super(languageField.STRINGS.getString("calC"));
     addWindowListener(this);
     setSize(200, 200);
     gl = new GridLayout(1, 1);

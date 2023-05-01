@@ -46,7 +46,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
    */
   private CalorieRecipeWindow() 
   {
-    super("Calorie Calculator");
+    super(languageField.STRINGS.getString("calC"));
     addWindowListener(this);
     recipeButton = new JButton();
     recipeButton.addActionListener(this);
