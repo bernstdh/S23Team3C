@@ -1,7 +1,5 @@
 package gui;
 import java.awt.*;
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -18,6 +16,7 @@ import javax.swing.text.DocumentFilter;
 
 
 import java.util.List;
+
 import items.Ingredient;
 import items.Recipes;
 import items.Steps;
@@ -27,7 +26,8 @@ import utilities.Serializer;
  * GUI used to open, save, and edit recipes.
  * @author Mike Buckingham (gui components)
  */
-public class RecipeEditor extends JFrame implements ActionListener, DocumentListener
+public class RecipeEditor extends JFrame 
+    implements ActionListener, DocumentListener
 {
   
   static final String NEWBUTTON = "newButton";
@@ -36,6 +36,8 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   static final String SAVEASBUTTON = "saveAsButton";
   static final String CLOSEBUTTON = "closeButton";
   
+  private static final Dimension DEFAULT_SIZE = new Dimension(600, 800);
+
   private static final long serialVersionUID = 1L;
   private static final String RECIPE = ".rcp";
   
@@ -64,8 +66,8 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
   {
     super("KiLowBites Recipe Editor");
     this.setLayout(new BorderLayout());
-    this.setSize(new Dimension(600, 800));
-    this.setResizable(false);
+    this.setSize(DEFAULT_SIZE);
+    this.setResizable(true);
     this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     buildButtonPanel();
@@ -387,18 +389,7 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     }
   }
   
-  /**
-   * Used to filter out all non integer characters from numberServedBox.
-   */
-  private class WholeNumberDocumentFilter extends DocumentFilter 
-  {
-    @Override
-    public void replace(final DocumentFilter.FilterBypass fb, final int offset, final int length,
-        final String text, final AttributeSet attr) throws BadLocationException 
-    {
-      fb.insertString(offset, text.replaceAll("[^[0-9]]", ""), attr);   
-    }
-  }
+
   
   private ImageIcon loadImageIcon(final String name)
   {
@@ -414,4 +405,18 @@ public class RecipeEditor extends JFrame implements ActionListener, DocumentList
     result.addActionListener(this);
     return result;
   }
+  
+  /**
+   * Used to filter out all non integer characters from numberServedBox.
+   */
+  private class WholeNumberDocumentFilter extends DocumentFilter 
+  {
+    @Override
+    public void replace(final DocumentFilter.FilterBypass fb, final int offset, final int length,
+        final String text, final AttributeSet attr) throws BadLocationException 
+    {
+      fb.insertString(offset, text.replaceAll("[^[0-9]]", ""), attr);   
+    }
+  }
+  
 }

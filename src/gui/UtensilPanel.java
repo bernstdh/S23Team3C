@@ -119,6 +119,9 @@ public class UtensilPanel extends JPanel
       utensilList.add(utensil);
       utensilListModel.addElement(utensil.toString());
       recipeEditor.setChanged();
+      
+      utensilNameBox.setText("");
+      utensilDetailsBox.setText("");
     }
     else if(ae.getSource() == utensilDeleteButton)
     {

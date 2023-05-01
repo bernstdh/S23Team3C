@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Dimension;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ import items.Ingredients;
 public class IngredientPanel extends JPanel 
     implements ActionListener, DocumentListener, ListSelectionListener
 {
+  private static boolean indivAdded = false;
   private static final long serialVersionUID = 1L;
   private DefaultListModel<String> ingredientsListModel;
 
@@ -90,7 +92,6 @@ public class IngredientPanel extends JPanel
     ingredientsUnitsBox.addItem("floz");
     ingredientsUnitsBox.addItem("g");
     ingredientsUnitsBox.addItem("gal");
-    ingredientsUnitsBox.addItem("individual");
     ingredientsUnitsBox.addItem("lbs");
     ingredientsUnitsBox.addItem("ml");
     ingredientsUnitsBox.addItem("oz");
@@ -99,6 +100,8 @@ public class IngredientPanel extends JPanel
     ingredientsUnitsBox.addItem("qt");
     ingredientsUnitsBox.addItem("tbs");
     ingredientsUnitsBox.addItem("tsp");
+    
+    //ingredientsUnitsBox.removeItemAt(ingredientsUnitsBox.getItemCount() - 1);
 
     //build the add and delete buttons
     ingredientsAddButton = new JButton("Add");
@@ -198,7 +201,9 @@ public class IngredientPanel extends JPanel
         ingredientsListModel.addElement(ingredient.toString());
       }
       
-
+      ingredientsNameBox.setText("");
+      ingredientsAmountBox.setText("");
+      ingredientsDetailsBox.setText("");
     }
     else if(ae.getSource() == ingredientsDeleteButton)
     {
@@ -227,6 +232,23 @@ public class IngredientPanel extends JPanel
 
   private void processTextChanges(final DocumentEvent e) 
   {
+    
+    // this if statement handles individual unit flexibility
+    if(e.getDocument() == ingredientsNameBox.getDocument()) 
+    { 
+      IngredientTable table = IngredientTable.createInstance();
+      Ingredients ingredient = table.fromCode(ingredientsNameBox.getText());
+      if(ingredient == null && indivAdded)
+      {
+        ingredientsUnitsBox.removeItemAt(ingredientsUnitsBox.getItemCount() - 1);
+        indivAdded = false;
+      }
+      if(ingredient != null && ingredient.getIndividualGrams() != -1.0)
+      {
+        ingredientsUnitsBox.addItem("individual");
+        indivAdded = true;
+      }
+    }
     boolean cantFormatAmount;
     try 
     {

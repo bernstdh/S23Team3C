@@ -111,6 +111,7 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
         stepsListModel.addElement(step.UtensilStepToString());
       }
       recipeEditor.setChanged();
+      stepsDetailsBox.setText("");
     }
     else if(ae.getSource() == stepsDeleteButton)
     {
