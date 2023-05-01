@@ -13,6 +13,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import app.languageField;
 import items.Ingredient;
 import items.IngredientTable;
 import items.Ingredients;
@@ -64,14 +65,15 @@ public class IngredientPanel extends JPanel
   
   private void buildPanel()
   {
-    this.setBorder(BorderFactory.createTitledBorder("Ingredients"));
+    this.setBorder(BorderFactory.createTitledBorder
+        (languageField.STRINGS.getString("ingredientsBorderText")));
     this.setLayout(new FlowLayout(FlowLayout.LEFT));
     
     //build JLabels
-    ingredientsNameLabel = new JLabel("Name");
-    ingredientsDetailsLabel = new JLabel("Details");
-    ingredientsAmountLabel = new JLabel("Amount");
-    ingredientsUnitsLabel = new JLabel("Units:");
+    ingredientsNameLabel = new JLabel(languageField.STRINGS.getString("name"));
+    ingredientsDetailsLabel = new JLabel(languageField.STRINGS.getString("details"));
+    ingredientsAmountLabel = new JLabel(languageField.STRINGS.getString("amountBoxText"));
+    ingredientsUnitsLabel = new JLabel(languageField.STRINGS.getString("unitsBoxText"));
     
     //build JTextFields
     ingredientsNameBox = new JTextField();
@@ -104,10 +106,10 @@ public class IngredientPanel extends JPanel
     //ingredientsUnitsBox.removeItemAt(ingredientsUnitsBox.getItemCount() - 1);
 
     //build the add and delete buttons
-    ingredientsAddButton = new JButton("Add");
+    ingredientsAddButton = new JButton(languageField.STRINGS.getString("add"));
     ingredientsAddButton.setEnabled(false);
     ingredientsAddButton.addActionListener(this);
-    ingredientsDeleteButton = new JButton("Delete");
+    ingredientsDeleteButton = new JButton(languageField.STRINGS.getString("delete"));
     ingredientsDeleteButton.setEnabled(false);
     ingredientsDeleteButton.addActionListener(this);
     

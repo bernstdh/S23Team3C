@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import app.languageField;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,8 +25,6 @@ import items.Utensils;
 public class StepPanel extends JPanel implements ActionListener, ListSelectionListener
 {
   private static final long serialVersionUID = 1L;
-  private static final String ADD = "Add";
-  private static final String DELETE = "Delete";
   
   private DefaultListModel<String> stepsListModel;
   private JButton stepsAddButton, stepsDeleteButton;
@@ -145,12 +145,12 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
   {
     JLabel stepsActionLabel, stepsOnLabel, stepsUtensilLabel, stepsDetailsLabel;
 
-    this.setBorder(BorderFactory.createTitledBorder("Steps"));
+    this.setBorder(BorderFactory.createTitledBorder("stepsBorderText"));
     this.setLayout(new FlowLayout(FlowLayout.LEFT));
-    stepsActionLabel = new JLabel("Action:");
-    stepsOnLabel = new JLabel("On:");
-    stepsUtensilLabel = new JLabel("Utensil:");
-    stepsDetailsLabel = new JLabel("Details");
+    stepsActionLabel = new JLabel(languageField.STRINGS.getString("actionBoxText"));
+    stepsOnLabel = new JLabel(languageField.STRINGS.getString("onBoxText"));
+    stepsUtensilLabel = new JLabel(languageField.STRINGS.getString("utensilBoxText"));
+    stepsDetailsLabel = new JLabel(languageField.STRINGS.getString("details"));
     
     stepsActionBox = new JComboBox<>();
     stepsActionBox.setPreferredSize(new Dimension(80, 20));
@@ -199,9 +199,9 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
     stepsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     stepsScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     
-    stepsAddButton = new JButton(ADD);
+    stepsAddButton = new JButton(languageField.STRINGS.getString("add"));
     stepsAddButton.setEnabled(false);
-    stepsDeleteButton = new JButton(DELETE);
+    stepsDeleteButton = new JButton(languageField.STRINGS.getString("delete"));
     stepsDeleteButton.setEnabled(false);
     
     this.add(stepsActionLabel);

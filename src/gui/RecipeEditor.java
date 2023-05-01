@@ -17,6 +17,7 @@ import javax.swing.text.DocumentFilter;
 
 import java.util.List;
 
+import app.languageField; 
 import items.Ingredient;
 import items.Recipes;
 import items.Steps;
@@ -30,17 +31,16 @@ public class RecipeEditor extends JFrame
     implements ActionListener, DocumentListener
 {
   
-  static final String NEWBUTTON = "newButton";
-  static final String OPENBUTTON = "openButton";
-  static final String SAVEBUTTON = "saveButton";
-  static final String SAVEASBUTTON = "saveAsButton";
-  static final String CLOSEBUTTON = "closeButton";
+  private static final String NEWBUTTON = "newButton";
+  private static final String OPENBUTTON = "openButton";
+  private static final String SAVEBUTTON = "saveButton";
+  private static final String SAVEASBUTTON = "saveAsButton";
+  private static final String CLOSEBUTTON = "closeButton";
   
   private static final Dimension DEFAULT_SIZE = new Dimension(600, 800);
 
   private static final long serialVersionUID = 1L;
   private static final String RECIPE = ".rcp";
-  
   
   private JButton closeButton, newButton, 
           openButton, saveAsButton, saveButton;
@@ -56,6 +56,7 @@ public class RecipeEditor extends JFrame
   private final String changedState = "changedState";
   private final String unchangedState = "unchangedState";
   private final String nullState = "nullState";
+  
   private UtensilPanel utensilsPanel;
   private DocumentFilter numberServedFilter;
  
@@ -64,7 +65,7 @@ public class RecipeEditor extends JFrame
    */
   public RecipeEditor()
   {
-    super("KiLowBites Recipe Editor");
+    super(languageField.STRINGS.getString("recipeEditor"));
     this.setLayout(new BorderLayout());
     this.setSize(DEFAULT_SIZE);
     this.setResizable(true);
@@ -267,7 +268,7 @@ public class RecipeEditor extends JFrame
     recipeAttributesPanel = new JPanel();
     recipeAttributesPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
     
-    recipeNameLabel = new JLabel("Name:");
+    recipeNameLabel = new JLabel(languageField.STRINGS.getString("name"));
     recipeNameBox = new JTextField();
     recipeNameBox.setPreferredSize(new Dimension(220, 20));
     recipeNameBox.getDocument().addDocumentListener(this);
@@ -275,7 +276,7 @@ public class RecipeEditor extends JFrame
     recipeAttributesPanel.add(recipeNameBox);
  
     
-    numberServedLabel = new JLabel("Serves:" );
+    numberServedLabel = new JLabel(languageField.STRINGS.getString("numberServedText"));
     numberServedBox = new JTextField();
     numberServedBox.setPreferredSize(new Dimension(60, 20));
     
@@ -391,16 +392,16 @@ public class RecipeEditor extends JFrame
   
 
   
-  private ImageIcon loadImageIcon(final String name)
+  private ImageIcon loadImageIcon(final String filename)
   {
-    URL url = this.getClass().getResource("/icons/"+ name);
+    URL url = this.getClass().getResource("/icons/"+ filename);
     ImageIcon icon = new ImageIcon(url);
     return icon;
   }
   
-  private JButton createJButton(final String name, final String actionCommand)
+  private JButton createJButton(final String filename, final String actionCommand)
   {
-    JButton result = new JButton(loadImageIcon(name));
+    JButton result = new JButton(loadImageIcon(filename));
     result.setActionCommand(actionCommand);
     result.addActionListener(this);
     return result;
