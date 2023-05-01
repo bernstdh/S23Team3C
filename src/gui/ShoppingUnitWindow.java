@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+
+import app.languageField;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,12 +30,12 @@ public class ShoppingUnitWindow extends JDialog
 	public ShoppingUnitWindow(final ShoppingListViewer parent,
 			final ArrayList<String> repeat) 
 	{
-		super(parent, "Change Units", true);
+		super(parent, languageField.STRINGS.getString("Change_Units"), true);
 
 		Set<String> uniqueUnits = new HashSet<>(repeat);
 		unitsComboBox = new JComboBox<>(uniqueUnits.toArray(new String[0]));
-		unitLabel = new JLabel("Select unit:");
-		applyButton = new JButton("Apply");
+		unitLabel = new JLabel(languageField.STRINGS.getString("Select"));
+		applyButton = new JButton(languageField.STRINGS.getString("Apply"));
 
 		setLayout(new FlowLayout());
 		add(unitLabel);
