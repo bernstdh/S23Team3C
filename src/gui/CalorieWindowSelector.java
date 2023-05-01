@@ -40,9 +40,12 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
   
   private int fileSelection;
   
-  private final String recipe = "Recipe";
-  private final String meal = "Meal";
-  private final String ing = "Ingredient";
+  private final String re = "Recipe";
+  private final String me = "Meal";
+  private final String in = "Ingredient";
+  private final String ct = "Confirm Type";
+  private final String choose = "Choose File";
+  private final String ci = "Confirm Item";
   
   /**
    * Constructor.
@@ -58,14 +61,14 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
     
     type = new JPanel();
     typeBox = new JComboBox<String>();
-    typeBox.addItem(ing);
-    typeBox.addItem(recipe);
-    typeBox.addItem(meal);
+    typeBox.addItem(in);
+    typeBox.addItem(re);
+    typeBox.addItem(me);
     typeBox.setSelectedItem(null);
     setLayout(gl);
     
     //Type selector button
-    confirmType = new JButton("Confirm Type");
+    confirmType = new JButton(ct);
     confirmType.addActionListener(this);
     confirmType.setSize(50, 50);
     
@@ -77,9 +80,9 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
     
     file = new JPanel();
     file.setLayout(new FlowLayout());
-    chooseFile = new JButton("Choose File");
+    chooseFile = new JButton(choose);
     chooseFile.addActionListener(this);
-    confirmItem = new JButton("Confirm Item");
+    confirmItem = new JButton(ci);
     confirmItem.addActionListener(this);
     fileName = new JLabel("");
     file.add(chooseFile);
@@ -94,17 +97,17 @@ public class CalorieWindowSelector extends JFrame implements ActionListener, Win
   public void actionPerformed(final ActionEvent e)
   {
     if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
-        && typeBox.getSelectedItem().toString().equals(ing))
+        && typeBox.getSelectedItem().toString().equals(in))
     {
       CalorieCalculatorWindow.createInstance();
     }
     else if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
-        && typeBox.getSelectedItem().toString().equals(recipe))
+        && typeBox.getSelectedItem().toString().equals(re))
     {
       CalorieRecipeWindow.createInstance();
     }
     else if(e.getSource().equals(confirmType) && typeBox.getSelectedItem() != null
-        && typeBox.getSelectedItem().toString().equals(meal))
+        && typeBox.getSelectedItem().toString().equals(me))
     {
       CalorieMealWindow.createInstance();
     }
