@@ -21,10 +21,12 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
   private static boolean exists = false;
   private static CalorieRecipeWindow instance = null;
   private String calor = "Calories:";
-  private String invalid = "Calories: Please Enter a Valid Size";
-  private String negative = "Calories: Please Enter a Positive Size";
+  private String invalid = "Calories: Please Enter a Valid Number";
+  private String negative = "Calories: Please Enter a Positive Number";
   private String choose = "Choose File";
   private String noRep = "Couldn't load recipe.";
+  private String se = "Servings";
+  private String re = "Recipe";
   
   private JTextField servingsBox;
   private JLabel calorieLabel;
@@ -61,9 +63,9 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
     JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     upperPanel.add(calc);
     upperPanel.add(reset);
-    lowerPanel.add(new JLabel("Recipe:"));
+    lowerPanel.add(new JLabel(re + ":"));
     lowerPanel.add(recipeButton);
-    lowerPanel.add(new JLabel("Servings:"));
+    lowerPanel.add(new JLabel(se + ":"));
     lowerPanel.add(servingsBox);
     lowerPanel.add(calorieLabel);
     panel.add(upperPanel, 0);
@@ -124,7 +126,7 @@ public class CalorieRecipeWindow extends JFrame implements ActionListener, Windo
         if (servings < 0) calorieLabel.setText(negative);
         else
         {
-          calorieLabel.setText(String.format("Calories: %.1f", calories * servings));
+          calorieLabel.setText(String.format(calor + " %.1f", calories * servings));
         } 
       }
       catch (NumberFormatException nfe)

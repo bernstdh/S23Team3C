@@ -47,8 +47,13 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
   private String ml = "ml";
   private String ind = "individual";
   private String toAmount = "To Amount:";
-  private String invalid = "To Amount: Please Enter a Valid Number.";
-  private String negative = "To Amount: Please Enter a Positive Number";
+  private String invalidUC = "To Amount: Please Enter a Valid Number.";
+  private String negativeUC = "To Amount: Please Enter a Positive Number";
+  private String frU = "From Units";
+  private String tU = "To Units";
+  private String in = "Ingredient";
+  private String frA = "From Amount";
+  private String indErrUC = "To Amount: Please Pick an Ingredient with an Individual Value.";
   String[] units = {dr, g, oz, lb, p, tsp, tbs, floz, cup,
       pt, qt, gal, ml, ind};
   ArrayList<String> weight = new ArrayList<String>(
@@ -93,13 +98,13 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
     JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     upperPanel.add(calc);
     upperPanel.add(reset);
-    lowerPanel.add(new JLabel("From Units:"));
+    lowerPanel.add(new JLabel(frU + ":"));
     lowerPanel.add(fromUnitsBox);
-    lowerPanel.add(new JLabel("To Units:"));
+    lowerPanel.add(new JLabel(tU + ":"));
     lowerPanel.add(toUnitsBox);
-    lowerPanel.add(new JLabel("Ingredient:"));
+    lowerPanel.add(new JLabel(in + ":"));
     lowerPanel.add(ingredientsBox);
-    lowerPanel.add(new JLabel("From Amount: "));
+    lowerPanel.add(new JLabel(frA + ": "));
     lowerPanel.add(amountBox);
     lowerPanel.add(amountLabel);
     panel.add(upperPanel, 0);
@@ -151,22 +156,21 @@ public class UnitConverterWindow extends JFrame implements ActionListener, Windo
       try
       {
         amount = Double.parseDouble(amountBox.getText());
-        if (amount < 0) amountLabel.setText(negative);
+        if (amount < 0) amountLabel.setText(negativeUC);
         else
         {
           if (ing.getIndividualGrams() == -1.0 && (fromUnit.equals(ind) || toUnit.equals(ind)))
-            amountLabel.setText("To Amount: Please Pick an Ingredient with"
-                + " an Individual Value.");
+            amountLabel.setText(indErrUC);
           else
           {
             newAmount = converter(ingredient, fromUnit, toUnit, amount);
-            amountLabel.setText(String.format("To Amount: %.1f", newAmount));
+            amountLabel.setText(String.format(toAmount + " %.1f", newAmount));
           }
         }
       }
       catch (NumberFormatException nfe)
       {
-        amountLabel.setText(invalid);
+        amountLabel.setText(invalidUC);
       }  
     } 
     
