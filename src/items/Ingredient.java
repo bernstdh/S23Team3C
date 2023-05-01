@@ -98,7 +98,11 @@ public class Ingredient implements Serializable
   public String toString()
   {
     String newString;
-    newString = String.format("%.1f %s of %s %s", this.amount, this.unit, this.details, this.name);
+    if(details.equals("")) 
+      newString = String.format("%.1f %s of %s", this.amount, this.unit, this.name);
+    else 
+      newString = String.format("%.1f %s of %s %s", 
+          this.amount, this.unit, this.details, this.name);
     return newString;
   }
 

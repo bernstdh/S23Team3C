@@ -56,7 +56,8 @@ public class Utensils implements Serializable
   public String toString()
   {
     String newString;
-    newString = String.format("%s %s", this.details, this.name);
+    if(details.equals("")) newString = String.format("%s",this.name);
+    else                   newString = String.format("%s %s", this.details, this.name);
     return newString;
   }
 
