@@ -80,7 +80,8 @@ public class MealEditor extends JFrame implements ActionListener
     nameBox.setEnabled(false);
     Dimension buttonSize = new Dimension(30, 30);
     
-    UIManager.put("FileChooser.cancelButtonText", "Cancelar");
+    UIManager.put("FileChooser.cancelButtonText", languageField.STRINGS.getString("cancelButton"));
+    UIManager.put("FileChooser.openButtonText", languageField.STRINGS.getString("openButton"));
 
 
     newButton = new JButton(loadImageIcon("newButton.png"));
