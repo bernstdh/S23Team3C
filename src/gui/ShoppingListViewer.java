@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import app.languageField;
 import items.Ingredient;
 import math.UnitConversion;
 
@@ -54,16 +55,16 @@ public class ShoppingListViewer extends JFrame implements Printable, ActionListe
 
   public ShoppingListViewer(final ArrayList<Ingredient> ingrds, final String title)
   {
-    super("KiLowBites Shopping List Viewer\t" + title);
+    super("KiLowBites " + languageField.STRINGS.getString("Shopping_LV") + " \t" + title);
 
     box = new ArrayList<Ingredient>();
-    numPeopleLabel = new JLabel("Number of People:");
+    numPeopleLabel = new JLabel(languageField.STRINGS.getString("NumPpl"));
     numPeopleBox = new JTextField(10);
-    generateButton = new JButton("Generate Shopping List");
+    generateButton = new JButton(languageField.STRINGS.getString("GenSL"));
     URL url = this.getClass().getResource("/icons/printButton.png");
     printButton = new JButton(new ImageIcon(url));
     printButton.addActionListener(this);
-    unitsButton = new JButton("Change units");
+    unitsButton = new JButton(languageField.STRINGS.getString("Change_Units"));
     shoppingListBox = new JTextArea(20, 40);
     shoppingListBox.setEditable(false);
 
@@ -114,7 +115,7 @@ public class ShoppingListViewer extends JFrame implements Printable, ActionListe
     }
     catch (NumberFormatException ex)
     {
-      shoppingListBox.setText("Please enter a valid amount of people.");
+      shoppingListBox.setText(languageField.STRINGS.getString("PlsValid"));
       return;
     }
 

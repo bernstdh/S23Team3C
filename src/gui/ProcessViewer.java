@@ -3,6 +3,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import app.languageField;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +31,7 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
 	 */
 	public ProcessViewer(final String name) 
 	{
-		super("KiLowBites Process Viewer\t" + name);
+		super("KiLowBites " + languageField.STRINGS.getString("Process_V") + " \t" + name);
 
 		utensilBox = new JTextArea(10, 30);
 		utensilBox.setEditable(false);
@@ -55,7 +57,7 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
 		add(printPanel, BorderLayout.NORTH);
 		
 		JPanel topPanel = new JPanel(new BorderLayout());
-		TitledBorder topBorder = new TitledBorder("Utensils");
+		TitledBorder topBorder = new TitledBorder(languageField.STRINGS.getString("Utensils"));
 		topBorder.setTitlePosition(TitledBorder.CENTER);
 		topBorder.setBorder(new LineBorder(Color.black));
 		topPanel.add(utensilScroll, BorderLayout.CENTER);
@@ -63,7 +65,7 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
 		add(topPanel, BorderLayout.CENTER);
 
 		JPanel bottomPanel = new JPanel(new BorderLayout());
-		TitledBorder bottomBorder = new TitledBorder("Steps");
+		TitledBorder bottomBorder = new TitledBorder(languageField.STRINGS.getString("Steps"));
 		bottomBorder.setTitlePosition(TitledBorder.CENTER);
 		bottomBorder.setBorder(new LineBorder(Color.black));
 		bottomPanel.add(stepsScroll, BorderLayout.CENTER);

@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+import app.languageField;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.net.URL;
@@ -40,7 +42,7 @@ public class AboutDialog
 	 */
 	public AboutDialog() 
 	{
-		JFrame frame = new JFrame("About Dialog");
+		JFrame frame = new JFrame(languageField.STRINGS.getString("About"));
 		JTextArea text = new JTextArea(about);
 
 		frame.setSize(550, 250);
