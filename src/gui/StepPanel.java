@@ -145,7 +145,8 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
   {
     JLabel stepsActionLabel, stepsOnLabel, stepsUtensilLabel, stepsDetailsLabel;
 
-    this.setBorder(BorderFactory.createTitledBorder("stepsBorderText"));
+    this.setBorder(
+        BorderFactory.createTitledBorder(languageField.STRINGS.getString("stepsBorderText")));
     this.setLayout(new FlowLayout(FlowLayout.LEFT));
     stepsActionLabel = new JLabel(languageField.STRINGS.getString("actionBoxText"));
     stepsOnLabel = new JLabel(languageField.STRINGS.getString("onBoxText"));

@@ -16,6 +16,7 @@ import javax.swing.text.DocumentFilter;
 
 
 import java.util.List;
+import java.util.Locale;
 
 import app.languageField; 
 import items.Ingredient;
@@ -97,6 +98,7 @@ public class RecipeEditor extends JFrame
     recipePanel.add(stepsPanel);
     
     fileChooser = new JFileChooser();
+    fileChooser.setLocale(Locale.FRENCH);
     this.state = nullState;
     this.setEnabledAll(false);
     updateButtonStates();
