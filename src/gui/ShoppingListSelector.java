@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import app.languageField;
 import items.Ingredient;
 import items.Meals;
 import items.Recipes;
@@ -46,8 +47,8 @@ public class ShoppingListSelector extends JFrame implements ActionListener
   
   private int fileSelection;
   
-  private final String recipe = "Recipe";
-  private final String meal = "Meal";
+  private final String recipe = languageField.STRINGS.getString("recipe");
+  private final String meal = languageField.STRINGS.getString("meal");
   
   /**
    * Creates a new ShoppingListSelector that includes a dropdown for selecting whether the shopping
@@ -56,7 +57,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
   public ShoppingListSelector()
   {
     //Create the frame
-    super("Shopping List Selector");
+    super(languageField.STRINGS.getString("shoppingSelector"));
     setSize(200, 200);
     gl = new GridLayout(1, 1);
     gl.setVgap(10);
@@ -71,7 +72,7 @@ public class ShoppingListSelector extends JFrame implements ActionListener
     setLayout(gl);
     
     //Type selector button
-    confirmType = new JButton("Confirm Type");
+    confirmType = new JButton(languageField.STRINGS.getString("confirmType"));
     confirmType.addActionListener(this);
     confirmType.setSize(50, 50);
     
@@ -83,9 +84,9 @@ public class ShoppingListSelector extends JFrame implements ActionListener
     
     file = new JPanel();
     file.setLayout(new FlowLayout());
-    chooseFile = new JButton("Choose File");
+    chooseFile = new JButton(languageField.STRINGS.getString("chooseFile"));
     chooseFile.addActionListener(this);
-    confirmItem = new JButton("Confirm File");
+    confirmItem = new JButton(languageField.STRINGS.getString("confirmFile"));
     confirmItem.addActionListener(this);
     fileName = new JLabel("");
     file.add(chooseFile);
@@ -154,10 +155,10 @@ public class ShoppingListSelector extends JFrame implements ActionListener
       FileNameExtensionFilter filter = null;
       if(typeBox.getSelectedItem().equals(recipe))
       {
-        filter = new FileNameExtensionFilter("Recipes", "rcp");
+        filter = new FileNameExtensionFilter(languageField.STRINGS.getString("recipes"), "rcp");
       } else if (typeBox.getSelectedItem().equals(meal))
       {
-        filter = new FileNameExtensionFilter("Meals", "mel");
+        filter = new FileNameExtensionFilter(languageField.STRINGS.getString("meals"), "mel");
       }
       fileChooser.setFileFilter(filter);
       fileSelection = fileChooser.showOpenDialog(this);

@@ -17,6 +17,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import app.languageField;
 import items.IngredientTable;
 import items.Ingredients;
 import utilities.Serializer;
@@ -44,7 +45,7 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
    */
   public MainWindow(final String name)
   {
-    super(name);
+    super(languageField.STRINGS.getString("KILowBites"));
     addWindowListener(this);
     menuBar = new JMenuBar();
     addMenuItems(menuBar);
@@ -56,41 +57,41 @@ public class MainWindow extends JFrame implements ActionListener, WindowListener
   private void addMenuItems(final JMenuBar mb)
   {
 
-    file = new JMenu("File");
-    exit = new JMenuItem("Exit");
+    file = new JMenu(languageField.STRINGS.getString("file"));
+    exit = new JMenuItem(languageField.STRINGS.getString("exit"));
     file.add(exit);
     exit.addActionListener(this);
     mb.add(file);
 
-    edit = new JMenu("Edit");
-    recipe = new JMenuItem("Recipe");
-    meal = new JMenuItem("Meal");
+    edit = new JMenu(languageField.STRINGS.getString("edit"));
+    recipe = new JMenuItem(languageField.STRINGS.getString("recipe"));
+    meal = new JMenuItem(languageField.STRINGS.getString("meal"));
     edit.add(recipe);
     edit.add(meal);
     recipe.addActionListener(this);
     meal.addActionListener(this);
     mb.add(edit);
 
-    view = new JMenu("View");
-    shoppingList = new JMenuItem("Shopping List");
-    process = new JMenuItem("Process");
+    view = new JMenu(languageField.STRINGS.getString("view"));
+    shoppingList = new JMenuItem(languageField.STRINGS.getString("shoppingList"));
+    process = new JMenuItem(languageField.STRINGS.getString("process"));
     view.add(shoppingList);
     view.add(process);
     shoppingList.addActionListener(this);
     process.addActionListener(this);
     mb.add(view);
 
-    tools = new JMenu("Tools");
-    calorieCalculator = new JMenuItem("Calorie Calculator");
-    unitsConverter = new JMenuItem("Units Converter");
+    tools = new JMenu(languageField.STRINGS.getString("tools"));
+    calorieCalculator = new JMenuItem(languageField.STRINGS.getString("calorieCalculator"));
+    unitsConverter = new JMenuItem(languageField.STRINGS.getString("unitsConverter"));
     tools.add(calorieCalculator);
     tools.add(unitsConverter);
     calorieCalculator.addActionListener(this);
     unitsConverter.addActionListener(this);
     mb.add(tools);
 
-    help = new JMenu("Help");
-    about = new JMenuItem("About");
+    help = new JMenu(languageField.STRINGS.getString("help"));
+    about = new JMenuItem(languageField.STRINGS.getString("about"));
     help.add(about);
     about.addActionListener(this);
     mb.add(help);

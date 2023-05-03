@@ -31,6 +31,9 @@ class IngredientTest
 
     newIngredient.setUnit("pints");
     assertEquals("pints", newIngredient.getUnit());
+    
+    newIngredient = new Ingredient(appleT, "", 5.0, "pds");
+    assertEquals("5.0 pds of Apple", newIngredient.toString());
 
   }
 

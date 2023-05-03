@@ -57,7 +57,8 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
 		add(printPanel, BorderLayout.NORTH);
 		
 		JPanel topPanel = new JPanel(new BorderLayout());
-		TitledBorder topBorder = new TitledBorder(languageField.STRINGS.getString("Utensils"));
+		TitledBorder topBorder =
+		    new TitledBorder(languageField.STRINGS.getString("Utensils"));
 		topBorder.setTitlePosition(TitledBorder.CENTER);
 		topBorder.setBorder(new LineBorder(Color.black));
 		topPanel.add(utensilScroll, BorderLayout.CENTER);
@@ -65,7 +66,8 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
 		add(topPanel, BorderLayout.CENTER);
 
 		JPanel bottomPanel = new JPanel(new BorderLayout());
-		TitledBorder bottomBorder = new TitledBorder(languageField.STRINGS.getString("Steps"));
+		TitledBorder bottomBorder =
+		    new TitledBorder(languageField.STRINGS.getString("Steps"));
 		bottomBorder.setTitlePosition(TitledBorder.CENTER);
 		bottomBorder.setBorder(new LineBorder(Color.black));
 		bottomPanel.add(stepsScroll, BorderLayout.CENTER);
@@ -99,7 +101,8 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
 
 
   @Override
-  public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException
+  public int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex)
+      throws PrinterException
   {
     double cH, cW, h, scale, w, x, y;
     Graphics2D g2;
@@ -109,13 +112,14 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
     
     status = Printable.NO_SUCH_PAGE;
     
-    if(pageIndex == 0) {
+    if(pageIndex == 0)
+    {
       x = pageFormat.getImageableX();
       y = pageFormat.getImageableY();
       
       g2.translate(x, y);
       
-      h = pageFormat.getImageableHeight();
+      h = pageFormat.getImageableHeight(); // Change this one right here.
       w = pageFormat.getImageableWidth();
       cW = (double)(this.getWidth());
       cH = (double)(this.getHeight());
@@ -129,23 +133,30 @@ public class ProcessViewer extends JFrame implements Printable, ActionListener
     return status;
   }
   
-  public void printProcess() {
+  /**
+   * Print the process or safe to a PDF.
+   */
+  public void printProcess()
+  {
     PrinterJob job = PrinterJob.getPrinterJob();
     PageFormat format = job.defaultPage();
-    try {
+    try
+    {
       job.setPrintable(this, format);
       boolean shouldPrint = job.printDialog();
       if(shouldPrint) job.print();
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (HeadlessException | PrinterException he)
+    {
+      he.printStackTrace();
     }
   }
 
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
-    if(e.getSource().equals(printButton)) {
+    if(e.getSource().equals(printButton))
+    {
       printProcess();
     }
     

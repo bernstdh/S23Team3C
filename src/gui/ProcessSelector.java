@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import app.languageField;
 import items.Meals;
 import items.Recipes;
 import items.Steps;
@@ -51,8 +52,8 @@ public class ProcessSelector extends JFrame implements ActionListener
 
   private int fileSelection;
 
-  private final String recipe = "Recipe";
-  private final String meal = "Meal";
+  private final String recipe = languageField.STRINGS.getString("recipe");
+  private final String meal = languageField.STRINGS.getString("meal");
 
   /**
    * Creates a new process selector window which is used to select a recipe to be viewed.
@@ -60,7 +61,7 @@ public class ProcessSelector extends JFrame implements ActionListener
   public ProcessSelector()
   {
     // Create the frame
-    super("Process Selector");
+    super(languageField.STRINGS.getString("processSelector"));
     setSize(200, 200);
     gl = new GridLayout(1, 1);
     gl.setVgap(10);
@@ -75,7 +76,7 @@ public class ProcessSelector extends JFrame implements ActionListener
     setLayout(gl);
 
     // Type selector button
-    confirmType = new JButton("Confirm Type");
+    confirmType = new JButton(languageField.STRINGS.getString("confirmType"));
     confirmType.addActionListener(this);
     confirmType.setSize(50, 50);
 
@@ -88,12 +89,12 @@ public class ProcessSelector extends JFrame implements ActionListener
     // File panel
     file = new JPanel();
     file.setLayout(fl);
-    confirmFile = new JButton("Confirm File");
+    confirmFile = new JButton(languageField.STRINGS.getString("confirmFile"));
     confirmFile.addActionListener(this);
     confirmFile.setSize(50, 50);
 
     // Choose File Button
-    chooseFile = new JButton("Choose File");
+    chooseFile = new JButton(languageField.STRINGS.getString("chooseFile"));
     chooseFile.addActionListener(this);
 
     fileName = new JLabel("");
@@ -127,7 +128,6 @@ public class ProcessSelector extends JFrame implements ActionListener
           r.alphabetizeU(r.getUtensils());
           String steps = "";
           String utensils = "";
-          System.out.println(r.getSteps().size());
           for (Steps s : r.getSteps())
           {
             if (s.getUtensilsSource() == s.getDestination()) // STEP_SINGLE
@@ -215,7 +215,8 @@ public class ProcessSelector extends JFrame implements ActionListener
       if (typeBox.getSelectedItem().equals(recipe))
       {
         fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Recipes", "rcp");
+        FileNameExtensionFilter filter =
+            new FileNameExtensionFilter(languageField.STRINGS.getString("recipes"), "rcp");
         fileChooser.setFileFilter(filter);
         fileSelection = fileChooser.showOpenDialog(this);
         try
@@ -230,12 +231,15 @@ public class ProcessSelector extends JFrame implements ActionListener
       else if (typeBox.getSelectedItem().equals(meal))
       {
         fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Meals", "mel");
+        FileNameExtensionFilter filter =
+            new FileNameExtensionFilter(languageField.STRINGS.getString("meals"), "mel");
         fileChooser.setFileFilter(filter);
         fileSelection = fileChooser.showOpenDialog(this);
-        try{
+        try
+        {
           fileName.setText(fileChooser.getSelectedFile().getName());
-        } catch(NullPointerException npe) {
+        } catch(NullPointerException npe)
+        {
           fileName.setText("");
         }
       }

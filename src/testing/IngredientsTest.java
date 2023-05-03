@@ -21,7 +21,10 @@ class IngredientsTest {
 		assertEquals("Apple", appleT.getIngredientName());
 		assertEquals(("g/ml"), appleT.getVolumeUnits());
 		
-
+		Ingredients bananaT = table.fromCode("Banana");
+		assertEquals("Banana", bananaT.getIngredientName());
+		assertEquals(118, bananaT.getIndividualGrams());
+		assertEquals(118 * 0.65, bananaT.getCaloriesPerIndividual());
 
 	}
 
