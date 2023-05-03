@@ -1,11 +1,10 @@
 package app;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Locale;
-import java.util.ResourceBundle;
+
+
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import gui.MainWindow;
 

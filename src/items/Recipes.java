@@ -1,7 +1,7 @@
 package items;
 import java.io.Serializable;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import math.CalorieCalculator;
 
@@ -9,7 +9,8 @@ import math.CalorieCalculator;
  * @author Julian Barrett
  *
  */
-public class Recipes implements Serializable {
+public class Recipes implements Serializable 
+{
 
 	/**
 	 * 
@@ -30,11 +31,12 @@ public class Recipes implements Serializable {
 	 * @param utensils for utensil list.
 	 * @param steps for cooking.
 	 */
-	public Recipes(String name, int numPpl, List<Ingredient> ingredients,
-			List<Utensils> utensils, List<Steps> steps) 
+	public Recipes(final String name, final int numPpl, final List<Ingredient> ingredients,
+			final List<Utensils> utensils,final  List<Steps> steps) 
 	{
 		this.ingredients = new ArrayList<Ingredient>();
-		for (Ingredient i : ingredients) {
+		for (Ingredient i : ingredients) 
+		{
 			this.ingredients.add(i);
 		}
 		alphabetize(this.ingredients);
@@ -44,7 +46,8 @@ public class Recipes implements Serializable {
 		this.steps =steps;
 
 		this.utensils = new ArrayList<Utensils>();
-		for (Utensils b : utensils) {
+		for (Utensils b : utensils)
+		{
 			this.utensils.add(b);
 		}
 		alphabetizeU(this.utensils);
@@ -55,7 +58,8 @@ public class Recipes implements Serializable {
 	 * returns steps.
 	 * @return steps list.
 	 */
-	public List<Steps> getSteps () {
+	public List<Steps> getSteps () 
+	{
 		return this.steps;
 	}
 	/**
@@ -80,7 +84,8 @@ public class Recipes implements Serializable {
 	 * Returns name.
 	 * @return name.
 	 */
-	public String getName() {
+	public String getName() 
+	{
 		return this.name;
 	}
 	
@@ -89,28 +94,34 @@ public class Recipes implements Serializable {
 	 * returns number of people.
 	 * @return numPpl.
 	 */
-	public int numPpl() {
+	public int numPpl() 
+	{
 		return this.numPpl;
 	}
 
 	/**
 	 * Method alphabetizes a list of utensils.
 	 * 
-	 * @param ingredients for list to be alphabetically organized.
+	 * @param ingrds for list to be alphabetically organized.
 	 */
-	public void alphabetize(List<Ingredient> ingredients) {
+	public void alphabetize(final List<Ingredient> ingrds) 
+	{
 
-		int n = ingredients.size();
+		int n = ingrds.size();
 		Ingredient temp;
-		for (int i = 0; i < n; i++) {
-			for (int j = i + 1; j < n; j++) {
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = i + 1; j < n; j++)
+			{
 
 				// to compare one string with other strings
-				if (ingredients.get(i).getName().compareTo(ingredients.get(j).getName()) > 0) {
+				if (ingrds.get(i).getName().compareTo
+						(ingrds.get(j).getName()) > 0) 
+				{
 					// swapping
-					temp = ingredients.get(i);
-					ingredients.set(i, ingredients.get(j));
-					ingredients.set(j, temp);
+					temp = ingrds.get(i);
+					ingrds.set(i, ingrds.get(j));
+					ingrds.set(j, temp);
 				}
 			}
 		}
@@ -119,29 +130,38 @@ public class Recipes implements Serializable {
 	/**
 	 * method alphabetizes a list of utensils.
 	 * 
-	 * @param utensils for list to be alphabetically organized.
+	 * @param utnsl for list to be alphabetically organized.
 	 */
-	public void alphabetizeU(List<Utensils> utensils) {
+	public void alphabetizeU(final List<Utensils> utnsl)
+	{
 
-		int n = utensils.size();
+		int n = utnsl.size();
 		Utensils temp;
-		for (int i = 0; i < n; i++) {
-			for (int j = i + 1; j < n; j++) {
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = i + 1; j < n; j++)
+			{
 
 				// to compare one string with other strings
-				if (utensils.get(i).getName().compareTo(utensils.get(j).getName()) > 0) {
+				if (utnsl.get(i).getName().compareTo(utnsl.get(j).getName()) > 0)
+				{
 					// swapping
-					temp = utensils.get(i);
-					utensils.set(i, utensils.get(j));
-					utensils.set(j, temp);
+					temp = utnsl.get(i);
+					utnsl.set(i, utnsl.get(j));
+					utnsl.set(j, temp);
 				}
 			}
 		}
 	}
-	
-	public double calorieCalculator() {
+	/**
+	 * Calorie calc.
+	 * @return double
+	 */
+	public double calorieCalculator() 
+	{
 		double calories = 0;
-		for (int i = 0; i < ingredients.size(); i++) {
+		for (int i = 0; i < ingredients.size(); i++) 
+		{
 		  calories += CalorieCalculator.calculateCalories(ingredients.get(i).getName(),
 		      ingredients.get(i).getAmount(), ingredients.get(i).getUnit());
 		}
