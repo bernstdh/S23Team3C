@@ -228,7 +228,7 @@ public class ShoppingListViewer extends JFrame implements Printable, ActionListe
    *          second ingredient
    * @return if equal
    */
-  private boolean equal(Ingredient ingr1, Ingredient ingr2)
+  private boolean equal(final Ingredient ingr1, final Ingredient ingr2)
   {
     return ingr1.getIngredient().equals(ingr2.getIngredient())
         && ingr1.getName().equals(ingr2.getName()) && ingr1.getDetails().equals(ingr2.getDetails())
@@ -236,7 +236,8 @@ public class ShoppingListViewer extends JFrame implements Printable, ActionListe
   }
 
   @Override
-  public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException
+  public int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex)
+      throws PrinterException
   {
     double cH, cW, h, scale, w, x, y;
     Graphics2D g2;
@@ -267,6 +268,9 @@ public class ShoppingListViewer extends JFrame implements Printable, ActionListe
     return status;
   }
 
+  /**
+   * Prints the shopping list.
+   */
   public void printShoppingList()
   {
     PrinterJob job = PrinterJob.getPrinterJob();
@@ -285,9 +289,10 @@ public class ShoppingListViewer extends JFrame implements Printable, ActionListe
   }
 
   @Override
-  public void actionPerformed(ActionEvent e)
+  public void actionPerformed(final ActionEvent e)
   {
-    if(e.getSource().equals(printButton)) {
+    if(e.getSource().equals(printButton)) 
+    {
       printShoppingList();
     }
   }

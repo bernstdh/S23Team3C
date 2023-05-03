@@ -135,7 +135,8 @@ public class IngredientDialog extends JDialog
       error.setText(languageField.STRINGS.getString("ingErr2"));
       return false;
     }
-    if (ingredientField.getText().length() == 0) {
+    if (ingredientField.getText().length() == 0) 
+    {
       error.setText(languageField.STRINGS.getString("ingErr1"));
       return false;
     }
@@ -166,11 +167,13 @@ public class IngredientDialog extends JDialog
     /*
      * Try setting the individual grams. If it's NaN set to -1
      */
-    if(caloriesField.getText() != null) {
+    if(caloriesField.getText() != null) 
+    {
       try
       {
         tempIndividual = Double.valueOf(caloriesField.getText());
-      } catch (NumberFormatException nfe) {
+      } catch (NumberFormatException nfe) 
+      {
         tempIndividual = -1;
       }
     }
@@ -186,16 +189,20 @@ public class IngredientDialog extends JDialog
       error.setText(languageField.STRINGS.getString("calsErr"));
       return false;
     }
-    if (tempIndividual < 0 && individualField.getText().length() < 1) {
+    if (tempIndividual < 0 && individualField.getText().length() < 1) 
+    {
       useInd = false;
-    } else {
+    } else 
+    {
       useInd = true;
     }
     density = tempDensity;
     calories = tempCalories;
-    if(!useInd) {
+    if(!useInd) 
+    {
       it.add(new Ingredients(ingredient, density, calories));
-    } else {
+    } else 
+    {
       it.add(new Ingredients(ingredient, density, calories, tempIndividual));
     }
     return true;
