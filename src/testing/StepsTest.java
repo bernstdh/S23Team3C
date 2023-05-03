@@ -39,15 +39,15 @@ class StepsTest
     assertEquals("wooden stirring spoon Spoon", ingredientStep.getDestination().toString());
 
     assertEquals("metal spoon the contents of the wooden stirring spoon Spoon whip",
-        utensilStep.UtensilStepToString());
+        utensilStep.utensilStepToString());
     assertEquals("metal spoon the contents of the wooden stirring spoon Spoon whip",
-        utensilStep.UtensilStepToString());
+        utensilStep.utensilStepToString());
     assertEquals(
         "wood spoon the contents of the wooden stirring spoon Spoon in the metal stirring spoon metal Spoon",
-        utensilStep2.UtensilStepToString());
+        utensilStep2.utensilStepToString());
 
     assertEquals("spoon the 5.0 pds of APPLE Apple in the wooden stirring spoon Spoon stirring",
-        ingredientStep.IngredientStepToString());
+        ingredientStep.ingredientStepToString());
   }
 
 }

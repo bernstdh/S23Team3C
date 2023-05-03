@@ -21,7 +21,7 @@ public class Steps implements Serializable
 
   /**
    * Utensils source.
-   * 
+   * @param details detail
    * @param action
    *          for description.
    * @param source
@@ -118,7 +118,7 @@ public class Steps implements Serializable
    * 
    * @return formatted string.
    */
-  public String IngredientStepToString()
+  public String ingredientStepToString()
   {
     return String.format("%s the %s in the %s %s", this.action, this.ingredientSource.toString(),
         this.destination.toString(), this.details);
@@ -129,7 +129,7 @@ public class Steps implements Serializable
    * 
    * @return formatted string.
    */
-  public String UtensilStepToString()
+  public String utensilStepToString()
   {
     if (this.utensilSource.getName().equals(destination.getName()))
     {

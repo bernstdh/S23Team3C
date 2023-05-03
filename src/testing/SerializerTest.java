@@ -55,8 +55,8 @@ class SerializerTest
     // steps are the same
     for (int i = 0; i < s.getSteps().size(); i++)
     {
-      assertTrue(s.getSteps().get(i).IngredientStepToString()
-          .equals(r.getSteps().get(i).IngredientStepToString()));
+      assertTrue(s.getSteps().get(i).ingredientStepToString()
+          .equals(r.getSteps().get(i).ingredientStepToString()));
     }
 
     // ingredients are the same
@@ -106,8 +106,8 @@ class SerializerTest
     assertTrue(s != null);
     for (int i = 0; i < s.getSteps().size(); i++)
     {
-      assertTrue(s.getSteps().get(i).IngredientStepToString()
-          .equals(r.getSteps().get(i).IngredientStepToString()));
+      assertTrue(s.getSteps().get(i).ingredientStepToString()
+          .equals(r.getSteps().get(i).ingredientStepToString()));
     }
     for (int i = 0; i < s.getIngredients().size(); i++)
     {
@@ -159,8 +159,8 @@ class SerializerTest
       Recipes r = n.getRecipes().get(i);
       for (int j = 0; j < s.getSteps().size(); j++)
       {
-        assertTrue(s.getSteps().get(j).IngredientStepToString()
-            .equals(r.getSteps().get(j).IngredientStepToString()));
+        assertTrue(s.getSteps().get(j).ingredientStepToString()
+            .equals(r.getSteps().get(j).ingredientStepToString()));
       }
       for (int j = 0; j < s.getIngredients().size(); j++)
       {
@@ -210,8 +210,8 @@ class SerializerTest
       Recipes r = n.getRecipes().get(i);
       for (int j = 0; j < s.getSteps().size(); j++)
       {
-        assertTrue(s.getSteps().get(j).IngredientStepToString()
-            .equals(r.getSteps().get(j).IngredientStepToString()));
+        assertTrue(s.getSteps().get(j).ingredientStepToString()
+            .equals(r.getSteps().get(j).ingredientStepToString()));
       }
       for (int j = 0; j < s.getIngredients().size(); j++)
       {

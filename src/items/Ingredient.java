@@ -1,7 +1,11 @@
 package items;
 
 import java.io.Serializable;
-
+/**
+ * Ingredient.
+ * @author shaury
+ *
+ */
 public class Ingredient implements Serializable
 {
 
@@ -14,18 +18,18 @@ public class Ingredient implements Serializable
   private Ingredients ingredient;
 
   /**
-   * @param name
-   *          for name of ingredient.
+   * Constructor.
+   * @param ingredients ingredients
    * @param details
    *          for ingredient description.
    * @param amount
    *          for ingredient amount.
    * @param unit
    *          amount in units.
-   * @param caloriesPerg
-   *          for calories per gram.
+   * 
    */
-  public Ingredient(Ingredients ingredients, String details, double amount, String unit)
+  public Ingredient(final Ingredients ingredients, final String details, 
+		  final double amount, final String unit)
   {
     this.ingredient = ingredients;
     this.name = ingredient.getIngredientName();
@@ -34,7 +38,10 @@ public class Ingredient implements Serializable
     this.ogAmount = amount;
     this.unit = unit;
   }
-
+  /**
+   * Getter.
+   * @return ingedient
+   */
   public Ingredients getIngredient()
   {
     return this.ingredient;
@@ -69,7 +76,11 @@ public class Ingredient implements Serializable
   {
     return this.amount;
   }
-
+  
+  /**
+   * getter.
+   * @return original amount
+   */
   public double getOgAmount()
   {
     return this.ogAmount;
@@ -84,17 +95,28 @@ public class Ingredient implements Serializable
   {
     return this.unit;
   }
-
-  public void setAmount(double amount)
+  
+  /**
+   * setter.
+   * @param amount amount
+   */
+  public void setAmount(final double amount)
   {
     this.amount = amount;
   }
-
-  public void setUnit(String unit)
+  
+  /**
+   * setter.
+   * @param unit set
+   */
+  public void setUnit(final String unit)
   {
     this.unit = unit;
   }
-
+  /**
+   * toString.
+   * @return string
+   */
   public String toString()
   {
     String newString;
