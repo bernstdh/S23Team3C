@@ -104,11 +104,11 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
       stepsList.add(step);
       if(step.getIngredientSource() != null)
       {
-        stepsListModel.addElement(step.IngredientStepToString());
+        stepsListModel.addElement(step.ingredientStepToString());
       }
       else
       {
-        stepsListModel.addElement(step.UtensilStepToString());
+        stepsListModel.addElement(step.utensilStepToString());
       }
       recipeEditor.setChanged();
       stepsDetailsBox.setText("");
@@ -125,12 +125,12 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
         numRemoved++;
         for(Steps s: stepsList) 
         {
-          if(s.getIngredientSource() != null && s.IngredientStepToString().equals(stepsString)) 
+          if(s.getIngredientSource() != null && s.ingredientStepToString().equals(stepsString)) 
           {
             stepsList.remove(s);
             break;
           }
-          else if(s.UtensilStepToString().equals(stepsString))
+          else if(s.utensilStepToString().equals(stepsString))
           {
             stepsList.remove(s);
             break;
@@ -287,9 +287,9 @@ public class StepPanel extends JPanel implements ActionListener, ListSelectionLi
     stepsList.add(s);
     if(s.getIngredientSource() != null)
     {
-      stepsListModel.addElement(s.IngredientStepToString());
+      stepsListModel.addElement(s.ingredientStepToString());
     }
-    else stepsListModel.addElement(s.UtensilStepToString());
+    else stepsListModel.addElement(s.utensilStepToString());
   }
 
 }
