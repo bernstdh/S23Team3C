@@ -128,7 +128,6 @@ public class ProcessSelector extends JFrame implements ActionListener
           r.alphabetizeU(r.getUtensils());
           String steps = "";
           String utensils = "";
-          System.out.println(r.getSteps().size());
           for (Steps s : r.getSteps())
           {
             if (s.getUtensilsSource() == s.getDestination()) // STEP_SINGLE
