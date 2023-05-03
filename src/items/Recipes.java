@@ -109,8 +109,8 @@ public class Recipes implements Serializable {
 				if (ingredients.get(i).getName().compareTo(ingredients.get(j).getName()) > 0) {
 					// swapping
 					temp = ingredients.get(i);
-					ingredients.add(i, ingredients.get(j));
-					ingredients.add(j, temp);
+					ingredients.set(i, ingredients.get(j));
+					ingredients.set(j, temp);
 				}
 			}
 		}
@@ -132,8 +132,8 @@ public class Recipes implements Serializable {
 				if (utensils.get(i).getName().compareTo(utensils.get(j).getName()) > 0) {
 					// swapping
 					temp = utensils.get(i);
-					utensils.add(i, utensils.get(j));
-					utensils.add(j, temp);
+					utensils.set(i, utensils.get(j));
+					utensils.set(j, temp);
 				}
 			}
 		}
