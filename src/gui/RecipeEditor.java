@@ -96,7 +96,10 @@ public class RecipeEditor extends JFrame
     recipePanel.add(ingredientsPanel);
     recipePanel.add(stepsPanel);
     
+    UIManager.put("FileChooser.cancelButtonText", languageField.STRINGS.getString("cancelButton"));
+    UIManager.put("FileChooser.openButtonText", languageField.STRINGS.getString(OPENBUTTON));
     fileChooser = new JFileChooser();
+
     this.state = nullState;
     this.setEnabledAll(false);
     updateButtonStates();
